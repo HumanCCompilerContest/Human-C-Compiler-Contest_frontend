@@ -12,7 +12,7 @@ const Regulation = () => {
       sx={{
         backgroundColor: theme.palette.primary.main,
         color: 'white',
-        padding: '1rem',
+        padding: '3rem',
         borderRadius: '10px',
       }}
     >

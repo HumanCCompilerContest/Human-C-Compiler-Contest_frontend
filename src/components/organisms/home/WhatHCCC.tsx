@@ -9,7 +9,6 @@ const WhatHCCC = () => {
   return (
     <Box
       sx={{
-        height: '50vh',
         display: 'flex',
         alignItems: 'center',
       }}
@@ -40,15 +39,17 @@ const WhatHCCC = () => {
       <Typography
         variant='h6'
         component='div'
-        sx={{ flexGrow: '2', padding: '5rem', fontWeight: '600' }}
+        sx={{ padding: '5rem', fontWeight: '600' }}
       >
-        その名の通り，競技者自身がCコンパイラとなってソースコードを読み込みアセンブリを吐き出す競技．
-        <br />
-        <br />
-        コンパイル時間や生成されたアセンブリの正しさ，コンパイルエラーを正しく出せているかなどをスコアとして算出．
-        <br />
-        <br />
-        最もスコアが高かったプレイヤが栄誉ある人間Cコンパイラの称号を手に入れる．
+        <p>
+          その名の通り，競技者自身がCコンパイラとなってソースコードを読み込みアセンブリを吐き出す競技．
+        </p>
+        <p>
+          コンパイル時間や生成されたアセンブリの正しさ，コンパイルエラーを正しく出せているかなどをスコアとして算出．
+        </p>
+        <p>
+          最もスコアが高かったプレイヤが栄誉ある人間Cコンパイラの称号を手に入れる．
+        </p>
       </Typography>
     </Box>
   )

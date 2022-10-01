@@ -9,10 +9,9 @@ const RequestedAbility = () => {
   return (
     <Box
       sx={{
-        height: '50vh',
         display: 'flex',
         alignItems: 'center',
-        mb: '3rem',
+        mb: '5rem',
       }}
     >
       <Card
@@ -45,17 +44,18 @@ const RequestedAbility = () => {
         component='div'
         sx={{ flexGrow: '2', padding: '5rem', fontWeight: '600' }}
       >
-        <span style={{ fontWeight: '800', color: '#f44336' }}>
-          ・C言語の仕様に関する深い知識
-        </span>
-        <br />
-        ・アセンブリを書く技術
-        <br /> ・ABIの知識
-        <br />
-        ・複数のアーキテクチャに関する知識
-        <br /> ・コンパイラまわりのあれこれ
-        <br />
-        ・慣れ（慣れ）
+        <ul>
+          <li>
+            <span style={{ fontWeight: '800', color: '#f44336' }}>
+              C言語の仕様に関する深い知識
+            </span>
+          </li>
+          <li>アセンブリを書く技術</li>
+          <li>ABIの知識</li>
+          <li>複数のアーキテクチャに関する知識</li>
+          <li>コンパイラまわりのあれこれ</li>
+          <li>慣れ（慣れ）</li>
+        </ul>
       </Typography>
     </Box>
   )

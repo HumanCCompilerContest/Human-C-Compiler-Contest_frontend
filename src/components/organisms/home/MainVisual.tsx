@@ -8,7 +8,7 @@ const MainVisual = () => {
   return (
     <Box
       sx={{
-        height: '400px',
+        height: '500px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
