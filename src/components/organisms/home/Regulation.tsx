@@ -49,7 +49,7 @@ const Regulation = () => {
         }}
       >
         <AlertTitle sx={{ fontWeight: '900' }}>許可項目</AlertTitle>
-        <Typography sx={{ lineHeight: '2rem' }}>
+        <Typography component='div' sx={{ lineHeight: '2rem' }}>
           <ul>
             <li>
               仕様書の閲覧
@@ -90,7 +90,7 @@ const Regulation = () => {
         }}
       >
         <AlertTitle sx={{ fontWeight: '900' }}>禁止事項</AlertTitle>
-        <Typography sx={{ lineHeight: '2rem' }}>
+        <Typography component='div' sx={{ lineHeight: '2rem' }}>
           <ul>
             <li>gcc -sやgodboltなどのツールによる不正なコンパイル</li>
             <li>既存のコンパイラを使用すること</li>
