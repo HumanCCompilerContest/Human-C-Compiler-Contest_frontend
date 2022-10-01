@@ -1,8 +1,10 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material/styles'
 import Image from 'next/image'
 
 const MainVisual = () => {
+  const theme = useTheme()
   return (
     <Box
       sx={{
@@ -16,7 +18,7 @@ const MainVisual = () => {
       <Box
         sx={{
           maxWidth: '1000px',
-          bgcolor: 'rgb(10, 25, 41)',
+          bgcolor: theme.palette.primary.main,
           color: 'white',
           padding: '4rem',
           opacity: 0.8,

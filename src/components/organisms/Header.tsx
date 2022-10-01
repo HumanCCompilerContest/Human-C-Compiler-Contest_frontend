@@ -5,16 +5,18 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material/styles'
 import Image from 'next/image'
 import * as React from 'react'
 
 const Header = () => {
+  const theme = useTheme()
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position='static'
         sx={{
-          backgroundColor: 'rgb(10, 25, 41)',
+          backgroundColor: theme.palette.primary.main,
         }}
       >
         <Toolbar>

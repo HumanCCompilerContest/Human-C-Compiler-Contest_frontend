@@ -1,15 +1,16 @@
 import Alert from '@mui/material/Alert'
 import AlertTitle from '@mui/material/AlertTitle'
 import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material/styles'
 
 const Regulation = () => {
+  const theme = useTheme()
   return (
     <Box
       sx={{
-        backgroundColor: 'rgb(10, 25, 41)',
+        backgroundColor: theme.palette.primary.main,
         color: 'white',
         padding: '1rem',
         borderRadius: '10px',

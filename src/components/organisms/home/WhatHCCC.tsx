@@ -1,13 +1,11 @@
-import Alert from '@mui/material/Alert'
-import AlertTitle from '@mui/material/AlertTitle'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Container from '@mui/material/Container'
-import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material/styles'
 
 const WhatHCCC = () => {
+  const theme = useTheme()
   return (
     <Box
       sx={{
@@ -20,7 +18,7 @@ const WhatHCCC = () => {
         sx={{
           minWidth: '300px',
           padding: '1rem 0',
-          backgroundColor: 'rgb(10, 25, 41)',
+          backgroundColor: theme.palette.primary.main,
         }}
       >
         <CardContent>
