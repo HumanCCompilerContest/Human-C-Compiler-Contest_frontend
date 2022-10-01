@@ -1,3 +1,4 @@
+import RuleIcon from '@mui/icons-material/Rule'
 import Alert from '@mui/material/Alert'
 import AlertTitle from '@mui/material/AlertTitle'
 import Box from '@mui/material/Box'
@@ -16,17 +17,27 @@ const Regulation = () => {
         borderRadius: '10px',
       }}
     >
-      <Typography
-        variant='h3'
-        component='div'
-        align='center'
+      <Box
         sx={{
-          fontWeight: '800',
-          paddingBottom: '3rem',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          pb: '3rem',
         }}
       >
-        Regulation
-      </Typography>
+        <RuleIcon sx={{ mr: '1rem', fontSize: '3rem' }} />
+        <Typography
+          variant='h3'
+          component='div'
+          align='center'
+          sx={{
+            fontWeight: '800',
+          }}
+        >
+          Regulation
+        </Typography>
+      </Box>
+
       <Alert
         variant='outlined'
         severity='success'
@@ -38,43 +49,35 @@ const Regulation = () => {
         }}
       >
         <AlertTitle sx={{ fontWeight: '900' }}>許可項目</AlertTitle>
-        <ul>
-          <li>
-            <Typography>仕様書の閲覧</Typography>
-          </li>
-          <li>
-            <ul>
-              <li>
-                <Link
-                  href='https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf'
-                  color='primary'
-                >
-                  C 仕様書
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='https://uclibc.org/docs/psABI-x86_64.pdf](https://uclibc.org/docs/psABI-x86_64.pdf'
-                  color='primary'
-                >
-                  AMD64-ABI
-                </Link>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <Typography>検証環境を使ってローカルでデバッグ</Typography>
-          </li>
-          <li>
-            <Typography> gdbによるデバッグ</Typography>
-          </li>
-          <li>
-            <Typography>人間による異常な最適化</Typography>
-          </li>
-          <li>
-            <Typography>紙，鉛筆，電卓などを用いる</Typography>
-          </li>
-        </ul>
+        <Typography sx={{ lineHeight: '2rem' }}>
+          <ul>
+            <li>
+              仕様書の閲覧
+              <ul>
+                <li>
+                  <Link
+                    href='https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf'
+                    sx={{ color: '#bbdefb' }}
+                  >
+                    C 規格書
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='https://uclibc.org/docs/psABI-x86_64.pdf](https://uclibc.org/docs/psABI-x86_64.pdf'
+                    sx={{ color: '#bbdefb' }}
+                  >
+                    AMD64-ABI
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li>検証環境を使ってローカルでデバッグ</li>
+            <li>gdbによるデバッグ</li>
+            <li>人間による異常な最適化</li>
+            <li>紙，鉛筆，電卓などを用いる</li>
+          </ul>
+        </Typography>
       </Alert>
       <Alert
         severity='error'
@@ -87,30 +90,16 @@ const Regulation = () => {
         }}
       >
         <AlertTitle sx={{ fontWeight: '900' }}>禁止事項</AlertTitle>
-        <ul>
-          <li>
-            <Typography>
-              gcc -sやgodboltなどのツールによる不正なコンパイル
-            </Typography>
-          </li>
-          <li>
-            <Typography>既存のコンパイラを使用すること</Typography>
-          </li>
-          <li>
-            <Typography>オンラインのツールを使用すること</Typography>
-          </li>
-          <li>
-            <Typography>コンパイラやツールを自作して使用すること</Typography>
-          </li>
-          <li>
-            <Typography>他者と回答を共有すること</Typography>
-          </li>
-          <li>
-            <Typography>
-              アセンブリ内に特定の回答を不正に埋め込む行為
-            </Typography>
-          </li>
-        </ul>
+        <Typography sx={{ lineHeight: '2rem' }}>
+          <ul>
+            <li>gcc -sやgodboltなどのツールによる不正なコンパイル</li>
+            <li>既存のコンパイラを使用すること</li>
+            <li>オンラインのツールを使用すること</li>
+            <li>コンパイラやツールを自作して使用すること</li>
+            <li>他者と回答を共有すること</li>
+            <li>アセンブリ内に特定の回答を不正に埋め込む行為</li>
+          </ul>
+        </Typography>
       </Alert>
     </Box>
   )
