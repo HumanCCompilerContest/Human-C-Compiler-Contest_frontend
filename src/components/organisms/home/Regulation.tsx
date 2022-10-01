@@ -56,7 +56,7 @@ const Regulation = () => {
               <ul>
                 <li>
                   <Link
-                    href='https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf'
+                    href='https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf'
                     sx={{ color: '#bbdefb' }}
                   >
                     C 規格書
@@ -64,7 +64,7 @@ const Regulation = () => {
                 </li>
                 <li>
                   <Link
-                    href='https://uclibc.org/docs/psABI-x86_64.pdf](https://uclibc.org/docs/psABI-x86_64.pdf'
+                    href='https://uclibc.org/docs/psABI-x86_64.pdf'
                     sx={{ color: '#bbdefb' }}
                   >
                     AMD64-ABI
