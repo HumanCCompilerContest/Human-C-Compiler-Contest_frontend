@@ -6,7 +6,12 @@ const Footer = () => {
   const theme = useTheme()
   return (
     <Box
-      sx={{ backgroundColor: theme.palette.primary.main, padding: '3rem 0' }}
+      sx={{
+        backgroundColor: theme.palette.primary.main,
+        padding: '3rem 0',
+        position: 'sticky',
+        top: '100vh',
+      }}
     >
       <Typography
         variant='h6'
