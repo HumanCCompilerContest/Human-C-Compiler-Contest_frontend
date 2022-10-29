@@ -10,6 +10,9 @@ import Link from 'next/link'
 import MuiLink from '@mui/material/Link'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import CreateIcon from '@mui/icons-material/Create'
+import StarIcon from '@mui/icons-material/Star'
+import PublishIcon from '@mui/icons-material/Publish'
 
 import ButtonWithIcon from '@/components/molecules/ButtonWithIcon'
 
@@ -48,9 +51,15 @@ const Header = () => {
         <Link href='/ranking' passHref>
           <MuiLink
             sx={{
+              display: 'flex',
+              alignItems: 'center',
               marginRight: '1rem',
             }}
           >
+            <StarIcon
+              fontSize='small'
+              sx={{ marginRight: '0.2rem', color: 'white' }}
+            />
             <Typography
               variant='subtitle1'
               component='span'
@@ -66,9 +75,15 @@ const Header = () => {
         <Link href='/problems' passHref>
           <MuiLink
             sx={{
+              display: 'flex',
+              alignItems: 'center',
               marginRight: '1rem',
             }}
           >
+            <CreateIcon
+              fontSize='small'
+              sx={{ marginRight: '0.2rem', color: 'white' }}
+            />
             <Typography
               variant='subtitle1'
               component='span'
@@ -84,9 +99,15 @@ const Header = () => {
         <Link href='/submissions' passHref>
           <MuiLink
             sx={{
+              display: 'flex',
+              alignItems: 'center',
               marginRight: '1rem',
             }}
           >
+            <PublishIcon
+              fontSize='small'
+              sx={{ marginRight: '0.2rem', color: 'white' }}
+            />
             <Typography
               variant='subtitle1'
               component='span'
