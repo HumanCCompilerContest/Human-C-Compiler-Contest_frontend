@@ -2,16 +2,16 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import PublishIcon from '@mui/icons-material/Publish'
 
 import BasicLayout from '@/components/templates/BasicLayout'
-import RankingTable from '@/components/molecules/RankingTable'
-import StarIcon from '@mui/icons-material/Star'
+import SubmissionsTable from '@/components/molecules/SubmissionsTable'
 
-const Ranking: NextPage = () => {
+const Submissions: NextPage = () => {
   return (
     <>
       <Head>
-        <title>ranking | HCCC</title>
+        <title>submissions | HCCC</title>
         <meta name='description' content='人間Cコンパイラーコンテスト' />
       </Head>
 
@@ -22,15 +22,15 @@ const Ranking: NextPage = () => {
             alignItems: 'center',
           }}
         >
-          <StarIcon fontSize='large' sx={{ marginRight: '0.2rem' }} />
+          <PublishIcon fontSize='large' sx={{ marginRight: '0.2rem' }} />
           <Typography variant='h4' sx={{ fontWeight: '600' }}>
-            Ranking
+            Submissions
           </Typography>
         </Box>
-        <RankingTable />
+        <SubmissionsTable />
       </BasicLayout>
     </>
   )
 }
 
-export default Ranking
+export default Submissions

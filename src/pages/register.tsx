@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 
 import BasicLayout from '@/components/templates/BasicLayout'
 
-const Login: NextPage = () => {
+const Register: NextPage = () => {
   return (
     <>
       <Head>
@@ -58,4 +58,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default Register

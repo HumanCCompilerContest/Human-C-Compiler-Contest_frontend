@@ -12,7 +12,7 @@ import { green } from '@mui/material/colors'
 
 import BasicLayout from '@/components/templates/BasicLayout'
 
-const Login: NextPage = () => {
+const Problems: NextPage = () => {
   const theme = useTheme()
 
   return (
@@ -30,10 +30,19 @@ const Login: NextPage = () => {
           }}
         >
           <CreateIcon fontSize='large' sx={{ marginRight: '0.5rem' }} />
-          <Typography variant='h4'>Problems</Typography>
+          <Typography variant='h4' sx={{ fontWeight: '600' }}>
+            Problems
+          </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', margin: '0 0 5rem' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            margin: '0 0 5rem',
+          }}
+        >
           {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((v, i) => {
             return (
               <Card
@@ -68,4 +77,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default Problems
