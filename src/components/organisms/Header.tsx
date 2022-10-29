@@ -29,6 +29,7 @@ const Header = () => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              marginRight: '4rem',
             }}
           >
             <IconButton
@@ -41,6 +42,60 @@ const Header = () => {
             </IconButton>
             <Typography variant='h6' component='span' sx={{ color: 'white' }}>
               HCCC
+            </Typography>
+          </MuiLink>
+        </Link>
+        <Link href='/ranking' passHref>
+          <MuiLink
+            sx={{
+              marginRight: '1rem',
+            }}
+          >
+            <Typography
+              variant='subtitle1'
+              component='span'
+              sx={{
+                color: 'white',
+                '&:hover': { borderBottom: '1px solid white' },
+              }}
+            >
+              ranking
+            </Typography>
+          </MuiLink>
+        </Link>
+        <Link href='/problems' passHref>
+          <MuiLink
+            sx={{
+              marginRight: '1rem',
+            }}
+          >
+            <Typography
+              variant='subtitle1'
+              component='span'
+              sx={{
+                color: 'white',
+                '&:hover': { borderBottom: '1px solid white' },
+              }}
+            >
+              problems
+            </Typography>
+          </MuiLink>
+        </Link>
+        <Link href='/submissions' passHref>
+          <MuiLink
+            sx={{
+              marginRight: '1rem',
+            }}
+          >
+            <Typography
+              variant='subtitle1'
+              component='span'
+              sx={{
+                color: 'white',
+                '&:hover': { borderBottom: '1px solid white' },
+              }}
+            >
+              submissions
             </Typography>
           </MuiLink>
         </Link>
