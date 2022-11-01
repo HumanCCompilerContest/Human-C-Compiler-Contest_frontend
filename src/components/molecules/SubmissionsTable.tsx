@@ -60,7 +60,7 @@ const BasicTable = () => {
               <StyledTableCell align='left'>{row.score}</StyledTableCell>
               <StyledTableCell align='left'>{row.result}</StyledTableCell>
               <StyledTableCell align='left'>
-                <Link href={`/submission/${row.id}`} passHref>
+                <Link href={`/submissions/${row.id}`} passHref>
                   <MuiLink sx={{ color: 'white' }}>詳細</MuiLink>
                 </Link>
               </StyledTableCell>
