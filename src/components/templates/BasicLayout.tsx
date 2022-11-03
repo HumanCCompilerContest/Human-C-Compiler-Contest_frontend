@@ -7,7 +7,10 @@ import Header from '@/components/organisms/Header'
 import { User } from '@/features/types'
 import useAuth from '@/features/hooks/useAuth'
 
-export const AuthContext = createContext<User | undefined>(undefined)
+export type AuthContextType = {
+  user?: User
+}
+export const AuthContext = createContext<AuthContextType>({})
 
 type BasicLayoutProps = {
   children: React.ReactNode
@@ -24,7 +27,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   }
 
   return (
-    <AuthContext.Provider value={user}>
+    <AuthContext.Provider value={{ user }}>
       <div style={{ height: '100%' }}>
         <Header />
         {isHome ? (

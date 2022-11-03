@@ -13,11 +13,15 @@ import Typography from '@mui/material/Typography'
 import CreateIcon from '@mui/icons-material/Create'
 import StarIcon from '@mui/icons-material/Star'
 import PublishIcon from '@mui/icons-material/Publish'
+import { useContext } from 'react'
 
+import { AuthContext } from '@/components/templates/BasicLayout'
 import ButtonWithIcon from '@/components/molecules/ButtonWithIcon'
 
 const Header = () => {
   const theme = useTheme()
+  const { user } = useContext(AuthContext)
+
   return (
     <AppBar
       position='static'
@@ -123,28 +127,48 @@ const Header = () => {
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <Link href='/login' passHref>
-          <MuiLink
-            sx={{
-              color: 'white',
-            }}
-          >
-            <ButtonWithIcon buttonLabel='Login' iconReactNode={<LoginIcon />} />
-          </MuiLink>
-        </Link>
+        {user ? (
+          <Link href='/logout' passHref>
+            <MuiLink
+              sx={{
+                color: 'white',
+              }}
+            >
+              <ButtonWithIcon
+                buttonLabel='Logout'
+                iconReactNode={<LoginIcon />}
+              />
+            </MuiLink>
+          </Link>
+        ) : (
+          <>
+            <Link href='/login' passHref>
+              <MuiLink
+                sx={{
+                  color: 'white',
+                }}
+              >
+                <ButtonWithIcon
+                  buttonLabel='Login'
+                  iconReactNode={<LoginIcon />}
+                />
+              </MuiLink>
+            </Link>
 
-        <Link href='/register' passHref>
-          <MuiLink
-            sx={{
-              color: 'white',
-            }}
-          >
-            <ButtonWithIcon
-              buttonLabel='Register'
-              iconReactNode={<HowToRegIcon />}
-            />
-          </MuiLink>
-        </Link>
+            <Link href='/register' passHref>
+              <MuiLink
+                sx={{
+                  color: 'white',
+                }}
+              >
+                <ButtonWithIcon
+                  buttonLabel='Register'
+                  iconReactNode={<HowToRegIcon />}
+                />
+              </MuiLink>
+            </Link>
+          </>
+        )}
       </Toolbar>
     </AppBar>
   )
