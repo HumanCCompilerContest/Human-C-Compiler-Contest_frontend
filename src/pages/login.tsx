@@ -1,26 +1,41 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useState } from 'react'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { useEffect } from 'react'
+import Alert from '@mui/material/Alert'
 
 import BasicLayout from '@/components/templates/BasicLayout'
 import { requestLogin } from '@/features/api'
+import { useForm } from 'react-hook-form'
+
+type IFormInput = {
+  name: string
+  password: string
+}
 
 const Login: NextPage = () => {
-  useEffect(() => {
-    const fn = async () => {
-      const res = await requestLogin({
-        name: '自分をGCCだと思い込んでいる一般人',
-        password: 'hoge',
-      })
-      console.log(res)
-    }
+  const [errorMessage, setErrorMessage] = useState('')
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>()
 
-    fn()
-  }, [])
+  const onSubmit = async (data: IFormInput) => {
+    const res = await requestLogin({
+      name: data.name,
+      password: data.password,
+    })
+
+    if (res.status === 'ng') {
+      setErrorMessage(res.errorMessage)
+      return
+    }
+    console.log(res)
+  }
 
   return (
     <>
@@ -30,39 +45,49 @@ const Login: NextPage = () => {
       </Head>
 
       <BasicLayout>
-        <Box sx={{ width: '500px', margin: '1rem auto' }}>
-          <Typography
-            variant='h4'
-            component='div'
-            sx={{ fontWeight: 600, margin: '0 0 0 2rem' }}
-          >
+        <Box sx={{ width: '500px', margin: '1rem auto', padding: '0 2rem' }}>
+          <Typography variant='h4' component='div' sx={{ fontWeight: 600 }}>
             Login
           </Typography>
-          <Box sx={{ margin: '1rem 2rem' }}>
+          <Box sx={{ margin: '2rem 0' }}>
+            {errorMessage && <Alert severity='error'>{errorMessage}</Alert>}
+          </Box>
+
+          <Box sx={{ margin: '1rem 0' }}>
             <TextField
               id='outlined-basic'
               className='w-20'
               label='User Name'
               variant='outlined'
               fullWidth
+              error={'name' in errors}
+              helperText={errors.name ? 'この項目は必須です' : ''}
+              {...register('name', { required: true })}
             />
           </Box>
-          <Box sx={{ margin: '2rem' }}>
+
+          <Box sx={{ margin: '2rem 0' }}>
             <TextField
               id='outlined-basic'
               label='Password'
               variant='outlined'
               fullWidth
+              error={'password' in errors}
+              helperText={errors.password ? 'この項目は必須です' : ''}
+              {...register('password', { required: true })}
             />
           </Box>
           <Box
             sx={{
               display: 'flex',
               justifyContent: 'right',
-              marginRight: '3rem',
             }}
           >
-            <Button variant='contained' size='large'>
+            <Button
+              variant='contained'
+              size='large'
+              onClick={handleSubmit(onSubmit)}
+            >
               Login
             </Button>
           </Box>

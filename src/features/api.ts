@@ -16,7 +16,7 @@ export const useMe = async () => {
   }
 }
 
-export const requestLogin = async (data: UserPost) => {
+export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
   const options = {
     method: 'POST',
     headers: {
