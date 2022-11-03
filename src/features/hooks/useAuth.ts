@@ -1,23 +1,30 @@
 import { useEffect, useState } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 
 import { useMe } from '@/features/api'
 
+const excludeAuthPath = ['/', '/login', '/register']
+
 const useAuth = (redirectTo = '/login') => {
   const [isLoading, setIsLoading] = useState(true)
-  const { user } = useMe()
+  const router = useRouter()
+  const { userResponse } = useMe()
 
   useEffect(() => {
-    if (!redirectTo || !user) return
+    if (!userResponse) return
 
-    if (redirectTo && user.status === 'ng') {
-      Router.push(redirectTo)
+    if (
+      !excludeAuthPath.includes(router.pathname) &&
+      redirectTo &&
+      userResponse.status === 'ng'
+    ) {
+      router.push(redirectTo)
       return
     }
     setIsLoading(false)
-  }, [user, redirectTo])
+  }, [userResponse, redirectTo])
 
-  return { user, isLoading }
+  return { user: userResponse?.user, isLoading }
 }
 
 export default useAuth

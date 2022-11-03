@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
+import { useSWRConfig } from 'swr'
 
 import BasicLayout from '@/components/templates/BasicLayout'
 import { requestLogin } from '@/features/api'
@@ -18,6 +19,7 @@ type IFormInput = {
 }
 
 const Login: NextPage = () => {
+  const { cache } = useSWRConfig()
   const [errorMessage, setErrorMessage] = useState('')
   const {
     register,
@@ -35,6 +37,8 @@ const Login: NextPage = () => {
       setErrorMessage(res.errorMessage)
       return
     }
+    // キャッシュを削除しないとログインしていない状態となる
+    cache.delete('/api/users/me')
     Router.push('/')
   }
 

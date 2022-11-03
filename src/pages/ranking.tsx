@@ -6,19 +6,8 @@ import Typography from '@mui/material/Typography'
 import BasicLayout from '@/components/templates/BasicLayout'
 import RankingTable from '@/components/molecules/RankingTable'
 import StarIcon from '@mui/icons-material/Star'
-import useAuth from '@/features/hooks/useAuth'
 
 const Ranking: NextPage = () => {
-  const { user, isLoading } = useAuth()
-
-  if (isLoading) {
-    return (
-      <BasicLayout>
-        <div>idLoading...</div>
-      </BasicLayout>
-    )
-  }
-
   return (
     <>
       <Head>

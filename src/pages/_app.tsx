@@ -1,6 +1,7 @@
 import CssBaseline from '@mui/material/CssBaseline'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import type { AppProps } from 'next/app'
+import { SWRConfig } from 'swr'
 
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
@@ -34,10 +35,12 @@ const theme = createTheme({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <SWRConfig value={{ provider: () => new Map() }}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </SWRConfig>
   )
 }
 

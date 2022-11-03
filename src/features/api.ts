@@ -10,7 +10,7 @@ export const useMe = () => {
   const { data, error } = useSWR(`/api/users/me`, MeFetcher)
 
   return {
-    user: data,
+    userResponse: data,
     isLoading: !error && !data,
     isError: error,
   }
