@@ -9,6 +9,7 @@ import Regulation from '@/components/organisms/home/Regulation'
 import RequestedAbility from '@/components/organisms/home/RequestedAbility'
 import WhatHCCC from '@/components/organisms/home/WhatHCCC'
 import QandA from '@/components/organisms/home/QandA'
+import Schedule from '@/components/organisms/home/Schedule'
 
 const Home: NextPage = () => {
   return (
@@ -27,6 +28,7 @@ const Home: NextPage = () => {
             padding: '2rem 0 10rem',
           }}
         >
+          <Schedule />
           <WhatHCCC />
           <RequestedAbility />
           <Regulation />
