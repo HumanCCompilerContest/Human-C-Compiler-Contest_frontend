@@ -6,8 +6,8 @@ const MeFetcher = (url: string): Promise<UserResponse> => {
   return fetch(url).then((res) => res.json())
 }
 
-export const useMe = async () => {
-  const { data, error } = useSWR(`/api/user/me`, MeFetcher)
+export const useMe = () => {
+  const { data, error } = useSWR(`/api/users/me`, MeFetcher)
 
   return {
     user: data,

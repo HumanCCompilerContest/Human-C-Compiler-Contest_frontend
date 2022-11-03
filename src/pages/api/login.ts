@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { serialize } from 'cookie'
 
 import { UserResponse } from '@/features/types'
 
@@ -8,7 +9,7 @@ export default function handler(
 ) {
   const bodyName: string = req.body.name || ''
   const bodyPassword: string = req.body.password || ''
-  const userName = '自分をGCCだと思い込んでいる一般人'
+  const userName = 'hoge'
   const password = 'hoge'
 
   if (bodyName === userName && bodyPassword === password) {
@@ -19,6 +20,7 @@ export default function handler(
         name: userName,
       },
     }
+    res.setHeader('Set-Cookie', serialize('hccc', 'session-key', { path: '/' }))
     res.status(200).json(data)
   } else {
     const data: UserResponse = {
