@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         <meta name='description' content='人間Cコンパイラーコンテスト' />
       </Head>
 
-      <BasicLayout>
+      <BasicLayout isHome>
         <MainVisual />
         <Container
           maxWidth='lg'

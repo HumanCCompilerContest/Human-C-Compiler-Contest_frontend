@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 
-import { UserPost, UserResponse } from '@/features/types'
+import { UserPost, UserResponse, ResponseBase } from '@/features/types'
 
 const MeFetcher = (url: string): Promise<UserResponse> => {
   return fetch(url).then((res) => res.json())
@@ -25,4 +25,14 @@ export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
     body: JSON.stringify(data),
   }
   return fetch('/api/login/', options).then((res) => res.json())
+}
+
+export const requestLogout = async (): Promise<ResponseBase> => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  return fetch('/api/logout/', options).then((res) => res.json())
 }

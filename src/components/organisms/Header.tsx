@@ -1,5 +1,6 @@
 import HowToRegIcon from '@mui/icons-material/HowToReg'
 import LoginIcon from '@mui/icons-material/Login'
+import LogoutIcon from '@mui/icons-material/Logout'
 import AppBar from '@mui/material/AppBar'
 import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
@@ -14,13 +15,30 @@ import CreateIcon from '@mui/icons-material/Create'
 import StarIcon from '@mui/icons-material/Star'
 import PublishIcon from '@mui/icons-material/Publish'
 import { useContext } from 'react'
+import { useRouter } from 'next/router'
+import { useSWRConfig } from 'swr'
 
 import { AuthContext } from '@/components/templates/BasicLayout'
 import ButtonWithIcon from '@/components/molecules/ButtonWithIcon'
+import { requestLogout } from '@/features/api'
 
 const Header = () => {
   const theme = useTheme()
+  const router = useRouter()
+  const { cache } = useSWRConfig()
   const { user } = useContext(AuthContext)
+
+  const handleClickLogout = async () => {
+    const res = await requestLogout()
+    if (res.status === 'ng') {
+      console.error(res.errorMessage)
+      return
+    }
+
+    // キャッシュを削除しないとログイン済の状態となる
+    cache.delete('/api/users/me')
+    router.push('/')
+  }
 
   return (
     <AppBar
@@ -128,18 +146,17 @@ const Header = () => {
         <Box sx={{ flexGrow: 1 }} />
 
         {user ? (
-          <Link href='/logout' passHref>
-            <MuiLink
-              sx={{
-                color: 'white',
-              }}
-            >
-              <ButtonWithIcon
-                buttonLabel='Logout'
-                iconReactNode={<LoginIcon />}
-              />
-            </MuiLink>
-          </Link>
+          <MuiLink
+            onClick={handleClickLogout}
+            sx={{
+              color: 'white',
+            }}
+          >
+            <ButtonWithIcon
+              buttonLabel='Logout'
+              iconReactNode={<LogoutIcon />}
+            />
+          </MuiLink>
         ) : (
           <>
             <Link href='/login' passHref>
