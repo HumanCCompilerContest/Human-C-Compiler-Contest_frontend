@@ -14,6 +14,9 @@ const theme = createTheme({
     primary: {
       main: '#0A1929',
     },
+    secondary: {
+      main: '#f44336',
+    },
   },
   components: {
     MuiCssBaseline: {
