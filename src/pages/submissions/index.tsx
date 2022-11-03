@@ -1,11 +1,11 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import PublishIcon from '@mui/icons-material/Publish'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import PublishIcon from '@mui/icons-material/Publish'
+import type { NextPage } from 'next'
+import Head from 'next/head'
 
-import BasicLayout from '@/components/templates/BasicLayout'
 import SubmissionsTable from '@/components/molecules/SubmissionsTable'
+import BasicLayout from '@/components/templates/BasicLayout'
 
 const Submissions: NextPage = () => {
   return (

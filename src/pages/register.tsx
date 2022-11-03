@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import type { NextPage } from 'next'
+import Head from 'next/head'
 
 import BasicLayout from '@/components/templates/BasicLayout'
 

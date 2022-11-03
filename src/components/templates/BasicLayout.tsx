@@ -4,8 +4,8 @@ import { createContext } from 'react'
 import Footer from '@/components/organisms/Footer'
 import Header from '@/components/organisms/Header'
 
-import { User } from '@/features/types'
 import useAuth from '@/features/hooks/useAuth'
+import { User } from '@/features/types'
 
 export type AuthContextType = {
   user?: User

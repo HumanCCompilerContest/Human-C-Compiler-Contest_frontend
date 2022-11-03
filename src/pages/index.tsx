@@ -2,13 +2,13 @@ import Container from '@mui/material/Container'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import BasicLayout from '@/components/templates/BasicLayout'
 import MainVisual from '@/components/organisms/home/MainVisual'
+import QandA from '@/components/organisms/home/QandA'
 import Regulation from '@/components/organisms/home/Regulation'
 import RequestedAbility from '@/components/organisms/home/RequestedAbility'
-import WhatHCCC from '@/components/organisms/home/WhatHCCC'
-import QandA from '@/components/organisms/home/QandA'
 import Schedule from '@/components/organisms/home/Schedule'
+import WhatHCCC from '@/components/organisms/home/WhatHCCC'
+import BasicLayout from '@/components/templates/BasicLayout'
 
 const Home: NextPage = () => {
   return (

@@ -1,11 +1,11 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import StarIcon from '@mui/icons-material/Star'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import type { NextPage } from 'next'
+import Head from 'next/head'
 
-import BasicLayout from '@/components/templates/BasicLayout'
 import RankingTable from '@/components/molecules/RankingTable'
-import StarIcon from '@mui/icons-material/Star'
+import BasicLayout from '@/components/templates/BasicLayout'
 
 const Ranking: NextPage = () => {
   return (

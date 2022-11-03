@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { serialize } from 'cookie'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { UserResponse } from '@/features/types'
 
