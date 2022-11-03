@@ -4,10 +4,24 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { useEffect } from 'react'
 
 import BasicLayout from '@/components/templates/BasicLayout'
+import { requestLogin } from '@/features/api'
 
 const Login: NextPage = () => {
+  useEffect(() => {
+    const fn = async () => {
+      const res = await requestLogin({
+        name: '自分をGCCだと思い込んでいる一般人',
+        password: 'hoge',
+      })
+      console.log(res)
+    }
+
+    fn()
+  }, [])
+
   return (
     <>
       <Head>
