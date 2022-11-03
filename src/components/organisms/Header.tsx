@@ -146,17 +146,30 @@ const Header = () => {
         <Box sx={{ flexGrow: 1 }} />
 
         {user ? (
-          <MuiLink
-            onClick={handleClickLogout}
-            sx={{
-              color: 'white',
-            }}
-          >
-            <ButtonWithIcon
-              buttonLabel='Logout'
-              iconReactNode={<LogoutIcon />}
-            />
-          </MuiLink>
+          <>
+            <Typography
+              sx={{
+                color: 'white',
+                marginRight: '2rem',
+                padding: '0.2rem 0.5rem',
+                border: '2px solid white',
+                borderRadius: '0.3rem',
+              }}
+            >
+              {user.name}
+            </Typography>
+            <MuiLink
+              onClick={handleClickLogout}
+              sx={{
+                color: 'white',
+              }}
+            >
+              <ButtonWithIcon
+                buttonLabel='Logout'
+                iconReactNode={<LogoutIcon />}
+              />
+            </MuiLink>
+          </>
         ) : (
           <>
             <Link href='/login' passHref>
