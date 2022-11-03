@@ -2,8 +2,7 @@ import Container from '@mui/material/Container'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import Footer from '@/components/organisms/Footer'
-import Header from '@/components/organisms/Header'
+import BasicLayout from '@/components/templates/BasicLayout'
 import MainVisual from '@/components/organisms/home/MainVisual'
 import Regulation from '@/components/organisms/home/Regulation'
 import RequestedAbility from '@/components/organisms/home/RequestedAbility'
@@ -19,8 +18,7 @@ const Home: NextPage = () => {
         <meta name='description' content='人間Cコンパイラーコンテスト' />
       </Head>
 
-      <div>
-        <Header />
+      <BasicLayout>
         <MainVisual />
         <Container
           maxWidth='lg'
@@ -34,8 +32,7 @@ const Home: NextPage = () => {
           <Regulation />
           <QandA />
         </Container>
-        <Footer />
-      </div>
+      </BasicLayout>
     </>
   )
 }

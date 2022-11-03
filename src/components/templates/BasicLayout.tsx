@@ -7,14 +7,15 @@ import Header from '@/components/organisms/Header'
 import { User } from '@/features/types'
 import useAuth from '@/features/hooks/useAuth'
 
-const AuthContext = createContext<User | undefined>(undefined)
+export const AuthContext = createContext<User | undefined>(undefined)
 
 type BasicLayoutProps = {
   children: React.ReactNode
+  isHome?: boolean
 }
 
 const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
-  const { children } = props
+  const { children, isHome = false } = props
 
   const { user, isLoading } = useAuth()
 
@@ -26,7 +27,11 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
     <AuthContext.Provider value={user}>
       <div style={{ height: '100%' }}>
         <Header />
-        <Container sx={{ marginTop: '4rem' }}>{children}</Container>
+        {isHome ? (
+          children
+        ) : (
+          <Container sx={{ marginTop: '4rem' }}>{children}</Container>
+        )}
         <Footer />
       </div>
     </AuthContext.Provider>
