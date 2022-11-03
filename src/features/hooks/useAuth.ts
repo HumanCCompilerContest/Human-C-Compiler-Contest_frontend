@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 import { useMe } from '@/features/api'
 
@@ -10,7 +10,7 @@ const useAuth = (redirectTo = '/login') => {
   const router = useRouter()
   const { userResponse } = useMe()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!userResponse) return
 
     if (

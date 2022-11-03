@@ -37,7 +37,7 @@ const Header = () => {
 
     // キャッシュを削除しないとログイン済の状態となる
     cache.delete('/api/users/me')
-    router.push('/')
+    router.push('/login')
   }
 
   return (
