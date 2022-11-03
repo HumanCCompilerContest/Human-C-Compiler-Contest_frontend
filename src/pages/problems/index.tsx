@@ -46,6 +46,7 @@ const Problems: NextPage = () => {
           {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((v, i) => {
             return (
               <Card
+                key={i}
                 sx={{
                   width: 300,
                   margin: '2rem 2rem 2rem 0',
