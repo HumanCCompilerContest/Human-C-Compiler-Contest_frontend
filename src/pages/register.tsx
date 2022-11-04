@@ -1,3 +1,4 @@
+import HowToRegIcon from '@mui/icons-material/HowToReg'
 import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -51,9 +52,21 @@ const Register: NextPage = () => {
 
       <BasicLayout>
         <Box sx={{ width: '500px', margin: '1rem auto', padding: '0 2rem' }}>
-          <Typography variant='h4' component='div' sx={{ fontWeight: 600 }}>
-            Register
-          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <HowToRegIcon
+              sx={{ width: '40px', height: '40px', marginRight: '1rem' }}
+            />
+            <Typography variant='h4' component='div' sx={{ fontWeight: 600 }}>
+              Register
+            </Typography>
+          </Box>
+
           <Box sx={{ margin: '2rem 0' }}>
             {errorMessage && <Alert severity='error'>{errorMessage}</Alert>}
           </Box>
@@ -82,20 +95,15 @@ const Register: NextPage = () => {
               {...register('password', { required: true })}
             />
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'right',
-            }}
+          <Button
+            variant='contained'
+            size='large'
+            fullWidth
+            onClick={handleSubmit(onSubmit)}
+            sx={{ padding: '1rem 0', fontSize: '1.2rem', fontWeight: 600 }}
           >
-            <Button
-              variant='contained'
-              size='large'
-              onClick={handleSubmit(onSubmit)}
-            >
-              Register
-            </Button>
-          </Box>
+            Register
+          </Button>
         </Box>
       </BasicLayout>
     </>
