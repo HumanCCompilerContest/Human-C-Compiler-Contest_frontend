@@ -1,7 +1,8 @@
-import MuiLink, { LinkProps } from '@mui/material/Link'
-import * as React from 'react'
-import Link from 'next/link'
 import { Box } from '@mui/material'
+import MuiLink from '@mui/material/Link'
+import type { LinkProps } from '@mui/material/Link'
+import Link from 'next/link'
+import * as React from 'react'
 
 type LinkWithIconProps = LinkProps & {
   href: string
@@ -33,6 +34,7 @@ const LinkWithIcon: React.FC<LinkWithIconProps> = (props) => {
         }}
       >
         <Box
+          component='span'
           sx={{
             margin: '0 0.5rem',
             display: 'flex',
@@ -41,7 +43,14 @@ const LinkWithIcon: React.FC<LinkWithIconProps> = (props) => {
         >
           {iconReactNode}
         </Box>
-        <Box sx={{ '&:hover': { borderBottom: '1px solid white' } }}>
+        <Box
+          component='span'
+          sx={{
+            display: 'inline-block',
+            lineHeight: 1,
+            '&:hover': { borderBottom: '1px solid white' },
+          }}
+        >
           {' '}
           {children}
         </Box>

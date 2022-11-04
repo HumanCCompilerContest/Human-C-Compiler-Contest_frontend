@@ -7,12 +7,10 @@ import StarIcon from '@mui/icons-material/Star'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
-import MuiLink from '@mui/material/Link'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { useContext } from 'react'
@@ -63,7 +61,11 @@ const Header = () => {
           }
           sx={{ marginRight: '3rem' }}
         >
-          <Typography variant='h6' component='span' sx={{ color: 'white' }}>
+          <Typography
+            variant='h6'
+            component='span'
+            sx={{ color: 'white', lineHeight: '1', display: 'inline-block' }}
+          >
             HCCC
           </Typography>
         </LinkWithIcon>

@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box'
-import Button, { ButtonProps } from '@mui/material/Button'
+import Button from '@mui/material/Button'
+import type { ButtonProps } from '@mui/material/Button'
 import { FC } from 'react'
 
 export type ButtonWithIconProps = ButtonProps & {
