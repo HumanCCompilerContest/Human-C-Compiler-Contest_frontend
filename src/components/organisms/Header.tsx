@@ -19,6 +19,7 @@ import { useContext } from 'react'
 import { useSWRConfig } from 'swr'
 
 import ButtonWithIcon from '@/components/molecules/ButtonWithIcon'
+import LinkWithIcon from '@/components/molecules/LinkWithIcon'
 import { AuthContext } from '@/components/templates/BasicLayout'
 import { requestLogout } from '@/features/api'
 
@@ -48,15 +49,9 @@ const Header = () => {
       }}
     >
       <Toolbar>
-        <Link href='/' passHref>
-          <MuiLink
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginRight: '4rem',
-            }}
-          >
+        <LinkWithIcon
+          href='/'
+          iconReactNode={
             <IconButton
               size='large'
               aria-label='menu'
@@ -65,83 +60,32 @@ const Header = () => {
             >
               <Image src='/HCCC_logo.png' layout='fill' />
             </IconButton>
-            <Typography variant='h6' component='span' sx={{ color: 'white' }}>
-              HCCC
-            </Typography>
-          </MuiLink>
-        </Link>
-        <Link href='/ranking' passHref>
-          <MuiLink
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              marginRight: '1rem',
-            }}
-          >
-            <StarIcon
-              fontSize='small'
-              sx={{ marginRight: '0.2rem', color: 'white' }}
-            />
-            <Typography
-              variant='subtitle1'
-              component='span'
-              sx={{
-                color: 'white',
-                '&:hover': { borderBottom: '1px solid white' },
-              }}
-            >
-              ranking
-            </Typography>
-          </MuiLink>
-        </Link>
-        <Link href='/problems' passHref>
-          <MuiLink
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              marginRight: '1rem',
-            }}
-          >
-            <CreateIcon
-              fontSize='small'
-              sx={{ marginRight: '0.2rem', color: 'white' }}
-            />
-            <Typography
-              variant='subtitle1'
-              component='span'
-              sx={{
-                color: 'white',
-                '&:hover': { borderBottom: '1px solid white' },
-              }}
-            >
-              problems
-            </Typography>
-          </MuiLink>
-        </Link>
-        <Link href='/submissions' passHref>
-          <MuiLink
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              marginRight: '1rem',
-            }}
-          >
-            <PublishIcon
-              fontSize='small'
-              sx={{ marginRight: '0.2rem', color: 'white' }}
-            />
-            <Typography
-              variant='subtitle1'
-              component='span'
-              sx={{
-                color: 'white',
-                '&:hover': { borderBottom: '1px solid white' },
-              }}
-            >
-              submissions
-            </Typography>
-          </MuiLink>
-        </Link>
+          }
+          sx={{ marginRight: '3rem' }}
+        >
+          <Typography variant='h6' component='span' sx={{ color: 'white' }}>
+            HCCC
+          </Typography>
+        </LinkWithIcon>
+
+        <LinkWithIcon
+          href='/ranking'
+          iconReactNode={<StarIcon />}
+          sx={{ marginRight: '1rem' }}
+        >
+          Ranking
+        </LinkWithIcon>
+
+        <LinkWithIcon
+          href='/problems'
+          iconReactNode={<CreateIcon />}
+          sx={{ marginRight: '1rem' }}
+        >
+          Problem
+        </LinkWithIcon>
+        <LinkWithIcon href='/submissions' iconReactNode={<PublishIcon />}>
+          Submission
+        </LinkWithIcon>
 
         <Box sx={{ flexGrow: 1 }} />
 
@@ -158,45 +102,31 @@ const Header = () => {
             >
               {user.name}
             </Typography>
-            <MuiLink
+            <ButtonWithIcon
+              buttonLabel='Logout'
+              iconReactNode={<LogoutIcon />}
               onClick={handleClickLogout}
               sx={{
                 color: 'white',
               }}
-            >
-              <ButtonWithIcon
-                buttonLabel='Logout'
-                iconReactNode={<LogoutIcon />}
-              />
-            </MuiLink>
+            />
           </>
         ) : (
           <>
-            <Link href='/login' passHref>
-              <MuiLink
-                sx={{
-                  color: 'white',
-                }}
-              >
-                <ButtonWithIcon
-                  buttonLabel='Login'
-                  iconReactNode={<LoginIcon />}
-                />
-              </MuiLink>
-            </Link>
-
-            <Link href='/register' passHref>
-              <MuiLink
-                sx={{
-                  color: 'white',
-                }}
-              >
-                <ButtonWithIcon
-                  buttonLabel='Register'
-                  iconReactNode={<HowToRegIcon />}
-                />
-              </MuiLink>
-            </Link>
+            <LinkWithIcon
+              href='/login'
+              iconReactNode={<LoginIcon />}
+              sx={{ marginRight: '1rem' }}
+            >
+              Login
+            </LinkWithIcon>
+            <LinkWithIcon
+              href='/register'
+              iconReactNode={<HowToRegIcon />}
+              sx={{ marginRight: '1rem' }}
+            >
+              Register
+            </LinkWithIcon>
           </>
         )}
       </Toolbar>

@@ -1,14 +1,14 @@
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import * as React from 'react'
+import Button, { ButtonProps } from '@mui/material/Button'
+import { FC } from 'react'
 
-type ButtonWithIconProps = {
+export type ButtonWithIconProps = ButtonProps & {
   buttonLabel: string
   iconReactNode: React.ReactNode
 }
 
-const ButtonWithIcon: React.FC<ButtonWithIconProps> = (props) => {
-  const { buttonLabel, iconReactNode } = props
+const ButtonWithIcon: FC<ButtonWithIconProps> = (props) => {
+  const { buttonLabel, iconReactNode, sx, ...leftProps } = props
   return (
     <Box
       sx={{
@@ -19,7 +19,13 @@ const ButtonWithIcon: React.FC<ButtonWithIconProps> = (props) => {
       }}
     >
       {iconReactNode}
-      <Button color='inherit'>{buttonLabel}</Button>
+      <Button
+        color='inherit'
+        {...leftProps}
+        sx={{ verticalAlign: 'bottom', ...sx }}
+      >
+        {buttonLabel}
+      </Button>
     </Box>
   )
 }
