@@ -9,6 +9,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import Highlight from 'react-highlight'
+import TitleLabel from '@/components/atoms/TitleLabel'
 import BasicLayout from '@/components/templates/BasicLayout'
 import { useProblem } from '@/features/api'
 
@@ -40,62 +41,36 @@ const Problem = () => {
       <Typography variant='h3' sx={{ fontWeight: '600' }}>
         {problem.title}
       </Typography>
-      <Typography variant='h6' sx={{ margin: '2rem 0' }}>
+      <Typography variant='h6' sx={{ my: '2rem' }}>
         TimeLimit 2sec / Score {problem.score}
       </Typography>
-      <Box sx={{ margin: '4rem 0' }}>
-        <Typography
-          variant='h4'
-          sx={{
-            fontWeight: '600',
-            marginBottom: '2rem',
-            padding: '1rem',
-            borderLeft: `10px solid ${theme.palette.secondary.main}`,
-            backgroundColor: '#efefef',
-          }}
-        >
-          問題文
+
+      <Box sx={{ margin: '5rem 0 10rem' }}>
+        <TitleLabel label='問題文' sx={{ mb: '2rem' }} />
+        <Typography variant='h6' sx={{ p: '1rem' }}>
+          {problem.statement}
         </Typography>
-        <Typography variant='h6'>{problem.statement}</Typography>
       </Box>
 
-      <Box sx={{ margin: '4rem 0' }}>
-        <Typography
-          variant='h4'
-          sx={{ fontWeight: '600', marginBottom: '1rem' }}
-        >
-          Source Code
-        </Typography>
+      <Box sx={{ margin: '10rem 0' }}>
+        <TitleLabel label='Source Code' sx={{ mb: '2rem' }} />
         <Highlight>{problem.code}</Highlight>
       </Box>
 
-      <Box sx={{ margin: '4rem 0' }}>
-        <Typography
-          variant='h4'
-          sx={{ fontWeight: '600', marginBottom: '1rem' }}
-        >
-          入力
+      <Box sx={{ margin: '10rem 0' }}>
+        <TitleLabel label='Input' sx={{ mb: '2rem' }} />
+        <Typography variant='h6' sx={{ p: '1rem' }}>
+          {problem.input_desc}
         </Typography>
-        <Typography variant='h6'>{problem.input_desc}</Typography>
       </Box>
 
-      <Box sx={{ margin: '4rem 0' }}>
-        <Typography
-          variant='h4'
-          sx={{ fontWeight: '600', marginBottom: '1rem' }}
-        >
-          出力
-        </Typography>
+      <Box sx={{ margin: '10rem 0' }}>
+        <TitleLabel label='Output' sx={{ mb: '2rem' }} />
         <Typography variant='h6'>{problem.output_desc}</Typography>
       </Box>
 
-      <Box sx={{ margin: '4rem 0' }}>
-        <Typography
-          variant='h4'
-          sx={{ fontWeight: '600', marginBottom: '1rem' }}
-        >
-          Submission
-        </Typography>
+      <Box sx={{ margin: '10rem 0' }}>
+        <TitleLabel label='Submission' sx={{ mb: '2rem' }} />
 
         <TextField
           color='primary'
