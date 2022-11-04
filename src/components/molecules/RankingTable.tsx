@@ -36,8 +36,8 @@ const BasicTable = () => {
         <TableHead>
           <StyledTableRow>
             <StyledTableCell>Rank</StyledTableCell>
-            <StyledTableCell align='left'>Name</StyledTableCell>
-            <StyledTableCell align='left'>Score</StyledTableCell>
+            <StyledTableCell align='right'>Name</StyledTableCell>
+            <StyledTableCell align='right'>Score</StyledTableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
@@ -65,8 +65,8 @@ const BasicTable = () => {
                   {row.rank}
                 </span>
               </StyledTableCell>
-              <StyledTableCell align='left'>{row.name}</StyledTableCell>
-              <StyledTableCell align='left'>{row.score}</StyledTableCell>
+              <StyledTableCell align='right'>{row.name}</StyledTableCell>
+              <StyledTableCell align='right'>{row.score}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -76,17 +76,16 @@ const BasicTable = () => {
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  borderBottom: `1px solid white`,
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: 'black',
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.secondary.main,
+    color: 'white',
     fontWeight: 700,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     fontWeight: 600,
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
+    backgroundColor: 'white',
+    color: theme.palette.primary.main,
   },
 }))
 
