@@ -33,3 +33,13 @@ export type ProblemResponse = ResponseBase & {
 export type ProblemListResponse = ResponseBase & {
   items: Problem[]
 }
+
+export type Ranking = {
+  rank: number
+  userName: string
+  score: number
+}
+
+export type RankingResponse = ResponseBase & {
+  items: Ranking[]
+}

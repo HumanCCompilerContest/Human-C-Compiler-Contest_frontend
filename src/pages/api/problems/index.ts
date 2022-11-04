@@ -38,4 +38,3 @@ export default function handler(
   data.items.push(problem)
   res.status(200).json(data)
 }
-;``
