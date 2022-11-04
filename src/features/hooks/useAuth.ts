@@ -3,7 +3,7 @@ import { useLayoutEffect, useState } from 'react'
 
 import { useMe } from '@/features/api'
 
-const excludeAuthPath = ['/', '/login', '/register']
+const requireAuthPath: string[] = []
 
 const useAuth = (redirectTo = '/login') => {
   const [isLoading, setIsLoading] = useState(true)
@@ -14,7 +14,7 @@ const useAuth = (redirectTo = '/login') => {
     if (!userResponse) return
 
     if (
-      !excludeAuthPath.includes(router.pathname) &&
+      requireAuthPath.includes(router.pathname) &&
       redirectTo &&
       userResponse.status === 'ng'
     ) {
