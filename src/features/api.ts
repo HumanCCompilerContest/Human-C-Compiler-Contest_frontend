@@ -27,6 +27,19 @@ export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
   return fetch('/api/login/', options).then((res) => res.json())
 }
 
+export const requestRegister = async (
+  data: UserPost,
+): Promise<UserResponse> => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  }
+  return fetch('/api/register/', options).then((res) => res.json())
+}
+
 export const requestLogout = async (): Promise<ResponseBase> => {
   const options = {
     method: 'POST',
