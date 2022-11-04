@@ -17,6 +17,7 @@ export type UserResponse = ResponseBase & {
 }
 
 export type Problem = {
+  id: number
   title: string
   statement: string
   code: string

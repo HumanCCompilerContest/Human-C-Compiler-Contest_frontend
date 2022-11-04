@@ -10,11 +10,12 @@ export default function handler(
     status: 'ok',
     errorMessage: '',
     problem: {
+      id: 1,
       title: 'constant',
-      statement: 'return 42',
-      code: 'int main() {return 42;}',
-      input_desc: 'no',
-      output_desc: 'status code = 42',
+      statement: '42を返すコードをコンパイルしてください',
+      code: 'int main() {\n . return 42;\n}',
+      input_desc: 'なし',
+      output_desc: 'ステータスコードで42を返すようにしてください',
       score: 100,
     },
   }
