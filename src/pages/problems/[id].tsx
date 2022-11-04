@@ -54,7 +54,9 @@ const Problem = () => {
 
       <Box sx={{ margin: '10rem 0' }}>
         <TitleLabel label='Source Code' sx={{ mb: '2rem' }} />
-        <Highlight>{problem.code}</Highlight>
+        <Box sx={{ fontSize: '1.2rem' }}>
+          <Highlight>{problem.code}</Highlight>
+        </Box>
       </Box>
 
       <Box sx={{ margin: '10rem 0' }}>
