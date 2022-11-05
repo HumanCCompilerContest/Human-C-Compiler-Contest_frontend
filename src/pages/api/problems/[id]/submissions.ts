@@ -20,6 +20,15 @@ export default function handler(
           id: 1,
           name: 'karintou',
         },
+        problem: {
+          id: 1,
+          title: 'constant',
+          statement: 'return 42',
+          code: 'int main() {return 42;}',
+          input_desc: 'no',
+          output_desc: 'status code = 42',
+          score: 100,
+        },
       },
     }
     res.status(200).json(data)

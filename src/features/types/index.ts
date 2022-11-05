@@ -52,16 +52,17 @@ export type Submission = {
   result: string
 }
 
-export type SubmissionJoinedUser = Submission & {
+export type SubmissionJoined = Submission & {
   user: User
+  problem: Problem
 }
 
 export type SubmissionJoinedUserResponse = ResponseBase & {
-  submission: SubmissionJoinedUser
+  submission: SubmissionJoined
 }
 
 export type SubmissionJoinedUserListResponse = ResponseBase & {
-  items: SubmissionJoinedUser[]
+  items: SubmissionJoined[]
 }
 
 export type SubmissionPost = {

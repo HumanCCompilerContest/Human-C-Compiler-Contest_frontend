@@ -2,14 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import {
   SubmissionJoinedUserListResponse,
-  SubmissionJoinedUser,
+  SubmissionJoined,
 } from '@/features/types'
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<SubmissionJoinedUserListResponse>,
 ) {
-  const submissionData: SubmissionJoinedUser = {
+  const submissionData: SubmissionJoined = {
     id: 1,
     time: '2022/01/01',
     asem: 'stop',
@@ -17,6 +17,15 @@ export default function handler(
     user: {
       id: 1,
       name: 'karintou',
+    },
+    problem: {
+      id: 1,
+      title: 'constant',
+      statement: 'return 42',
+      code: 'int main() {return 42;}',
+      input_desc: 'no',
+      output_desc: 'status code = 42',
+      score: 100,
     },
   }
   const data: SubmissionJoinedUserListResponse = {

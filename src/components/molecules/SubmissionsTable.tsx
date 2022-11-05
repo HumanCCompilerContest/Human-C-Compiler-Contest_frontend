@@ -1,3 +1,5 @@
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
 import MuiLink from '@mui/material/Link'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -10,29 +12,19 @@ import { styled } from '@mui/material/styles'
 import Link from 'next/link'
 import * as React from 'react'
 
-const createData = (
-  dateTime: string,
-  name: string,
-  userName: string,
-  score: number,
-  result: string,
-  id: number,
-) => {
-  return { dateTime, name, userName, score, result, id }
-}
-
-const rows = [
-  createData('2001/1/1/11:11:11', 'Hello,world!!', 'karintou', 500, 'AC', 1),
-  createData('2001/1/1/11:11:11', 'char literal', 'karintou', 400, 'AC', 2),
-  createData('2001/1/1/11:11:11', 'number', 'karintou', 300, 'AC', 3),
-  createData('2001/1/1/11:11:11', 'plus', 'karintou', 200, 'AC', 4),
-  createData('2001/1/1/11:11:11', 'pointer', 'karintou', 100, 'AC', 5),
-  createData('2001/1/1/11:11:11', 'deref', 'karintou', 0, 'WA', 6),
-  createData('2001/1/1/11:11:11', 'tree', 'karintou', 0, 'TLE', 7),
-  createData('2001/1/1/11:11:11', 'function', 'karintou', 0, 'RE', 8),
-]
+import { useSubmissionList } from '@/features/api'
 
 const BasicTable = () => {
+  const { submissionListResponse, isLoading } = useSubmissionList()
+
+  if (isLoading || !submissionListResponse) {
+    return (
+      <Backdrop sx={{ color: '#fff' }} open>
+        <CircularProgress color='inherit' />
+      </Backdrop>
+    )
+  }
+
   return (
     <TableContainer component={Paper} sx={{ margin: '3rem 0' }}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -47,16 +39,15 @@ const BasicTable = () => {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {submissionListResponse.items.map((row) => (
             <StyledTableRow
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <StyledTableCell component='th' scope='row'>
-                {row.dateTime}
+                {row.time}
               </StyledTableCell>
-              <StyledTableCell align='left'>{row.name}</StyledTableCell>
-              <StyledTableCell align='left'>{row.userName}</StyledTableCell>
+              <StyledTableCell align='left'>{row.user.name}</StyledTableCell>
               <StyledTableCell align='left'>{row.score}</StyledTableCell>
               <StyledTableCell align='left'>{row.result}</StyledTableCell>
               <StyledTableCell align='left'>
