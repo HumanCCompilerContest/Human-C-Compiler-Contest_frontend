@@ -5,13 +5,15 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useContext } from 'react'
 
 import SubmissionsTable from '@/components/molecules/SubmissionsTable'
-import BasicLayout from '@/components/templates/BasicLayout'
+import BasicLayout, { AuthContext } from '@/components/templates/BasicLayout'
 import { useSubmissionList } from '@/features/api'
 
 const Submissions: NextPage = () => {
-  const { submissionListResponse, isLoading } = useSubmissionList()
+  const { user } = useContext(AuthContext)
+  const { submissionListResponse, isLoading } = useSubmissionList(user?.id)
 
   if (isLoading || !submissionListResponse) {
     return (

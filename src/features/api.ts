@@ -70,8 +70,11 @@ export const useProblem = (id: number) => {
   }
 }
 
-export const useSubmissionList = () => {
-  const { data, error } = useSWR(`/api/submissions/`, SubmissionListFetcher)
+export const useSubmissionList = (userID?: number) => {
+  const url = userID
+    ? `/api/submissions/?user_id=${userID}`
+    : `/api/submissions/`
+  const { data, error } = useSWR(url, SubmissionListFetcher)
 
   return {
     submissionListResponse: data,
