@@ -1,14 +1,28 @@
+import Backdrop from '@mui/material/Backdrop'
 import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-
 import Highlight from 'react-highlight'
+
+import SubmissionResultTable from '@/components/molecules/SubmissionResultTable'
 import BasicLayout from '@/components/templates/BasicLayout'
+import { useSubmission } from '@/features/api'
 
 const Submission = () => {
   const router = useRouter()
   const { id } = router.query
+
+  const { submissionResponse, isLoading } = useSubmission(Number(id))
+
+  if (isLoading || !submissionResponse) {
+    return (
+      <Backdrop sx={{ color: '#fff' }} open>
+        <CircularProgress color='inherit' />
+      </Backdrop>
+    )
+  }
 
   return (
     <BasicLayout>
@@ -19,7 +33,7 @@ const Submission = () => {
         />
       </Head>
       <Typography variant='h3' sx={{ fontWeight: '600' }}>
-        Submission {id}
+        Submission #{submissionResponse.submission.id}
       </Typography>
 
       <Box sx={{ margin: '4rem 0' }}>
@@ -29,36 +43,10 @@ const Submission = () => {
         >
           Source Code
         </Typography>
-        <Highlight>
-          {`int main(void) {
-	return 42;
-}`}
-        </Highlight>
+        <Highlight>{submissionResponse.submission.asem}</Highlight>
       </Box>
-      <Typography variant='h4' sx={{ fontWeight: '600', marginBottom: '1rem' }}>
-        User karintou
-      </Typography>
-      <Typography variant='h4' sx={{ fontWeight: '600', marginBottom: '1rem' }}>
-        DateTime 1900/1/1
-      </Typography>
-      <Typography variant='h4' sx={{ fontWeight: '600', marginBottom: '1rem' }}>
-        問題名
-      </Typography>
-      <Typography variant='h4' sx={{ fontWeight: '600', marginBottom: '1rem' }}>
-        結果
-      </Typography>
-      <Typography variant='h4' sx={{ fontWeight: '600', marginBottom: '1rem' }}>
-        得点 100
-      </Typography>
-      <Typography variant='h4' sx={{ fontWeight: '600', marginBottom: '1rem' }}>
-        コード長 310byte
-      </Typography>
-      <Typography variant='h4' sx={{ fontWeight: '600', marginBottom: '1rem' }}>
-        エラーメッセージ
-      </Typography>
-      <Typography variant='h4' sx={{ fontWeight: '600', marginBottom: '1rem' }}>
-        ジャッジ結果
-      </Typography>
+
+      <SubmissionResultTable submission={submissionResponse.submission} />
     </BasicLayout>
   )
 }
