@@ -7,29 +7,25 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { styled } from '@mui/material/styles'
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
 import * as React from 'react'
 
-const createData = (rank: number, name: string, score: number) => {
-  return { rank, name, score }
-}
-
-const rows = [
-  createData(1, 'mirenk1', 5000),
-  createData(2, '_AlignOf1', 4000),
-  createData(3, 'mirenk2', 3000),
-  createData(4, '_AlignOf2', 2000),
-  createData(5, 'mirenk3', 1000),
-  createData(6, '_AlignOf3', 0),
-  createData(7, 'karintou', 0),
-  createData(8, 'karintou', 0),
-  createData(9, 'karintou', 0),
-  createData(10, 'karintou', 0),
-  createData(11, 'karintou', 0),
-  createData(12, 'karintou', 0),
-  createData(13, 'karintou', 0),
-]
+import { useRanking } from '@/features/api'
 
 const BasicTable = () => {
+  const { rankingResponse, isLoading } = useRanking()
+
+  if (isLoading || !rankingResponse) {
+    return (
+      <Backdrop sx={{ color: '#fff' }} open>
+        <CircularProgress color='inherit' />
+      </Backdrop>
+    )
+  }
+
+  const rankingList = rankingResponse.items
+
   return (
     <TableContainer component={Paper} sx={{ margin: '3rem 0' }}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -41,7 +37,7 @@ const BasicTable = () => {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rankingList.map((row) => (
             <StyledTableRow
               key={row.rank}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -65,7 +61,7 @@ const BasicTable = () => {
                   {row.rank}
                 </span>
               </StyledTableCell>
-              <StyledTableCell align='right'>{row.name}</StyledTableCell>
+              <StyledTableCell align='right'>{row.userName}</StyledTableCell>
               <StyledTableCell align='right'>{row.score}</StyledTableCell>
             </StyledTableRow>
           ))}

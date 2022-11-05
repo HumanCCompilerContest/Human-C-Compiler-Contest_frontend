@@ -6,6 +6,7 @@ import {
   ResponseBase,
   ProblemListResponse,
   ProblemResponse,
+  RankingResponse,
 } from '@/features/types'
 
 const MeFetcher = (url: string): Promise<UserResponse> => {
@@ -17,6 +18,10 @@ const ProblemListFetcher = (url: string): Promise<ProblemListResponse> => {
 }
 
 const ProblemFetcher = (url: string): Promise<ProblemResponse> => {
+  return fetch(url).then((res) => res.json())
+}
+
+const RankingFetcher = (url: string): Promise<RankingResponse> => {
   return fetch(url).then((res) => res.json())
 }
 
@@ -45,6 +50,16 @@ export const useProblem = (id: number) => {
 
   return {
     problemResponse: data,
+    isLoading: !error && !data,
+    isError: error,
+  }
+}
+
+export const useRanking = () => {
+  const { data, error } = useSWR(`/api/ranking/`, RankingFetcher)
+
+  return {
+    rankingResponse: data,
     isLoading: !error && !data,
     isError: error,
   }
