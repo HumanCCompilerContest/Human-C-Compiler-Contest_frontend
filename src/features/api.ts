@@ -9,6 +9,7 @@ import {
   RankingResponse,
   SubmissionPost,
   SubmissionJoinedUserResponse,
+  SubmissionJoinedUserListResponse,
 } from '@/features/types'
 
 const MeFetcher = (url: string): Promise<UserResponse> => {
@@ -24,6 +25,18 @@ const ProblemFetcher = (url: string): Promise<ProblemResponse> => {
 }
 
 const RankingFetcher = (url: string): Promise<RankingResponse> => {
+  return fetch(url).then((res) => res.json())
+}
+
+const SubmissionFetcher = (
+  url: string,
+): Promise<SubmissionJoinedUserResponse> => {
+  return fetch(url).then((res) => res.json())
+}
+
+const SubmissionListFetcher = (
+  url: string,
+): Promise<SubmissionJoinedUserListResponse> => {
   return fetch(url).then((res) => res.json())
 }
 
@@ -52,6 +65,26 @@ export const useProblem = (id: number) => {
 
   return {
     problemResponse: data,
+    isLoading: !error && !data,
+    isError: error,
+  }
+}
+
+export const useSubmissionList = () => {
+  const { data, error } = useSWR(`/api/submissions/`, SubmissionListFetcher)
+
+  return {
+    submissionListResponse: data,
+    isLoading: !error && !data,
+    isError: error,
+  }
+}
+
+export const useSubmission = (id: number) => {
+  const { data, error } = useSWR(`/api/submissions/${id}`, SubmissionFetcher)
+
+  return {
+    submissionResponse: data,
     isLoading: !error && !data,
     isError: error,
   }
