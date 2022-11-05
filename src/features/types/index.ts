@@ -60,6 +60,10 @@ export type SubmissionJoinedUserResponse = ResponseBase & {
   submission: SubmissionJoinedUser
 }
 
+export type SubmissionJoinedUserListResponse = ResponseBase & {
+  items: SubmissionJoinedUser[]
+}
+
 export type SubmissionPost = {
   asem: string
 }
