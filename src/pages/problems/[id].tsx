@@ -1,3 +1,4 @@
+import Alert from '@mui/material/Alert'
 import Backdrop from '@mui/material/Backdrop'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -7,11 +8,17 @@ import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-
+import { useState } from 'react'
 import Highlight from 'react-highlight'
+import { useForm } from 'react-hook-form'
+
 import TitleLabel from '@/components/atoms/TitleLabel'
 import BasicLayout from '@/components/templates/BasicLayout'
-import { useProblem } from '@/features/api'
+import { useProblem, requestSubmission } from '@/features/api'
+
+type IFormInput = {
+  asem: string
+}
 
 const Problem = () => {
   const router = useRouter()
@@ -19,6 +26,29 @@ const Problem = () => {
 
   const { problemResponse, isLoading, isError } = useProblem(Number(id))
   const theme = useTheme()
+
+  const [errorMessage, setErrorMessage] = useState('')
+  const [isPostLoading, setIsPostLoading] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>()
+
+  const onSubmit = async (data: IFormInput) => {
+    setIsPostLoading(true)
+    const res = await requestSubmission(Number(id), {
+      asem: data.asem,
+    })
+    setIsPostLoading(false)
+
+    if (res.status === 'ng') {
+      setErrorMessage(res.errorMessage)
+      return
+    }
+
+    router.push(`/submissions/${res.submission.id}/`)
+  }
 
   if (isLoading || !problemResponse) {
     return (
@@ -74,6 +104,10 @@ const Problem = () => {
       <Box sx={{ margin: '10rem 0' }}>
         <TitleLabel label='Submission' sx={{ mb: '2rem' }} />
 
+        <Box sx={{ margin: '2rem 0' }}>
+          {errorMessage && <Alert severity='error'>{errorMessage}</Alert>}
+        </Box>
+
         <TextField
           color='primary'
           label='submission'
@@ -82,13 +116,25 @@ const Problem = () => {
           multiline
           fullWidth
           placeholder='input assembly'
+          {...register('asem')}
         />
         <Box sx={{ display: 'flex', justifyContent: 'center', margin: '4rem' }}>
-          <Button variant='contained' size='large' sx={{ width: '200px' }}>
+          <Button
+            variant='contained'
+            size='large'
+            sx={{ width: '200px' }}
+            onClick={handleSubmit(onSubmit)}
+          >
             Submit
           </Button>
         </Box>
       </Box>
+
+      {isPostLoading && (
+        <Backdrop sx={{ color: '#fff' }} open>
+          <CircularProgress color='inherit' />
+        </Backdrop>
+      )}
     </BasicLayout>
   )
 }

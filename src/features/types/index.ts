@@ -59,3 +59,7 @@ export type SubmissionJoinedUser = Submission & {
 export type SubmissionJoinedUserResponse = ResponseBase & {
   submission: SubmissionJoinedUser
 }
+
+export type SubmissionPost = {
+  asem: string
+}

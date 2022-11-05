@@ -7,6 +7,8 @@ import {
   ProblemListResponse,
   ProblemResponse,
   RankingResponse,
+  SubmissionPost,
+  SubmissionJoinedUserResponse,
 } from '@/features/types'
 
 const MeFetcher = (url: string): Promise<UserResponse> => {
@@ -97,4 +99,20 @@ export const requestLogout = async (): Promise<ResponseBase> => {
     },
   }
   return fetch('/api/logout/', options).then((res) => res.json())
+}
+
+export const requestSubmission = async (
+  id: number,
+  data: SubmissionPost,
+): Promise<SubmissionJoinedUserResponse> => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  }
+  return fetch(`/api/problems/${id}/submissions`, options).then((res) =>
+    res.json(),
+  )
 }
