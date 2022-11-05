@@ -24,7 +24,7 @@ const Submissions: NextPage = () => {
   return (
     <>
       <Head>
-        <title>submissions | HCCC</title>
+        <title>my submissions | HCCC</title>
         <meta name='description' content='人間Cコンパイラーコンテスト' />
       </Head>
 

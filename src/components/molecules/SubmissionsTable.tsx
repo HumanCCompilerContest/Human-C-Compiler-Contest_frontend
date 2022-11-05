@@ -1,5 +1,3 @@
-import Backdrop from '@mui/material/Backdrop'
-import CircularProgress from '@mui/material/CircularProgress'
 import MuiLink from '@mui/material/Link'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -10,21 +8,15 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { styled } from '@mui/material/styles'
 import Link from 'next/link'
-import * as React from 'react'
+import { FC } from 'react'
 
-import { useSubmissionList } from '@/features/api'
+import { SubmissionJoined } from '@/features/types'
 
-const BasicTable = () => {
-  const { submissionListResponse, isLoading } = useSubmissionList()
+type SubmissionsTableProps = {
+  submissionList: SubmissionJoined[]
+}
 
-  if (isLoading || !submissionListResponse) {
-    return (
-      <Backdrop sx={{ color: '#fff' }} open>
-        <CircularProgress color='inherit' />
-      </Backdrop>
-    )
-  }
-
+const SubmissionsTable: FC<SubmissionsTableProps> = ({ submissionList }) => {
   return (
     <TableContainer component={Paper} sx={{ margin: '3rem 0' }}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -39,7 +31,7 @@ const BasicTable = () => {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {submissionListResponse.items.map((row, idx) => (
+          {submissionList.map((row, idx) => (
             <StyledTableRow
               key={idx}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -90,4 +82,4 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }))
 
-export default BasicTable
+export default SubmissionsTable
