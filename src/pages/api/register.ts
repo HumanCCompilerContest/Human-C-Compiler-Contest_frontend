@@ -24,6 +24,7 @@ export default function handler(
     status: 'ok',
     errorMessage: '',
     user: {
+      id: 1,
       name: bodyName,
     },
   }

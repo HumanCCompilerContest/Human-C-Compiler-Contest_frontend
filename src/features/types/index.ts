@@ -9,6 +9,7 @@ export type UserPost = {
 }
 
 export type User = {
+  id: number
   name: string
 }
 
@@ -42,4 +43,19 @@ export type Ranking = {
 
 export type RankingResponse = ResponseBase & {
   items: Ranking[]
+}
+
+export type Submission = {
+  id: number
+  time: string
+  asem: string
+  result: string
+}
+
+export type SubmissionJoinedUser = Submission & {
+  user: User
+}
+
+export type SubmissionJoinedUserResponse = ResponseBase & {
+  submission: SubmissionJoinedUser
 }
