@@ -30,29 +30,34 @@ const BasicTable = () => {
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <StyledTableRow>
-            <StyledTableCell>DateTime</StyledTableCell>
-            <StyledTableCell align='left'>Name</StyledTableCell>
-            <StyledTableCell align='left'>User</StyledTableCell>
-            <StyledTableCell align='left'>Score</StyledTableCell>
-            <StyledTableCell align='left'>Result</StyledTableCell>
-            <StyledTableCell align='left'></StyledTableCell>
+            <StyledTableCell align='left'>DateTime</StyledTableCell>
+            <StyledTableCell align='right'>Name</StyledTableCell>
+            <StyledTableCell align='right'>User</StyledTableCell>
+            <StyledTableCell align='right'>Score</StyledTableCell>
+            <StyledTableCell align='right'>Result</StyledTableCell>
+            <StyledTableCell align='right'></StyledTableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {submissionListResponse.items.map((row) => (
+          {submissionListResponse.items.map((row, idx) => (
             <StyledTableRow
-              key={row.id}
+              key={idx}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <StyledTableCell component='th' scope='row'>
+              <StyledTableCell component='th' scope='row' align='left'>
                 {row.time}
               </StyledTableCell>
-              <StyledTableCell align='left'>{row.user.name}</StyledTableCell>
-              <StyledTableCell align='left'>{row.score}</StyledTableCell>
-              <StyledTableCell align='left'>{row.result}</StyledTableCell>
-              <StyledTableCell align='left'>
+              <StyledTableCell align='right'>
+                {row.problem.title}
+              </StyledTableCell>
+              <StyledTableCell align='right'>{row.user.name}</StyledTableCell>
+              <StyledTableCell align='right'>
+                {row.problem.score}
+              </StyledTableCell>
+              <StyledTableCell align='right'>{row.result}</StyledTableCell>
+              <StyledTableCell align='center'>
                 <Link href={`/submissions/${row.id}`} passHref>
-                  <MuiLink sx={{ color: 'white' }}>詳細</MuiLink>
+                  <MuiLink>詳細</MuiLink>
                 </Link>
               </StyledTableCell>
             </StyledTableRow>
@@ -64,17 +69,17 @@ const BasicTable = () => {
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  borderBottom: `1px solid white`,
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: 'black',
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.secondary.main,
+    color: 'white',
     fontWeight: 700,
+    fontSize: 18,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     fontWeight: 600,
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
+    backgroundColor: 'white',
+    color: theme.palette.primary.main,
   },
 }))
 
