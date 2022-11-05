@@ -2,6 +2,8 @@ import Container from '@mui/material/Container'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
+import HCCCTarget from '@/components/organisms/home/HCCCTarget'
+import JoinCondition from '@/components/organisms/home/JoinCondition'
 import MainVisual from '@/components/organisms/home/MainVisual'
 import QandA from '@/components/organisms/home/QandA'
 import Regulation from '@/components/organisms/home/Regulation'
@@ -14,7 +16,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>HCCC</title>
+        <title>Home | HCCC</title>
         <meta name='description' content='人間Cコンパイラーコンテスト' />
       </Head>
 
@@ -28,7 +30,9 @@ const Home: NextPage = () => {
         >
           <Schedule />
           <WhatHCCC />
+          <HCCCTarget />
           <RequestedAbility />
+          <JoinCondition />
           <Regulation />
           <QandA />
         </Container>

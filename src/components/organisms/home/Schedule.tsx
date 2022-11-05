@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 
 const Schedule = () => {
   return (
-    <Box sx={{ margin: '4rem 0' }}>
+    <Box sx={{ margin: '4rem 0 8rem' }}>
       <Box
         sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
@@ -20,7 +20,8 @@ const Schedule = () => {
           2022年11月19日(土) 13:10 〜
         </Typography>
         <Typography variant='h6' sx={{ margin: '2rem 0 1rem' }}>
-          SECCONCON(SECCON Contests)は SECCON Contest of Contest
+          HCCCはSECCONCONの一種目として開催されます。 SECCONCON(SECCON
+          Contests)は SECCON Contest of Contest
           に応募された競技やコンテストの企画案・設計案を，実際に実施するイベントです．
         </Typography>
         <Typography align='center'>

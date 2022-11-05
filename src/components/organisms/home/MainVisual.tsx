@@ -23,6 +23,7 @@ const MainVisual = () => {
           padding: '4rem',
           opacity: 0.8,
           display: 'flex',
+          borderRadius: '1rem',
         }}
       >
         <Image src='/HCCC_logo.png' width='200px' height='200px' />
@@ -36,7 +37,18 @@ const MainVisual = () => {
               paddingBottom: '3rem',
             }}
           >
-            あなたもCコンパイラーになろう
+            あなたも
+            <span
+              style={{
+                fontSize: '2.5rem',
+                padding: '0 0.5rem',
+                fontWeight: '900',
+                color: '#ffe0b2',
+              }}
+            >
+              Cコンパイラ
+            </span>
+            になろう
           </Typography>
           <Typography
             variant='h6'

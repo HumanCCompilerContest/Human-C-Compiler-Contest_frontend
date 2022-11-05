@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 
-const WhatHCCC = () => {
+const HCCCTarget = () => {
   const theme = useTheme()
   return (
     <Box
@@ -26,7 +26,7 @@ const WhatHCCC = () => {
       >
         <CardContent>
           <Typography
-            variant='h3'
+            variant='h4'
             component='div'
             align='center'
             sx={{
@@ -35,7 +35,7 @@ const WhatHCCC = () => {
               color: 'white',
             }}
           >
-            What is HCCC?
+            競技の目的
           </Typography>
         </CardContent>
       </Card>
@@ -46,21 +46,14 @@ const WhatHCCC = () => {
         sx={{ padding: '0 5rem', fontWeight: '600' }}
       >
         <p style={{ margin: 0 }}>
-          人間Cコンパイラコンテストとは，文字通り競技者自身がCコンパイラとなってC言語からアセンブリを生成し，その時間と正確さを競う競技です．
+          この競技の目的は競技を通じてアセンブリやC言語の仕様，ABIと仲良くなることです．
         </p>
         <p>
-          競技者はC言語のプログラムを渡され，それを見てコンパイルが通らなければ（C言語の仕様に則っていなければ）該当する最初の行を指摘し，コンパイルが通るようであればアセンブリを書いて提出します．
-        </p>
-        <p>
-          最もスコアが高かったプレイヤが栄誉ある
-          <span style={{ fontWeight: '800', color: '#f44336' }}>
-            人間Cコンパイラの称号
-          </span>
-          を手に入れる．
+          人力でCコンパイラと同じことをするというアプローチから普段使っているコンパイラの中身を解明し，アセンブリを書いて読んでデバッグすることで低レイヤの力をつけることを目標とします．
         </p>
       </Typography>
     </Box>
   )
 }
 
-export default WhatHCCC
+export default HCCCTarget

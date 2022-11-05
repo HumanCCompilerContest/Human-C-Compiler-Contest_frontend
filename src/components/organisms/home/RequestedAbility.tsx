@@ -10,13 +10,16 @@ const RequestedAbility = () => {
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'center',
-        mb: '5rem',
+        mb: '8rem',
       }}
     >
       <Card
         sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           minWidth: '300px',
+          height: '250px',
           padding: '1rem 0',
           backgroundColor: theme.palette.primary.main,
         }}
@@ -42,9 +45,13 @@ const RequestedAbility = () => {
       <Typography
         variant='h6'
         component='div'
-        sx={{ flexGrow: '2', padding: '5rem', fontWeight: '600' }}
+        sx={{
+          flexGrow: '2',
+          padding: '0 5rem',
+          fontWeight: '600',
+        }}
       >
-        <ul>
+        <ul style={{ marginTop: 0 }}>
           <li>
             <span style={{ fontWeight: '800', color: '#f44336' }}>
               C言語の仕様に関する深い知識
@@ -52,7 +59,7 @@ const RequestedAbility = () => {
           </li>
           <li>アセンブリを書く技術</li>
           <li>ABIの知識</li>
-          <li>複数のアーキテクチャに関する知識</li>
+          <li>x86_64アーキテクチャの知識</li>
           <li>コンパイラまわりのあれこれ</li>
           <li>慣れ（慣れ）</li>
         </ul>
