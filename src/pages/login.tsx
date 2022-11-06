@@ -1,16 +1,8 @@
 import LoginIcon from '@mui/icons-material/Login'
-import {
-  Alert,
-  Box,
-  Button,
-  TextField,
-  Typography,
-  useMediaQuery,
-} from '@mui/material'
-
+import { Alert, Box, Button, TextField, Typography } from '@mui/material'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSWRConfig } from 'swr'
@@ -24,14 +16,14 @@ type IFormInput = {
 }
 
 const Login: NextPage = () => {
-  const { cache } = useSWRConfig()
+  const { mutate } = useSWRConfig()
   const [errorMessage, setErrorMessage] = useState('')
-  const match = useMediaQuery('(min-width:577px)')
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>()
+  const router = useRouter()
 
   const onSubmit = async (data: IFormInput) => {
     const res = await requestLogin({
@@ -43,9 +35,9 @@ const Login: NextPage = () => {
       setErrorMessage(res.errorMessage)
       return
     }
-    // キャッシュを削除しないとログインしていない状態となる
-    cache.delete('/api/users/me')
-    Router.push('/')
+    // データの再検証をしないと表示がログインしていない状態となる
+    mutate('/api/users/me')
+    router.push('/')
   }
 
   return (
@@ -58,7 +50,7 @@ const Login: NextPage = () => {
       <BasicLayout>
         <Box
           sx={{
-            width: match ? '500px' : undefined,
+            width: { xs: 'none', sm: '500px' },
             margin: '1rem auto',
             padding: '0 2rem',
           }}
@@ -73,7 +65,7 @@ const Login: NextPage = () => {
             <LoginIcon
               sx={{ width: '40px', height: '40px', marginRight: '1rem' }}
             />
-            <Typography variant='h4' component='div' sx={{ fontWeight: 600 }}>
+            <Typography variant='h4' sx={{ fontWeight: 600 }}>
               Login
             </Typography>
           </Box>
@@ -84,7 +76,6 @@ const Login: NextPage = () => {
 
           <Box sx={{ margin: '1rem 0' }}>
             <TextField
-              id='outlined-basic'
               className='w-20'
               label='User Name'
               variant='outlined'
@@ -97,7 +88,6 @@ const Login: NextPage = () => {
 
           <Box sx={{ margin: '2rem 0' }}>
             <TextField
-              id='outlined-basic'
               label='Password'
               variant='outlined'
               fullWidth
