@@ -6,12 +6,15 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import PublishIcon from '@mui/icons-material/Publish'
 import StarIcon from '@mui/icons-material/Star'
 import type { SxProps, Theme } from '@mui/material'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
-import Menu from '@mui/material/Menu'
+import {
+  Box,
+  IconButton,
+  Menu,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+} from '@mui/material'
 import MuiMenuItem from '@mui/material/MenuItem'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import { styled } from '@mui/system'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -33,6 +36,7 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = () => {
   const { user } = useContext(AuthContext)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
+  const match = useMediaQuery('(min-width:577px)')
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
@@ -77,11 +81,14 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = () => {
         </Typography>
       </StyledLinkWithIcon>
 
+      <Box sx={{ flexGrow: 1 }} />
+
       {user && (
         <Typography
+          variant='caption'
           sx={{
             color: 'white',
-            marginRight: '2rem',
+            marginRight: match ? '2rem' : '0.5rem',
             padding: '0.2rem 0.5rem',
             border: '2px solid white',
             borderRadius: '0.3rem',
@@ -90,8 +97,6 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = () => {
           {user.name}
         </Typography>
       )}
-
-      <Box sx={{ flexGrow: 1 }} />
 
       <IconButton onClick={handleClick} sx={{ color: 'white' }}>
         <MoreVertIcon />
@@ -130,9 +135,6 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = () => {
               buttonLabel='Logout'
               iconReactNode={<LogoutIcon />}
               onClick={handleClickLogout}
-              sx={{
-                color: 'white',
-              }}
             />
           </MenuItem>
         ) : (
