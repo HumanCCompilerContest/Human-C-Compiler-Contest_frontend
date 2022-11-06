@@ -16,7 +16,7 @@ export default function handler(
     result: 'AC',
     user: {
       id: 1,
-      name: 'karintou',
+      name: 'hoge',
     },
     problem: {
       id: 1,

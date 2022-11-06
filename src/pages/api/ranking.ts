@@ -14,7 +14,7 @@ export default function handler(
   for (let i = 0; i < 20; i++) {
     const rankingItem = {
       rank: i + 1,
-      userName: 'karintou',
+      userName: 'hoge',
       score: 100,
     }
     data.items.push(rankingItem)
