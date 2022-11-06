@@ -1,15 +1,8 @@
 import HowToRegIcon from '@mui/icons-material/HowToReg'
-import {
-  Alert,
-  Box,
-  Button,
-  TextField,
-  Typography,
-  useMediaQuery,
-} from '@mui/material'
+import { Alert, Box, Button, TextField, Typography } from '@mui/material'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSWRConfig } from 'swr'
@@ -23,9 +16,9 @@ type IFormInput = {
 }
 
 const Register: NextPage = () => {
-  const { cache } = useSWRConfig()
+  const { mutate } = useSWRConfig()
   const [errorMessage, setErrorMessage] = useState('')
-  const match = useMediaQuery('(min-width:577px)')
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -42,9 +35,9 @@ const Register: NextPage = () => {
       setErrorMessage(res.errorMessage)
       return
     }
-    // キャッシュを削除しないとログインしていない状態となる
-    cache.delete('/api/users/me')
-    Router.push('/')
+    // データの再検証をしないとログインしていない状態となる
+    mutate('/api/users/me')
+    router.push('/')
   }
 
   return (
@@ -57,7 +50,7 @@ const Register: NextPage = () => {
       <BasicLayout>
         <Box
           sx={{
-            width: match ? '500px' : undefined,
+            width: { xs: 'none', sm: '500px' },
             margin: '1rem auto',
             padding: '0 2rem',
           }}
@@ -83,7 +76,6 @@ const Register: NextPage = () => {
 
           <Box sx={{ margin: '1rem 0' }}>
             <TextField
-              id='outlined-basic'
               className='w-20'
               label='User Name'
               variant='outlined'
@@ -96,7 +88,6 @@ const Register: NextPage = () => {
 
           <Box sx={{ margin: '2rem 0' }}>
             <TextField
-              id='outlined-basic'
               label='Password'
               variant='outlined'
               fullWidth
