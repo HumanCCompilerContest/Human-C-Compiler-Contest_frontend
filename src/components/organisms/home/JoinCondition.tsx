@@ -1,8 +1,9 @@
 import FeedIcon from '@mui/icons-material/Feed'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { useMediaQuery, Box, Typography } from '@mui/material'
 
 const JoinCondition = () => {
+  const match = useMediaQuery('(min-width:577px)')
+
   return (
     <Box sx={{ margin: '4rem 0 8rem' }}>
       <Box
@@ -12,7 +13,7 @@ const JoinCondition = () => {
         <Typography variant='h3'>参加条件</Typography>
       </Box>
 
-      <Box sx={{ width: '600px', margin: '3rem auto' }}>
+      <Box sx={{ width: match ? '600px' : '90%', margin: '3rem auto' }}>
         <Typography variant='h6' sx={{ margin: '2rem 0 1rem' }}>
           <p>
             低レイヤに興味がある方からCコンパイラ自作勢までレベルを問わず募集します．

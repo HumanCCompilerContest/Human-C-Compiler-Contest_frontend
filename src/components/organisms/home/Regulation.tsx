@@ -1,19 +1,24 @@
 import RuleIcon from '@mui/icons-material/Rule'
-import Alert from '@mui/material/Alert'
-import AlertTitle from '@mui/material/AlertTitle'
-import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
+import {
+  useMediaQuery,
+  Typography,
+  Link,
+  Box,
+  AlertTitle,
+  Alert,
+} from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 const Regulation = () => {
   const theme = useTheme()
+  const match = useMediaQuery('(min-width:577px)')
+
   return (
     <Box
       sx={{
         backgroundColor: theme.palette.primary.main,
         color: 'white',
-        padding: '3rem',
+        padding: match ? '3rem' : '1rem',
         borderRadius: '10px',
       }}
     >
@@ -22,12 +27,12 @@ const Regulation = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          pb: '3rem',
+          pb: match ? '3rem' : '1rem',
         }}
       >
         <RuleIcon sx={{ mr: '1rem', fontSize: '3rem' }} />
         <Typography
-          variant='h3'
+          variant={match ? 'h3' : 'h4'}
           component='div'
           align='center'
           sx={{

@@ -25,7 +25,7 @@ const Home: NextPage = () => {
         <Container
           maxWidth='lg'
           sx={{
-            padding: '2rem 0 10rem',
+            padding: '2rem 0.5rem 10rem',
           }}
         >
           <Schedule />

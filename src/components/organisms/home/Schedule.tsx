@@ -1,9 +1,12 @@
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import { useMediaQuery } from '@mui/material'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 
 const Schedule = () => {
+  const match = useMediaQuery('(min-width:577px)')
+
   return (
     <Box sx={{ margin: '4rem 0 8rem' }}>
       <Box
@@ -15,7 +18,7 @@ const Schedule = () => {
         <Typography variant='h3'>Schedule</Typography>
       </Box>
 
-      <Box sx={{ width: '600px', margin: '3rem auto' }}>
+      <Box sx={{ width: match ? '600px' : '90%', margin: '3rem auto' }}>
         <Typography variant='h4' align='center'>
           2022年11月19日(土) 13:10 〜
         </Typography>

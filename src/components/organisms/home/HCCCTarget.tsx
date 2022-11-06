@@ -1,16 +1,22 @@
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
+import {
+  useMediaQuery,
+  Box,
+  Card,
+  CardContent,
+  Typography,
+} from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 const HCCCTarget = () => {
   const theme = useTheme()
+  const match = useMediaQuery('(min-width:577px)')
+
   return (
     <Box
       sx={{
         display: 'flex',
-        mb: '8rem',
+        mb: match ? '8rem' : '4rem',
+        flexDirection: match ? undefined : 'column',
       }}
     >
       <Card
@@ -43,7 +49,7 @@ const HCCCTarget = () => {
       <Typography
         variant='h6'
         component='div'
-        sx={{ padding: '0 5rem', fontWeight: '600' }}
+        sx={{ padding: match ? '0 5rem' : '3rem 2rem', fontWeight: '600' }}
       >
         <p style={{ margin: 0 }}>
           この競技の目的は競技を通じてアセンブリやC言語の仕様，ABIと仲良くなることです．

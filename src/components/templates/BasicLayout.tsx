@@ -39,7 +39,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         {isHome ? (
           children
         ) : (
-          <Container sx={{ marginTop: '4rem' }}>{children}</Container>
+          <Container sx={{ marginTop: '4rem', padding: '0 0.5rem' }}>
+            {children}
+          </Container>
         )}
         <Footer />
       </div>

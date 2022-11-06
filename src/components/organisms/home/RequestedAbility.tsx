@@ -1,16 +1,22 @@
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
+import {
+  useMediaQuery,
+  Box,
+  Card,
+  CardContent,
+  Typography,
+} from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 const RequestedAbility = () => {
   const theme = useTheme()
+  const match = useMediaQuery('(min-width:577px)')
+
   return (
     <Box
       sx={{
         display: 'flex',
-        mb: '8rem',
+        mb: match ? '8rem' : '4rem',
+        flexDirection: match ? undefined : 'column',
       }}
     >
       <Card
@@ -45,11 +51,7 @@ const RequestedAbility = () => {
       <Typography
         variant='h6'
         component='div'
-        sx={{
-          flexGrow: '2',
-          padding: '0 5rem',
-          fontWeight: '600',
-        }}
+        sx={{ padding: match ? '0 5rem' : '3rem 2rem', fontWeight: '600' }}
       >
         <ul style={{ marginTop: 0 }}>
           <li>
