@@ -1,6 +1,4 @@
-import Backdrop from '@mui/material/Backdrop'
-import CircularProgress from '@mui/material/CircularProgress'
-import Container from '@mui/material/Container'
+import { Backdrop, CircularProgress, Container } from '@mui/material'
 import { createContext } from 'react'
 
 import Footer from '@/components/organisms/Footer'

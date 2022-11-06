@@ -1,9 +1,13 @@
 import LoginIcon from '@mui/icons-material/Login'
-import Alert from '@mui/material/Alert'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
+import {
+  Alert,
+  Box,
+  Button,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from '@mui/material'
+
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Router from 'next/router'
@@ -22,6 +26,7 @@ type IFormInput = {
 const Login: NextPage = () => {
   const { cache } = useSWRConfig()
   const [errorMessage, setErrorMessage] = useState('')
+  const match = useMediaQuery('(min-width:577px)')
   const {
     register,
     handleSubmit,
@@ -51,7 +56,13 @@ const Login: NextPage = () => {
       </Head>
 
       <BasicLayout>
-        <Box sx={{ width: '500px', margin: '1rem auto', padding: '0 2rem' }}>
+        <Box
+          sx={{
+            width: match ? '500px' : undefined,
+            margin: '1rem auto',
+            padding: '0 2rem',
+          }}
+        >
           <Box
             sx={{
               display: 'flex',
