@@ -1,9 +1,9 @@
 import StarIcon from '@mui/icons-material/Star'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
+import TextWithIcon from '@/components/atoms/TextWithIcon'
 import RankingTable from '@/components/molecules/RankingTable'
 import BasicLayout from '@/components/templates/BasicLayout'
 
@@ -16,17 +16,12 @@ const Ranking: NextPage = () => {
       </Head>
 
       <BasicLayout>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <StarIcon fontSize='large' sx={{ marginRight: '0.2rem' }} />
+        <TextWithIcon>
+          <StarIcon fontSize='large' sx={{ mr: '0.2rem' }} />
           <Typography variant='h4' sx={{ fontWeight: '600' }}>
             Ranking
           </Typography>
-        </Box>
+        </TextWithIcon>
         <RankingTable />
       </BasicLayout>
     </>
