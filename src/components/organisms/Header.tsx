@@ -1,14 +1,16 @@
 import { useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
-import type { Theme } from '@mui/material/styles'
+import type { Theme, SxProps } from '@mui/material/styles'
 import { FC } from 'react'
 
 import MobileHeaderToolbar from '../molecules/MobileHeaderToolbar'
 import HeaderToolbar from '@/components/molecules/HeaderToolbar'
 
-type HeaderProps = {}
+type HeaderProps = {
+  sx?: SxProps<Theme>
+}
 
-const Header: FC<HeaderProps> = ({}) => {
+const Header: FC<HeaderProps> = ({ sx }) => {
   const isUpMd = useMediaQuery<Theme>((theme) => theme.breakpoints.up('md'))
 
   return (
@@ -16,6 +18,7 @@ const Header: FC<HeaderProps> = ({}) => {
       position='static'
       sx={{
         backgroundColor: 'primary.main',
+        ...sx,
       }}
     >
       {isUpMd ? <HeaderToolbar /> : <MobileHeaderToolbar />}
