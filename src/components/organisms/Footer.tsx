@@ -1,25 +1,29 @@
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import { useTheme } from '@mui/material/styles'
+import { Typography, Box } from '@mui/material'
+import type { SxProps, Theme } from '@mui/material/styles'
+import { FC } from 'react'
 
-const Footer = () => {
-  const theme = useTheme()
+type FooterProps = {
+  sx?: SxProps<Theme>
+}
+
+const Footer: FC<FooterProps> = ({ sx }) => {
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.primary.main,
-        padding: '3rem 0',
+        backgroundColor: 'primary.main',
+        py: '3rem',
         position: 'sticky',
         top: '100vh',
+        ...sx,
       }}
     >
       <Typography
-        variant='h6'
+        variant='subtitle1'
         component='div'
         align='center'
         sx={{ color: 'white' }}
       >
-        Human C Compiler Contest
+        Copyright © 2022 HCCC All Rights Reserved.
       </Typography>
     </Box>
   )
