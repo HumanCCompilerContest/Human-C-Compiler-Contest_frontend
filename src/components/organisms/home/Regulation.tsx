@@ -1,38 +1,42 @@
 import RuleIcon from '@mui/icons-material/Rule'
 import {
-  useMediaQuery,
   Typography,
   Link,
   Box,
   AlertTitle,
   Alert,
+  useMediaQuery,
 } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import type { SxProps, Theme } from '@mui/material/styles'
+import { FC } from 'react'
 
-const Regulation = () => {
-  const theme = useTheme()
-  const match = useMediaQuery('(min-width:577px)')
+import TextWithIcon from '@/components/atoms/TextWithIcon'
+
+type RegulationProps = {
+  sx?: SxProps<Theme>
+}
+
+const Regulation: FC<RegulationProps> = ({ sx }) => {
+  const isUpMd = useMediaQuery<Theme>((theme) => theme.breakpoints.up('md'))
 
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: 'primary.main',
         color: 'white',
-        padding: match ? '3rem' : '1rem',
+        p: { xs: '1rem', md: '3rem' },
         borderRadius: '10px',
+        ...sx,
       }}
     >
-      <Box
+      <TextWithIcon
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          pb: match ? '3rem' : '1rem',
+          pb: { xs: '1rem', md: '3rem' },
         }}
       >
         <RuleIcon sx={{ mr: '1rem', fontSize: '3rem' }} />
         <Typography
-          variant={match ? 'h3' : 'h4'}
+          variant={isUpMd ? 'h3' : 'h4'}
           component='div'
           align='center'
           sx={{
@@ -41,7 +45,7 @@ const Regulation = () => {
         >
           Regulation
         </Typography>
-      </Box>
+      </TextWithIcon>
 
       <Alert
         variant='outlined'
