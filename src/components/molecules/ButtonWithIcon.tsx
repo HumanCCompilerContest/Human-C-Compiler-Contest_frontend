@@ -16,7 +16,7 @@ const ButtonWithIcon: FC<ButtonWithIconProps> = (props) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: '0 0.5rem',
+        m: '0 0.5rem',
       }}
     >
       {iconReactNode}

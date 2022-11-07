@@ -51,8 +51,8 @@ const Login: NextPage = () => {
         <Box
           sx={{
             width: { xs: 'none', md: '500px' },
-            margin: '1rem auto',
-            padding: '0 2rem',
+            m: '1rem auto',
+            p: '0 2rem',
           }}
         >
           <Box
@@ -62,19 +62,17 @@ const Login: NextPage = () => {
               alignItems: 'center',
             }}
           >
-            <LoginIcon
-              sx={{ width: '40px', height: '40px', marginRight: '1rem' }}
-            />
+            <LoginIcon sx={{ width: '40px', height: '40px', mr: '1rem' }} />
             <Typography variant='h4' sx={{ fontWeight: 600 }}>
               Login
             </Typography>
           </Box>
 
-          <Box sx={{ margin: '2rem 0' }}>
+          <Box sx={{ m: '2rem 0' }}>
             {errorMessage && <Alert severity='error'>{errorMessage}</Alert>}
           </Box>
 
-          <Box sx={{ margin: '1rem 0' }}>
+          <Box sx={{ m: '1rem 0' }}>
             <TextField
               className='w-20'
               label='User Name'
@@ -86,7 +84,7 @@ const Login: NextPage = () => {
             />
           </Box>
 
-          <Box sx={{ margin: '2rem 0' }}>
+          <Box sx={{ m: '2rem 0' }}>
             <TextField
               label='Password'
               variant='outlined'
@@ -107,7 +105,7 @@ const Login: NextPage = () => {
               size='large'
               fullWidth
               onClick={handleSubmit(onSubmit)}
-              sx={{ padding: '1rem 0', fontSize: '1.2rem', fontWeight: 600 }}
+              sx={{ p: '1rem 0', fontSize: '1.2rem', fontWeight: 600 }}
             >
               Login
             </Button>

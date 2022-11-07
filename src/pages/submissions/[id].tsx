@@ -36,7 +36,7 @@ const Submission = () => {
         Submission #{submissionResponse.submission.id}
       </Typography>
 
-      <Box sx={{ margin: '4rem 0' }}>
+      <Box sx={{ m: '4rem 0' }}>
         <Typography
           variant='h4'
           sx={{ fontWeight: '600', marginBottom: '1rem' }}

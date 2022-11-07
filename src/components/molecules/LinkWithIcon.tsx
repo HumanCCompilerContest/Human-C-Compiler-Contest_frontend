@@ -36,7 +36,7 @@ const LinkWithIcon: React.FC<LinkWithIconProps> = (props) => {
         <Box
           component='span'
           sx={{
-            margin: '0 0.5rem',
+            m: '0 0.5rem',
             display: 'flex',
             alignItems: 'center',
           }}

@@ -24,7 +24,7 @@ const MainVisual: FC<MainVisualProps> = ({ sx }) => {
           maxWidth: { xs: '90%', md: '1000px' },
           bgcolor: 'primary.main',
           color: 'white',
-          padding: { xs: '2rem', md: '4rem' },
+          p: { xs: '2rem', md: '4rem' },
           opacity: 0.8,
           display: 'flex',
           borderRadius: '1rem',
@@ -34,7 +34,7 @@ const MainVisual: FC<MainVisualProps> = ({ sx }) => {
           <Image src='/HCCC_logo.png' width='200px' height='200px' />
         </Box>
 
-        <Box sx={{ padding: '1rem' }}>
+        <Box sx={{ p: '1rem' }}>
           <Typography
             variant='h4'
             component='div'
@@ -51,7 +51,7 @@ const MainVisual: FC<MainVisualProps> = ({ sx }) => {
               sx={{
                 display: { xs: 'block', md: 'inline' },
                 fontSize: '2.5rem',
-                padding: '0 0.5rem',
+                p: '0 0.5rem',
                 fontWeight: '900',
                 color: '#ffe0b2',
               }}

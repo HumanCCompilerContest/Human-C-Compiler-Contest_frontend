@@ -18,7 +18,7 @@ type SubmissionsTableProps = {
 
 const SubmissionsTable: FC<SubmissionsTableProps> = ({ submissionList }) => {
   return (
-    <TableContainer component={Paper} sx={{ margin: '3rem 0' }}>
+    <TableContainer component={Paper} sx={{ m: '3rem 0' }}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <StyledTableRow>

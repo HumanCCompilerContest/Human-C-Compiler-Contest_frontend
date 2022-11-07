@@ -15,7 +15,7 @@ const TitleLabel: FC<TitleLabelProps> = ({ label, sx }) => {
       variant='h4'
       sx={{
         fontWeight: '600',
-        padding: '1rem',
+        p: '1rem',
         borderLeft: `10px solid ${theme.palette.secondary.main}`,
         backgroundColor: '#efefef',
         ...sx,

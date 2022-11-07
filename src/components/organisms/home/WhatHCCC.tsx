@@ -10,7 +10,7 @@ type WhatHCCCProps = {
 const WhatHCCC: FC<WhatHCCCProps> = ({ sx }) => {
   return (
     <DiscriptionCard title='What is HCCC' sx={sx}>
-      <p style={{ margin: 0 }}>
+      <p style={{ m: 0 }}>
         人間Cコンパイラコンテストとは，文字通り競技者自身がCコンパイラとなってC言語からアセンブリを生成し，その時間と正確さを競う競技です．
       </p>
       <p>

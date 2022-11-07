@@ -56,7 +56,7 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
           <IconButton
             size='large'
             aria-label='menu'
-            sx={{ margin: '0 0.5rem 0 1rem' }}
+            sx={{ m: '0 0.5rem 0 1rem' }}
             disabled
           >
             <Image src='/HCCC_logo.png' layout='fill' />
@@ -81,7 +81,7 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
           sx={{
             color: 'white',
             marginRight: { xs: '0.5rem', md: '2rem' },
-            padding: '0.2rem 0.5rem',
+            p: '0.2rem 0.5rem',
             border: '2px solid white',
             borderRadius: '0.3rem',
           }}

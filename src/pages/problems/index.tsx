@@ -52,7 +52,7 @@ const Problems: NextPage = () => {
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'space-around',
-            margin: '0 0 5rem',
+            m: '0 0 5rem',
           }}
         >
           {problemListResponse?.items.map((v, i) => {
@@ -61,7 +61,7 @@ const Problems: NextPage = () => {
                 key={i}
                 sx={{
                   width: 300,
-                  margin: '2rem 2rem 2rem 0',
+                  m: '2rem 2rem 2rem 0',
                   backgroundColor:
                     i % 2 == 0 ? theme.palette.primary.main : green[500],
                   color: 'white',
@@ -74,7 +74,7 @@ const Problems: NextPage = () => {
                 <CardActionArea>
                   <Link href={`/problems/${v.id}`}>
                     <CardContent>
-                      <Typography sx={{ margin: '0.5rem 0 1rem' }}>
+                      <Typography sx={{ m: '0.5rem 0 1rem' }}>
                         {v.title}
                       </Typography>
                       <Typography>{v.score}</Typography>

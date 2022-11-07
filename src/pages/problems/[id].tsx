@@ -75,36 +75,36 @@ const Problem = () => {
         TimeLimit 2sec / Score {problem.score}
       </Typography>
 
-      <Box sx={{ margin: '5rem 0 10rem' }}>
+      <Box sx={{ m: '5rem 0 10rem' }}>
         <TitleLabel label='問題文' sx={{ mb: '2rem' }} />
         <Typography variant='h6' sx={{ p: '1rem' }}>
           {problem.statement}
         </Typography>
       </Box>
 
-      <Box sx={{ margin: '10rem 0' }}>
+      <Box sx={{ m: '10rem 0' }}>
         <TitleLabel label='Source Code' sx={{ mb: '2rem' }} />
         <Box sx={{ fontSize: '1.2rem' }}>
           <Highlight>{problem.code}</Highlight>
         </Box>
       </Box>
 
-      <Box sx={{ margin: '10rem 0' }}>
+      <Box sx={{ m: '10rem 0' }}>
         <TitleLabel label='Input' sx={{ mb: '2rem' }} />
         <Typography variant='h6' sx={{ p: '1rem' }}>
           {problem.input_desc}
         </Typography>
       </Box>
 
-      <Box sx={{ margin: '10rem 0' }}>
+      <Box sx={{ m: '10rem 0' }}>
         <TitleLabel label='Output' sx={{ mb: '2rem' }} />
         <Typography variant='h6'>{problem.output_desc}</Typography>
       </Box>
 
-      <Box sx={{ margin: '10rem 0' }}>
+      <Box sx={{ m: '10rem 0' }}>
         <TitleLabel label='Submission' sx={{ mb: '2rem' }} />
 
-        <Box sx={{ margin: '2rem 0' }}>
+        <Box sx={{ m: '2rem 0' }}>
           {errorMessage && <Alert severity='error'>{errorMessage}</Alert>}
         </Box>
 
@@ -118,7 +118,7 @@ const Problem = () => {
           placeholder='input assembly'
           {...register('asem')}
         />
-        <Box sx={{ display: 'flex', justifyContent: 'center', margin: '4rem' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', m: '4rem' }}>
           <Button
             variant='contained'
             size='large'

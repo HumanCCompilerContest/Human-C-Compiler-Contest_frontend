@@ -24,7 +24,7 @@ const DiscriptionCard: FC<DiscriptionCardProps> = ({ title, children, sx }) => {
           justifyContent: 'center',
           minWidth: '300px',
           height: '250px',
-          padding: '1rem 0',
+          p: '1rem 0',
           backgroundColor: 'primary.main',
         }}
       >
@@ -35,7 +35,7 @@ const DiscriptionCard: FC<DiscriptionCardProps> = ({ title, children, sx }) => {
             align='center'
             sx={{
               fontWeight: '800',
-              padding: '1rem 0',
+              p: '1rem 0',
               color: 'white',
               whiteSpace: 'pre-wrap',
             }}
@@ -49,7 +49,7 @@ const DiscriptionCard: FC<DiscriptionCardProps> = ({ title, children, sx }) => {
         variant='h6'
         component='div'
         sx={{
-          padding: { xs: '3rem 2rem', md: '0 5rem' },
+          p: { xs: '3rem 2rem', md: '0 5rem' },
           fontWeight: '600',
         }}
       >
