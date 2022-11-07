@@ -13,20 +13,14 @@ import { styled } from '@mui/material/styles'
 import type { SxProps, Theme } from '@mui/material/styles'
 import { FC } from 'react'
 
-import Loading from '@/components/atoms/Loading'
-import { useRanking } from '@/features/api'
+import { Ranking } from '@/features/types'
 
-type RankingTableProps = { sx: SxProps<Theme> }
+type RankingTableProps = {
+  rankingList: Ranking[]
+  sx?: SxProps<Theme>
+}
 
-const RankingTable: FC<RankingTableProps> = ({ sx }) => {
-  const { rankingResponse, isLoading } = useRanking()
-
-  if (isLoading || !rankingResponse) {
-    return <Loading />
-  }
-
-  const rankingList = rankingResponse.items
-
+const RankingTable: FC<RankingTableProps> = ({ sx, rankingList }) => {
   return (
     <TableContainer component={Paper} sx={{ m: '3rem 0', ...sx }}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
