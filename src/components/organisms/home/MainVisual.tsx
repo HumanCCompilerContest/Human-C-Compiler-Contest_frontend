@@ -38,6 +38,7 @@ const MainVisual: FC<MainVisualProps> = ({ sx }) => {
           <Typography
             variant='h4'
             component='div'
+            align='center'
             sx={{
               width: { xs: undefined, md: '600px' },
               fontWeight: '800',
