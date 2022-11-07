@@ -1,19 +1,25 @@
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
-import Backdrop from '@mui/material/Backdrop'
-import CircularProgress from '@mui/material/CircularProgress'
-import Paper from '@mui/material/Paper'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell, { tableCellClasses } from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
+import {
+  Backdrop,
+  CircularProgress,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material'
+import { tableCellClasses } from '@mui/material/TableCell'
 import { styled } from '@mui/material/styles'
-import * as React from 'react'
+import type { SxProps, Theme } from '@mui/material/styles'
+import { FC } from 'react'
 
 import { useRanking } from '@/features/api'
 
-const BasicTable = () => {
+type RankingTableProps = { sx: SxProps<Theme> }
+
+const RankingTable: FC<RankingTableProps> = ({ sx }) => {
   const { rankingResponse, isLoading } = useRanking()
 
   if (isLoading || !rankingResponse) {
@@ -27,7 +33,7 @@ const BasicTable = () => {
   const rankingList = rankingResponse.items
 
   return (
-    <TableContainer component={Paper} sx={{ m: '3rem 0' }}>
+    <TableContainer component={Paper} sx={{ m: '3rem 0', ...sx }}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <StyledTableRow>
@@ -92,4 +98,4 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }))
 
-export default BasicTable
+export default RankingTable

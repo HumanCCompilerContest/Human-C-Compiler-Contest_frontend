@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { Button, Box } from '@mui/material'
 import type { ButtonProps } from '@mui/material/Button'
 import { FC } from 'react'
 

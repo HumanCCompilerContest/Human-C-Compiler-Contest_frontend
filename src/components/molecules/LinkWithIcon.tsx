@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import MuiLink from '@mui/material/Link'
 import type { LinkProps } from '@mui/material/Link'
 import Link from 'next/link'
-import * as React from 'react'
+import { FC } from 'react'
 
 type LinkWithIconProps = LinkProps & {
   href: string
@@ -11,7 +11,7 @@ type LinkWithIconProps = LinkProps & {
   children?: React.ReactNode
 }
 
-const LinkWithIcon: React.FC<LinkWithIconProps> = (props) => {
+const LinkWithIcon: FC<LinkWithIconProps> = (props) => {
   const {
     href,
     iconReactNode,
