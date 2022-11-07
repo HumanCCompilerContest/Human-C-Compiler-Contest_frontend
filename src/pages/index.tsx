@@ -29,7 +29,7 @@ const Home: NextPage = () => {
           }}
         >
           <Schedule sx={{ margin: '4rem 0 8rem' }} />
-          <WhatHCCC sx={{ mb: { xs: '4rem', sm: '8rem' } }} />
+          <WhatHCCC sx={{ mb: { xs: '4rem', md: '8rem' } }} />
           <HCCCTarget />
           <RequestedAbility />
           <JoinCondition />

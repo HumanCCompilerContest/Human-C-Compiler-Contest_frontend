@@ -19,7 +19,7 @@ const Schedule: FC<ScheduleProps> = ({ sx }) => {
         <Typography variant='h3'>Schedule</Typography>
       </TextWithIcon>
 
-      <Box sx={{ width: { xs: '90%', sm: '600px' }, margin: '3rem auto' }}>
+      <Box sx={{ width: { xs: '90%', md: '600px' }, margin: '3rem auto' }}>
         <Typography variant='h4' align='center'>
           2022年11月19日(土) 13:10 〜
         </Typography>

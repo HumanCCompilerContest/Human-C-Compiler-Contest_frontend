@@ -50,7 +50,7 @@ const Login: NextPage = () => {
       <BasicLayout>
         <Box
           sx={{
-            width: { xs: 'none', sm: '500px' },
+            width: { xs: 'none', md: '500px' },
             margin: '1rem auto',
             padding: '0 2rem',
           }}
