@@ -97,12 +97,12 @@ const QandA: FC<QandAProps> = ({ sx }) => {
 }
 
 const StyledAccordionSummary = styled(AccordionSummary)({
-  p: '1rem',
+  padding: '1rem',
   backgroundColor: 'rgba(0, 0, 0, .03)',
 })
 
 const StyledAccordionDetails = styled(AccordionDetails)({
-  p: '2rem 1rem',
+  padding: '2rem 1rem',
 })
 
 export default QandA
