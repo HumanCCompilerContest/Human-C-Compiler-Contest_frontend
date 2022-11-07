@@ -23,22 +23,30 @@ type RankingTableProps = {
 const RankingTable: FC<RankingTableProps> = ({ sx, rankingList }) => {
   return (
     <TableContainer component={Paper} sx={{ m: '3rem 0', ...sx }}>
-      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+      <Table sx={{ minWidth: 650 }}>
         <TableHead>
           <StyledTableRow>
-            <StyledTableCell>Rank</StyledTableCell>
-            <StyledTableCell align='right'>Name</StyledTableCell>
-            <StyledTableCell align='right'>Score</StyledTableCell>
+            <StyledTableCell sx={{ fontWeight: 700, fontSize: '1.1rem' }}>
+              Rank
+            </StyledTableCell>
+            <StyledTableCell
+              align='right'
+              sx={{ fontWeight: 700, fontSize: '1.1rem' }}
+            >
+              Name
+            </StyledTableCell>
+            <StyledTableCell
+              align='right'
+              sx={{ fontWeight: 700, fontSize: '1.1rem' }}
+            >
+              Score
+            </StyledTableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
           {rankingList.map((row) => (
-            <StyledTableRow
-              key={row.rank}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+            <StyledTableRow key={row.rank}>
               <StyledTableCell
-                component='th'
                 scope='row'
                 sx={{
                   display: 'flex',
