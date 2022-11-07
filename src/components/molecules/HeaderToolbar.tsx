@@ -2,6 +2,7 @@ import CreateIcon from '@mui/icons-material/Create'
 import HowToRegIcon from '@mui/icons-material/HowToReg'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
+import PersonIcon from '@mui/icons-material/Person'
 import PublishIcon from '@mui/icons-material/Publish'
 import StarIcon from '@mui/icons-material/Star'
 import type { SxProps, Theme } from '@mui/material'
@@ -11,6 +12,7 @@ import { useRouter } from 'next/router'
 import { useContext, FC } from 'react'
 import { useSWRConfig } from 'swr'
 
+import TextWithIcon from '@/components/atoms/TextWithIcon'
 import ButtonWithIcon from '@/components/molecules/ButtonWithIcon'
 import LinkWithIcon from '@/components/molecules/LinkWithIcon'
 import { AuthContext } from '@/components/templates/BasicLayout'
@@ -20,9 +22,9 @@ type HeaderToolbarProps = {
   sx?: SxProps<Theme>
 }
 
-const HeaderToolbar: FC<HeaderToolbarProps> = () => {
+const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
   const router = useRouter()
-  const { cache } = useSWRConfig()
+  const { mutate } = useSWRConfig()
   const { user } = useContext(AuthContext)
 
   const handleClickLogout = async () => {
@@ -32,26 +34,21 @@ const HeaderToolbar: FC<HeaderToolbarProps> = () => {
       return
     }
 
-    // キャッシュを削除しないとログイン済の状態となる
-    cache.delete('/api/users/me')
+    // データの再検証をしないとログイン済の状態となる
+    mutate('/api/users/me')
     router.push('/login')
   }
 
   return (
-    <Toolbar>
+    <Toolbar sx={sx}>
       <LinkWithIcon
         href='/'
         iconReactNode={
-          <IconButton
-            size='large'
-            aria-label='menu'
-            sx={{ m: '0 0.5rem 0 1rem' }}
-            disabled
-          >
+          <IconButton size='large' sx={{ m: '0 0.5rem 0 1rem' }} disabled>
             <Image src='/HCCC_logo.png' layout='fill' />
           </IconButton>
         }
-        sx={{ marginRight: '3rem' }}
+        sx={{ mr: '3rem' }}
       >
         <Typography
           variant='h6'
@@ -65,7 +62,7 @@ const HeaderToolbar: FC<HeaderToolbarProps> = () => {
       <LinkWithIcon
         href='/ranking'
         iconReactNode={<StarIcon />}
-        sx={{ marginRight: '1rem' }}
+        sx={{ mr: '1rem' }}
       >
         Ranking
       </LinkWithIcon>
@@ -73,7 +70,7 @@ const HeaderToolbar: FC<HeaderToolbarProps> = () => {
       <LinkWithIcon
         href='/problems'
         iconReactNode={<CreateIcon />}
-        sx={{ marginRight: '1rem' }}
+        sx={{ mr: '1rem' }}
       >
         Problem
       </LinkWithIcon>
@@ -85,23 +82,32 @@ const HeaderToolbar: FC<HeaderToolbarProps> = () => {
 
       {user ? (
         <>
-          <Typography
+          <TextWithIcon
             sx={{
               color: 'white',
-              marginRight: '2rem',
-              p: '0.2rem 0.5rem',
               border: '2px solid white',
               borderRadius: '0.3rem',
+              p: '0.5rem',
+              mr: '2rem',
             }}
           >
-            {user.name}
-          </Typography>
+            <PersonIcon sx={{ mr: '0.5rem' }} />
+            <Typography
+              sx={{
+                p: '0.1rem',
+              }}
+            >
+              {user.name}
+            </Typography>
+          </TextWithIcon>
+
           <ButtonWithIcon
             buttonLabel='Logout'
             iconReactNode={<LogoutIcon />}
             onClick={handleClickLogout}
             sx={{
               color: 'white',
+              mr: '1rem',
             }}
           />
         </>
@@ -110,14 +116,14 @@ const HeaderToolbar: FC<HeaderToolbarProps> = () => {
           <LinkWithIcon
             href='/login'
             iconReactNode={<LoginIcon />}
-            sx={{ marginRight: '1rem' }}
+            sx={{ mr: '1rem' }}
           >
             Login
           </LinkWithIcon>
           <LinkWithIcon
             href='/register'
             iconReactNode={<HowToRegIcon />}
-            sx={{ marginRight: '1rem' }}
+            sx={{ mr: '1rem' }}
           >
             Register
           </LinkWithIcon>
