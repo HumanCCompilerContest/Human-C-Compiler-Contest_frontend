@@ -1,11 +1,10 @@
-import Backdrop from '@mui/material/Backdrop'
 import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Highlight from 'react-highlight'
 
+import Loading from '@/components/atoms/Loading'
 import SubmissionResultTable from '@/components/molecules/SubmissionResultTable'
 import BasicLayout from '@/components/templates/BasicLayout'
 import { useSubmission } from '@/features/api'
@@ -17,11 +16,7 @@ const Submission = () => {
   const { submissionResponse, isLoading } = useSubmission(Number(id))
 
   if (isLoading || !submissionResponse) {
-    return (
-      <Backdrop sx={{ color: '#fff' }} open>
-        <CircularProgress color='inherit' />
-      </Backdrop>
-    )
+    return <Loading />
   }
 
   return (

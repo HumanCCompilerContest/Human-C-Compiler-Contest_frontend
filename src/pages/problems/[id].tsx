@@ -1,8 +1,6 @@
 import Alert from '@mui/material/Alert'
-import Backdrop from '@mui/material/Backdrop'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
@@ -12,6 +10,7 @@ import { useState } from 'react'
 import Highlight from 'react-highlight'
 import { useForm } from 'react-hook-form'
 
+import Loading from '@/components/atoms/Loading'
 import TitleLabel from '@/components/atoms/TitleLabel'
 import BasicLayout from '@/components/templates/BasicLayout'
 import { useProblem, requestSubmission } from '@/features/api'
@@ -51,11 +50,7 @@ const Problem = () => {
   }
 
   if (isLoading || !problemResponse) {
-    return (
-      <Backdrop sx={{ color: '#fff' }} open>
-        <CircularProgress color='inherit' />
-      </Backdrop>
-    )
+    return <Loading />
   }
 
   const problem = problemResponse.problem
@@ -130,11 +125,7 @@ const Problem = () => {
         </Box>
       </Box>
 
-      {isPostLoading && (
-        <Backdrop sx={{ color: '#fff' }} open>
-          <CircularProgress color='inherit' />
-        </Backdrop>
-      )}
+      {isPostLoading && <Loading />}
     </BasicLayout>
   )
 }

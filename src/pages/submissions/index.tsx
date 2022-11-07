@@ -1,11 +1,10 @@
 import PublishIcon from '@mui/icons-material/Publish'
-import Backdrop from '@mui/material/Backdrop'
 import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
+import Loading from '@/components/atoms/Loading'
 import SubmissionsTable from '@/components/molecules/SubmissionsTable'
 import BasicLayout from '@/components/templates/BasicLayout'
 import { useSubmissionList } from '@/features/api'
@@ -14,11 +13,7 @@ const Submissions: NextPage = () => {
   const { submissionListResponse, isLoading } = useSubmissionList()
 
   if (isLoading || !submissionListResponse) {
-    return (
-      <Backdrop sx={{ color: '#fff' }} open>
-        <CircularProgress color='inherit' />
-      </Backdrop>
-    )
+    return <Loading />
   }
 
   return (

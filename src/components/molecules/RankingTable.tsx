@@ -1,7 +1,5 @@
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import {
-  Backdrop,
-  CircularProgress,
   Paper,
   Table,
   TableBody,
@@ -15,6 +13,7 @@ import { styled } from '@mui/material/styles'
 import type { SxProps, Theme } from '@mui/material/styles'
 import { FC } from 'react'
 
+import Loading from '@/components/atoms/Loading'
 import { useRanking } from '@/features/api'
 
 type RankingTableProps = { sx: SxProps<Theme> }
@@ -23,11 +22,7 @@ const RankingTable: FC<RankingTableProps> = ({ sx }) => {
   const { rankingResponse, isLoading } = useRanking()
 
   if (isLoading || !rankingResponse) {
-    return (
-      <Backdrop sx={{ color: '#fff' }} open>
-        <CircularProgress color='inherit' />
-      </Backdrop>
-    )
+    return <Loading />
   }
 
   const rankingList = rankingResponse.items

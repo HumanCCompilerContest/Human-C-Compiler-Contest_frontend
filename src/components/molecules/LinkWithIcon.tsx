@@ -51,7 +51,6 @@ const LinkWithIcon: FC<LinkWithIconProps> = (props) => {
             '&:hover': { borderBottom: '1px solid white' },
           }}
         >
-          {' '}
           {children}
         </Box>
       </MuiLink>

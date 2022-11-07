@@ -1,6 +1,7 @@
-import { Backdrop, CircularProgress, Container } from '@mui/material'
+import { Container } from '@mui/material'
 import { createContext } from 'react'
 
+import Loading from '@/components/atoms/Loading'
 import Footer from '@/components/organisms/Footer'
 import Header from '@/components/organisms/Header'
 
@@ -23,11 +24,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   const { user, isLoading } = useAuth()
 
   if (isLoading) {
-    return (
-      <Backdrop sx={{ color: '#fff' }} open>
-        <CircularProgress color='inherit' />
-      </Backdrop>
-    )
+    return <Loading />
   }
 
   return (
