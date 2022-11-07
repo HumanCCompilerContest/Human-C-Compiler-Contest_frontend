@@ -32,7 +32,7 @@ const Home: NextPage = () => {
           <HCCCTarget sx={{ mb: { xs: '4rem', md: '8rem' } }} />
           <RequestedAbility sx={{ mb: { xs: '4rem', md: '8rem' } }} />
           <Schedule sx={{ m: '12rem 0' }} />
-          <JoinCondition />
+          <JoinCondition sx={{ m: '4rem 0 8rem' }} />
           <Regulation />
           <QandA />
         </Container>

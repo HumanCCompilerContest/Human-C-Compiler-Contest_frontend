@@ -1,20 +1,24 @@
 import FeedIcon from '@mui/icons-material/Feed'
-import { useMediaQuery, Box, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import type { SxProps, Theme } from '@mui/material/styles'
+import { FC } from 'react'
 
-const JoinCondition = () => {
-  const match = useMediaQuery('(min-width:577px)')
+import TextWithIcon from '@/components/atoms/TextWithIcon'
 
+type JoinConditionProps = {
+  sx?: SxProps<Theme>
+}
+
+const JoinCondition: FC<JoinConditionProps> = ({ sx }) => {
   return (
-    <Box sx={{ margin: '4rem 0 8rem' }}>
-      <Box
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      >
-        <FeedIcon sx={{ width: '60px', height: '60px', marginRight: '1rem' }} />
+    <Box sx={sx}>
+      <TextWithIcon>
+        <FeedIcon sx={{ width: '60px', height: '60px', mr: '1rem' }} />
         <Typography variant='h3'>参加条件</Typography>
-      </Box>
+      </TextWithIcon>
 
-      <Box sx={{ width: match ? '600px' : '90%', margin: '3rem auto' }}>
-        <Typography variant='h6' sx={{ margin: '2rem 0 1rem' }}>
+      <Box sx={{ width: { xs: '90%', md: '600px' }, m: '3rem auto' }}>
+        <Typography variant='h6' sx={{ m: '2rem 0 1rem' }}>
           <p>
             低レイヤに興味がある方からCコンパイラ自作勢までレベルを問わず募集します．
           </p>
