@@ -75,7 +75,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     fontWeight: 600,
-    backgroundColor: 'white',
     color: theme.palette.primary.main,
   },
 }))
@@ -84,6 +83,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
+  },
+  '&:nth-child(even)': {
+    backgroundColor: '#f5f5f5',
   },
 }))
 

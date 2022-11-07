@@ -4,10 +4,10 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 
 import Loading from '@/components/atoms/Loading'
-import { useRanking } from '@/features/api'
 import TextWithIcon from '@/components/atoms/TextWithIcon'
 import RankingTable from '@/components/molecules/RankingTable'
 import BasicLayout from '@/components/templates/BasicLayout'
+import { useRanking } from '@/features/api'
 
 const Ranking: NextPage = () => {
   const { rankingResponse, isLoading } = useRanking()
