@@ -3,6 +3,7 @@ import HowToRegIcon from '@mui/icons-material/HowToReg'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import PersonIcon from '@mui/icons-material/Person'
 import PublishIcon from '@mui/icons-material/Publish'
 import StarIcon from '@mui/icons-material/Star'
 import type { SxProps, Theme } from '@mui/material'
@@ -14,6 +15,7 @@ import { useRouter } from 'next/router'
 import { useContext, FC, useState } from 'react'
 import { useSWRConfig } from 'swr'
 
+import TextWithIcon from '../atoms/TextWithIcon'
 import ButtonWithIcon from '@/components/molecules/ButtonWithIcon'
 import LinkWithIcon from '@/components/molecules/LinkWithIcon'
 import { AuthContext } from '@/components/templates/BasicLayout'
@@ -25,7 +27,7 @@ type HeaderToolbarProps = {
 
 const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
   const router = useRouter()
-  const { cache } = useSWRConfig()
+  const { mutate } = useSWRConfig()
   const { user } = useContext(AuthContext)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -43,8 +45,8 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       return
     }
 
-    // キャッシュを削除しないとログイン済の状態となる
-    cache.delete('/api/users/me')
+    // データの再検証をしないとログイン済の状態となる
+    mutate('/api/users/me')
     router.push('/login')
   }
 
@@ -53,16 +55,11 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       <StyledLinkWithIcon
         href='/'
         iconReactNode={
-          <IconButton
-            size='large'
-            aria-label='menu'
-            sx={{ m: '0 0.5rem 0 1rem' }}
-            disabled
-          >
+          <IconButton size='large' sx={{ m: '0 0.5rem 0 1rem' }} disabled>
             <Image src='/HCCC_logo.png' layout='fill' />
           </IconButton>
         }
-        sx={{ marginRight: '3rem' }}
+        sx={{ mr: '3rem' }}
       >
         <Typography
           variant='h6'
@@ -76,18 +73,25 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       <Box sx={{ flexGrow: 1 }} />
 
       {user && (
-        <Typography
-          variant='caption'
+        <TextWithIcon
           sx={{
             color: 'white',
-            marginRight: { xs: '0.5rem', md: '2rem' },
-            p: '0.2rem 0.5rem',
             border: '2px solid white',
             borderRadius: '0.3rem',
+            p: '0.5rem',
+            mr: '1rem',
           }}
         >
-          {user.name}
-        </Typography>
+          <PersonIcon sx={{ mr: '0.5rem' }} />
+          <Typography
+            variant='subtitle1'
+            sx={{
+              p: '0.1rem',
+            }}
+          >
+            {user.name}
+          </Typography>
+        </TextWithIcon>
       )}
 
       <IconButton onClick={handleClick} sx={{ color: 'white' }}>
@@ -96,20 +100,12 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
 
       <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
         <MenuItem>
-          <StyledLinkWithIcon
-            href='/ranking'
-            iconReactNode={<StarIcon />}
-            sx={{ marginRight: '1rem' }}
-          >
+          <StyledLinkWithIcon href='/ranking' iconReactNode={<StarIcon />}>
             Ranking
           </StyledLinkWithIcon>
         </MenuItem>
         <MenuItem>
-          <StyledLinkWithIcon
-            href='/problems'
-            iconReactNode={<CreateIcon />}
-            sx={{ marginRight: '1rem' }}
-          >
+          <StyledLinkWithIcon href='/problems' iconReactNode={<CreateIcon />}>
             Problem
           </StyledLinkWithIcon>
         </MenuItem>
@@ -132,20 +128,14 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
         ) : (
           <>
             <MenuItem>
-              <StyledLinkWithIcon
-                href='/login'
-                iconReactNode={<LoginIcon />}
-                sx={{ marginRight: '1rem' }}
-              >
+              <StyledLinkWithIcon href='/login' iconReactNode={<LoginIcon />}>
                 Login
               </StyledLinkWithIcon>
             </MenuItem>
             <MenuItem>
-              {' '}
               <StyledLinkWithIcon
                 href='/register'
                 iconReactNode={<HowToRegIcon />}
-                sx={{ marginRight: '1rem' }}
               >
                 Register
               </StyledLinkWithIcon>
@@ -163,6 +153,7 @@ const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
 
 const StyledLinkWithIcon = styled(LinkWithIcon)(({ theme }) => ({
   color: theme.palette.primary.main,
+  marginRight: '1rem',
 }))
 
 export default MobileHeaderToolbar
