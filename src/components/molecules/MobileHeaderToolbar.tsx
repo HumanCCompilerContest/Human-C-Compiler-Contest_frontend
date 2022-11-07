@@ -6,14 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import PublishIcon from '@mui/icons-material/Publish'
 import StarIcon from '@mui/icons-material/Star'
 import type { SxProps, Theme } from '@mui/material'
-import {
-  Box,
-  IconButton,
-  Menu,
-  Toolbar,
-  Typography,
-  useMediaQuery,
-} from '@mui/material'
+import { Box, IconButton, Menu, Toolbar, Typography } from '@mui/material'
 import MuiMenuItem from '@mui/material/MenuItem'
 import { styled } from '@mui/system'
 import Image from 'next/image'
@@ -30,13 +23,12 @@ type HeaderToolbarProps = {
   sx?: SxProps<Theme>
 }
 
-const MobileHeaderToolbar: FC<HeaderToolbarProps> = () => {
+const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
   const router = useRouter()
   const { cache } = useSWRConfig()
   const { user } = useContext(AuthContext)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
-  const match = useMediaQuery('(min-width:577px)')
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
@@ -57,7 +49,7 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = () => {
   }
 
   return (
-    <Toolbar>
+    <Toolbar sx={sx}>
       <StyledLinkWithIcon
         href='/'
         iconReactNode={
@@ -88,7 +80,7 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = () => {
           variant='caption'
           sx={{
             color: 'white',
-            marginRight: match ? '2rem' : '0.5rem',
+            marginRight: { xs: '0.5rem', md: '2rem' },
             padding: '0.2rem 0.5rem',
             border: '2px solid white',
             borderRadius: '0.3rem',

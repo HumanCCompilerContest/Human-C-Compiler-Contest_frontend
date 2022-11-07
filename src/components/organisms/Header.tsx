@@ -1,23 +1,24 @@
 import { useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
-import { useTheme } from '@mui/material/styles'
-import * as React from 'react'
+import type { Theme } from '@mui/material/styles'
+import { FC } from 'react'
 
 import MobileHeaderToolbar from '../molecules/MobileHeaderToolbar'
 import HeaderToolbar from '@/components/molecules/HeaderToolbar'
 
-const Header = () => {
-  const theme = useTheme()
-  const match = useMediaQuery('(min-width:577px)')
+type HeaderProps = {}
+
+const Header: FC<HeaderProps> = ({}) => {
+  const isMd = useMediaQuery<Theme>((theme) => theme.breakpoints.up('md'))
 
   return (
     <AppBar
       position='static'
       sx={{
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: 'primary.main',
       }}
     >
-      {match ? <HeaderToolbar /> : <MobileHeaderToolbar />}
+      {isMd ? <HeaderToolbar /> : <MobileHeaderToolbar />}
     </AppBar>
   )
 }
