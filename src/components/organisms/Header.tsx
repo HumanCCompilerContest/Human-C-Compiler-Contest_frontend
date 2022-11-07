@@ -9,7 +9,7 @@ import HeaderToolbar from '@/components/molecules/HeaderToolbar'
 type HeaderProps = {}
 
 const Header: FC<HeaderProps> = ({}) => {
-  const isMd = useMediaQuery<Theme>((theme) => theme.breakpoints.up('md'))
+  const isUpMd = useMediaQuery<Theme>((theme) => theme.breakpoints.up('md'))
 
   return (
     <AppBar
@@ -18,7 +18,7 @@ const Header: FC<HeaderProps> = ({}) => {
         backgroundColor: 'primary.main',
       }}
     >
-      {isMd ? <HeaderToolbar /> : <MobileHeaderToolbar />}
+      {isUpMd ? <HeaderToolbar /> : <MobileHeaderToolbar />}
     </AppBar>
   )
 }
