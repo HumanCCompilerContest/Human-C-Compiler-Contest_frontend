@@ -28,8 +28,8 @@ const Home: NextPage = () => {
             padding: '2rem 0.5rem 10rem',
           }}
         >
-          <Schedule />
-          <WhatHCCC />
+          <Schedule sx={{ margin: '4rem 0 8rem' }} />
+          <WhatHCCC sx={{ mb: { xs: '4rem', sm: '8rem' } }} />
           <HCCCTarget />
           <RequestedAbility />
           <JoinCondition />

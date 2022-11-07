@@ -1,10 +1,13 @@
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import { useTheme } from '@mui/material/styles'
+import { Box, Typography } from '@mui/material'
+import type { SxProps, Theme } from '@mui/material/styles'
 import Image from 'next/image'
+import { FC } from 'react'
 
-const MainVisual = () => {
-  const theme = useTheme()
+type MainVisualProps = {
+  sx?: SxProps<Theme>
+}
+
+const MainVisual: FC<MainVisualProps> = ({ sx }) => {
   return (
     <Box
       sx={{
@@ -13,20 +16,21 @@ const MainVisual = () => {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundImage: "url('/bg.jpg')",
+        ...sx,
       }}
     >
       <Box
         sx={{
-          maxWidth: { xs: '90%', sm: '1000px' },
-          bgcolor: theme.palette.primary.main,
+          maxWidth: { xs: '90%', md: '1000px' },
+          bgcolor: 'primary.main',
           color: 'white',
-          padding: { xs: '2rem', sm: '4rem' },
+          padding: { xs: '2rem', md: '4rem' },
           opacity: 0.8,
           display: 'flex',
           borderRadius: '1rem',
         }}
       >
-        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
           <Image src='/HCCC_logo.png' width='200px' height='200px' />
         </Box>
 
@@ -35,16 +39,16 @@ const MainVisual = () => {
             variant='h4'
             component='div'
             sx={{
-              width: { xs: undefined, sm: '600px' },
+              width: { xs: undefined, md: '600px' },
               fontWeight: '800',
               paddingBottom: '3rem',
             }}
           >
             あなたも
-            <Box
+            <Typography
               component='span'
               sx={{
-                display: { xs: 'block', sm: 'inline' },
+                display: { xs: 'block', md: 'inline' },
                 fontSize: '2.5rem',
                 padding: '0 0.5rem',
                 fontWeight: '900',
@@ -52,7 +56,7 @@ const MainVisual = () => {
               }}
             >
               Cコンパイラ
-            </Box>
+            </Typography>
             になろう
           </Typography>
           <Typography
