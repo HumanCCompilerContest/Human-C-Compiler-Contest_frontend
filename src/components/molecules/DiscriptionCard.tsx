@@ -30,13 +30,14 @@ const DiscriptionCard: FC<DiscriptionCardProps> = ({ title, children, sx }) => {
       >
         <CardContent>
           <Typography
-            variant='h3'
+            variant='h4'
             component='div'
             align='center'
             sx={{
               fontWeight: '800',
               padding: '1rem 0',
               color: 'white',
+              whiteSpace: 'pre-wrap',
             }}
           >
             {title}
