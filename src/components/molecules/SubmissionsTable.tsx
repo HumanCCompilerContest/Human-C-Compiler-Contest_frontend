@@ -6,6 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Chip,
 } from '@mui/material'
 import MuiLink from '@mui/material/Link'
 import { tableCellClasses } from '@mui/material/TableCell'
@@ -22,7 +23,7 @@ type SubmissionsTableProps = {
 const SubmissionsTable: FC<SubmissionsTableProps> = ({ submissionList }) => {
   return (
     <TableContainer component={Paper} sx={{ m: '3rem 0' }}>
-      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+      <Table sx={{ minWidth: 650 }}>
         <TableHead>
           <StyledTableRow>
             <StyledTableCell align='left'>DateTime</StyledTableCell>
@@ -35,10 +36,7 @@ const SubmissionsTable: FC<SubmissionsTableProps> = ({ submissionList }) => {
         </TableHead>
         <TableBody>
           {submissionList.map((row, idx) => (
-            <StyledTableRow
-              key={idx}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+            <StyledTableRow key={idx}>
               <StyledTableCell component='th' scope='row' align='left'>
                 {row.time}
               </StyledTableCell>
@@ -47,9 +45,17 @@ const SubmissionsTable: FC<SubmissionsTableProps> = ({ submissionList }) => {
               </StyledTableCell>
               <StyledTableCell align='right'>{row.user.name}</StyledTableCell>
               <StyledTableCell align='right'>
-                {row.problem.score}
+                {row.result === 'AC' ? row.problem.score : 0}
               </StyledTableCell>
-              <StyledTableCell align='right'>{row.result}</StyledTableCell>
+              <StyledTableCell align='right'>
+                <Chip
+                  label={row.result}
+                  sx={{
+                    bgcolor: row.result === 'AC' ? '#5cb85c' : '#ffc107',
+                    color: 'white',
+                  }}
+                />
+              </StyledTableCell>
               <StyledTableCell align='center'>
                 <Link href={`/submissions/${row.id}`} passHref>
                   <MuiLink>詳細</MuiLink>
@@ -68,12 +74,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.main,
     color: 'white',
     fontWeight: 700,
-    fontSize: 18,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     fontWeight: 600,
-    backgroundColor: 'white',
     color: theme.palette.primary.main,
   },
 }))
@@ -82,6 +86,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
+  },
+  '&:nth-of-type(even)': {
+    backgroundColor: '#f5f5f5',
   },
 }))
 

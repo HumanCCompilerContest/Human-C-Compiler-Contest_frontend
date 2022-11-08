@@ -36,6 +36,7 @@ export default function handler(
   for (let i = 0; i < 30; i++) {
     data.items.push(submissionData)
   }
+  data.items.push({ ...submissionData, result: 'WA' })
 
   res.status(200).json(data)
 }
