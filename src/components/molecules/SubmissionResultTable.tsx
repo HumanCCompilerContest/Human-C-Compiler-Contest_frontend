@@ -5,6 +5,7 @@ import {
   TableCell,
   TableContainer,
   TableRow,
+  Chip,
 } from '@mui/material'
 
 import { tableCellClasses } from '@mui/material/TableCell'
@@ -25,7 +26,7 @@ const SubmissionResultTable: FC<SubmissionResultTableProps> = ({
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableBody>
           <StyledTableRow>
-            <StyledTableCell component='th' align='center'>
+            <StyledTableCell component='th' align='center' variant='head'>
               Problem
             </StyledTableCell>
             <StyledTableCell align='center'>
@@ -33,15 +34,21 @@ const SubmissionResultTable: FC<SubmissionResultTableProps> = ({
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow>
-            <StyledTableCell component='th' align='center'>
+            <StyledTableCell component='th' align='center' variant='head'>
               Result
             </StyledTableCell>
             <StyledTableCell align='center'>
-              {submission.result}
+              <Chip
+                label={submission.result}
+                sx={{
+                  bgcolor: submission.result === 'AC' ? '#5cb85c' : '#ffc107',
+                  color: 'white',
+                }}
+              />
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow>
-            <StyledTableCell component='th' align='center'>
+            <StyledTableCell component='th' align='center' variant='head'>
               Score
             </StyledTableCell>
             <StyledTableCell align='center'>
@@ -49,7 +56,7 @@ const SubmissionResultTable: FC<SubmissionResultTableProps> = ({
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow>
-            <StyledTableCell component='th' align='center'>
+            <StyledTableCell component='th' align='center' variant='head'>
               User
             </StyledTableCell>
             <StyledTableCell align='center'>
@@ -57,7 +64,7 @@ const SubmissionResultTable: FC<SubmissionResultTableProps> = ({
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow>
-            <StyledTableCell component='th' align='center'>
+            <StyledTableCell component='th' align='center' variant='head'>
               DateTime
             </StyledTableCell>
             <StyledTableCell align='center'>{submission.time}</StyledTableCell>
@@ -70,15 +77,14 @@ const SubmissionResultTable: FC<SubmissionResultTableProps> = ({
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
     color: 'white',
-    fontWeight: 700,
-    fontSize: 18,
+    fontSize: 16,
+    fontWeight: 900,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     fontWeight: 600,
-    backgroundColor: 'white',
     color: theme.palette.primary.main,
   },
 }))

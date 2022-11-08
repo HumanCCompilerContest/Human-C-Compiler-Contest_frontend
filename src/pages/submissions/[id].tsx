@@ -23,6 +23,7 @@ const Submission = () => {
     <BasicLayout>
       <Head>
         <title>submissions | HCCC</title>
+        <meta name='description' content='人間Cコンパイラーコンテスト' />
       </Head>
       <Typography variant='h3' sx={{ fontWeight: '600' }}>
         Submission #{submissionResponse.submission.id}
@@ -35,7 +36,7 @@ const Submission = () => {
         >
           Source Code
         </Typography>
-        <Code language='c'>{submissionResponse.submission.asem}</Code>
+        <Code language='assembly'>{submissionResponse.submission.asem}</Code>
       </Box>
 
       <SubmissionResultTable submission={submissionResponse.submission} />
