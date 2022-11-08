@@ -3,15 +3,15 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useContext } from 'react'
 
 import Loading from '@/components/atoms/Loading'
+import { useAuthContext } from '@/components/contexts/AuthProvider'
 import SubmissionsTable from '@/components/molecules/SubmissionsTable'
-import BasicLayout, { AuthContext } from '@/components/templates/BasicLayout'
+import BasicLayout from '@/components/templates/BasicLayout'
 import { useSubmissionList } from '@/features/api'
 
 const Submissions: NextPage = () => {
-  const { user } = useContext(AuthContext)
+  const { user } = useAuthContext()
   const { submissionListResponse, isLoading } = useSubmissionList(user?.id)
 
   if (isLoading || !submissionListResponse) {

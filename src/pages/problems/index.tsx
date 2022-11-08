@@ -3,16 +3,16 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useContext } from 'react'
 
 import Loading from '@/components/atoms/Loading'
 import TextWithIcon from '@/components/atoms/TextWithIcon'
+import { useAuthContext } from '@/components/contexts/AuthProvider'
 import ProblemCard from '@/components/molecules/ProblemCard'
-import BasicLayout, { AuthContext } from '@/components/templates/BasicLayout'
+import BasicLayout from '@/components/templates/BasicLayout'
 import { useProblemIsCorrectList } from '@/features/api'
 
 const Problems: NextPage = () => {
-  const { user } = useContext(AuthContext)
+  const { user } = useAuthContext()
   console.log(user)
   const { problemIsCorrectList, isLoading, isError } = useProblemIsCorrectList(
     user?.id,

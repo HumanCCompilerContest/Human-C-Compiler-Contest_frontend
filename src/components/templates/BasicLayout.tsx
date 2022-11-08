@@ -1,15 +1,7 @@
 import { Container } from '@mui/material'
-import { createContext } from 'react'
 
 import Footer from '@/components/organisms/Footer'
 import Header from '@/components/organisms/Header'
-
-import { User } from '@/features/types'
-
-export type AuthContextType = {
-  user?: User
-}
-export const AuthContext = createContext<AuthContextType>({})
 
 type BasicLayoutProps = {
   children: React.ReactNode

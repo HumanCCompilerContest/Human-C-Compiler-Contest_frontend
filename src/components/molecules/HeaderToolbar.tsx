@@ -9,13 +9,13 @@ import type { SxProps, Theme } from '@mui/material'
 import { Typography, Toolbar, IconButton, Box } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useContext, FC } from 'react'
+import { FC } from 'react'
 import { useSWRConfig } from 'swr'
 
 import TextWithIcon from '@/components/atoms/TextWithIcon'
+import { useAuthContext } from '@/components/contexts/AuthProvider'
 import ButtonWithIcon from '@/components/molecules/ButtonWithIcon'
 import LinkWithIcon from '@/components/molecules/LinkWithIcon'
-import { AuthContext } from '@/components/templates/BasicLayout'
 import { requestLogout } from '@/features/api'
 
 type HeaderToolbarProps = {
@@ -25,7 +25,7 @@ type HeaderToolbarProps = {
 const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
   const router = useRouter()
   const { mutate } = useSWRConfig()
-  const { user } = useContext(AuthContext)
+  const { user } = useAuthContext()
 
   const handleClickLogout = async () => {
     const res = await requestLogout()

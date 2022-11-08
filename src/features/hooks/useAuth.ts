@@ -22,7 +22,7 @@ const useAuth = (redirectTo = '/login') => {
       return
     }
     setIsLoading(false)
-  }, [userResponse, redirectTo])
+  }, [userResponse?.user, redirectTo])
 
   return { user: userResponse?.user, isLoading }
 }

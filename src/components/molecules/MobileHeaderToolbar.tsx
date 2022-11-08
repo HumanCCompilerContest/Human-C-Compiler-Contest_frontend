@@ -12,13 +12,13 @@ import MuiMenuItem from '@mui/material/MenuItem'
 import { styled } from '@mui/system'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useContext, FC, useState } from 'react'
+import { FC, useState } from 'react'
 import { useSWRConfig } from 'swr'
 
 import TextWithIcon from '../atoms/TextWithIcon'
+import { useAuthContext } from '@/components/contexts/AuthProvider'
 import ButtonWithIcon from '@/components/molecules/ButtonWithIcon'
 import LinkWithIcon from '@/components/molecules/LinkWithIcon'
-import { AuthContext } from '@/components/templates/BasicLayout'
 import { requestLogout } from '@/features/api'
 
 type HeaderToolbarProps = {
@@ -28,7 +28,7 @@ type HeaderToolbarProps = {
 const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
   const router = useRouter()
   const { mutate } = useSWRConfig()
-  const { user } = useContext(AuthContext)
+  const { user } = useAuthContext()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
