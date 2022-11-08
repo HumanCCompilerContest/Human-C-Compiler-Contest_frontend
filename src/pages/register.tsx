@@ -88,6 +88,7 @@ const Register: NextPage = () => {
 
           <Box sx={{ m: '2rem 0' }}>
             <TextField
+              type='password'
               label='Password'
               variant='outlined'
               fullWidth
