@@ -13,20 +13,28 @@ import {
   ProblesIsCorrect,
 } from '@/features/types'
 
-const MeFetcher = (url: string): Promise<UserResponse> => {
-  return fetch(url).then((res) => res.json())
+const MeFetcher = (path: string): Promise<UserResponse> => {
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
+    res.json(),
+  )
 }
 
-const ProblemListFetcher = (url: string): Promise<ProblemListResponse> => {
-  return fetch(url).then((res) => res.json())
+const ProblemListFetcher = (path: string): Promise<ProblemListResponse> => {
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
+    res.json(),
+  )
 }
 
-const ProblemFetcher = (url: string): Promise<ProblemResponse> => {
-  return fetch(url).then((res) => res.json())
+const ProblemFetcher = (path: string): Promise<ProblemResponse> => {
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
+    res.json(),
+  )
 }
 
-const RankingFetcher = (url: string): Promise<RankingResponse> => {
-  return fetch(url).then((res) => res.json())
+const RankingFetcher = (path: string): Promise<RankingResponse> => {
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
+    res.json(),
+  )
 }
 
 const SubmissionFetcher = (
