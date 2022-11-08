@@ -2,8 +2,8 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Highlight from 'react-highlight'
 
+import Code from '@/components/atoms/Code'
 import Loading from '@/components/atoms/Loading'
 import SubmissionResultTable from '@/components/molecules/SubmissionResultTable'
 import BasicLayout from '@/components/templates/BasicLayout'
@@ -22,10 +22,7 @@ const Submission = () => {
   return (
     <BasicLayout>
       <Head>
-        <link
-          rel='stylesheet'
-          href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css'
-        />
+        <title>submissions | HCCC</title>
       </Head>
       <Typography variant='h3' sx={{ fontWeight: '600' }}>
         Submission #{submissionResponse.submission.id}
@@ -38,7 +35,7 @@ const Submission = () => {
         >
           Source Code
         </Typography>
-        <Highlight>{submissionResponse.submission.asem}</Highlight>
+        <Code language='c'>{submissionResponse.submission.asem}</Code>
       </Box>
 
       <SubmissionResultTable submission={submissionResponse.submission} />

@@ -7,9 +7,9 @@ import { useTheme } from '@mui/material/styles'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import Highlight from 'react-highlight'
 import { useForm } from 'react-hook-form'
 
+import Code from '@/components/atoms/Code'
 import Loading from '@/components/atoms/Loading'
 import TitleLabel from '@/components/atoms/TitleLabel'
 import BasicLayout from '@/components/templates/BasicLayout'
@@ -78,7 +78,7 @@ const Problem = () => {
       <Box sx={{ m: '10rem 0' }}>
         <TitleLabel label='Source Code' sx={{ mb: '2rem' }} />
         <Box sx={{ fontSize: '1.2rem' }}>
-          <Highlight>{problem.code}</Highlight>
+          <Code language='c'>{problem.code}</Code>
         </Box>
       </Box>
 
