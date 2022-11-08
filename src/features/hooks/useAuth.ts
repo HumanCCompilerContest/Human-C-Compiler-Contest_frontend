@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 
 import { useMe } from '@/features/api'
 
@@ -22,7 +22,7 @@ const useAuth = (redirectTo = '/login') => {
       return
     }
     setIsLoading(false)
-  }, [userResponse?.user, redirectTo])
+  }, [userResponse, userResponse?.user, redirectTo])
 
   return { user: userResponse?.user, isLoading }
 }
