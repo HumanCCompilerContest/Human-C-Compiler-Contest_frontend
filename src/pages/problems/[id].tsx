@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import { useTheme } from '@mui/material/styles'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -24,7 +23,6 @@ const Problem = () => {
   const { id } = router.query
 
   const { problemResponse, isLoading, isError } = useProblem(Number(id))
-  const theme = useTheme()
 
   const [errorMessage, setErrorMessage] = useState('')
   const [isPostLoading, setIsPostLoading] = useState(false)
@@ -109,7 +107,9 @@ const Problem = () => {
           multiline
           fullWidth
           placeholder='input assembly'
-          {...register('asem')}
+          error={'asem' in errors}
+          helperText={errors.asem ? 'この項目は必須です' : ''}
+          {...register('asem', { required: true })}
         />
         <Box sx={{ display: 'flex', justifyContent: 'center', m: '4rem' }}>
           <Button
