@@ -58,10 +58,8 @@ const Problem = () => {
   return (
     <BasicLayout>
       <Head>
-        <link
-          rel='stylesheet'
-          href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css'
-        />
+        <title>problem {problem.title} | HCCC</title>
+        <meta name='description' content='人間Cコンパイラーコンテスト' />
       </Head>
       <Typography variant='h3' sx={{ fontWeight: '600' }}>
         {problem.title}
