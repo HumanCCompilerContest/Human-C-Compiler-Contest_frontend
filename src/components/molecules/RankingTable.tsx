@@ -44,8 +44,8 @@ const RankingTable: FC<RankingTableProps> = ({ sx, rankingList }) => {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {rankingList.map((row) => (
-            <StyledTableRow key={row.rank}>
+          {rankingList.map((row, i) => (
+            <StyledTableRow key={i}>
               <StyledTableCell
                 scope='row'
                 sx={{

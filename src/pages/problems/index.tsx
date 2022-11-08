@@ -44,8 +44,12 @@ const Problems: NextPage = () => {
             mb: '5rem',
           }}
         >
-          {problemIsCorrectList?.map((problem, i) => (
-            <ProblemCard problem={problem} key={i} sx={{ m: '2rem' }} />
+          {problemIsCorrectList?.map((problem) => (
+            <ProblemCard
+              problem={problem}
+              key={problem.id}
+              sx={{ m: '2rem' }}
+            />
           ))}
         </Box>
       </BasicLayout>

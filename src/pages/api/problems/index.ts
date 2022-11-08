@@ -20,21 +20,10 @@ export default function handler(
     errorMessage: '',
     items: [],
   }
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
-  data.items.push(problem)
+  for (let i = 0; i < 20; i++) {
+    problem.id = i
+    problem.title = `constant ver ${i}`
+    data.items.push({ ...problem })
+  }
   res.status(200).json(data)
 }
