@@ -10,6 +10,7 @@ import {
   SubmissionPost,
   SubmissionJoinedUserResponse,
   SubmissionJoinedUserListResponse,
+  ProblesIsCorrect,
 } from '@/features/types'
 
 const MeFetcher = (url: string): Promise<UserResponse> => {
@@ -70,11 +71,11 @@ export const useProblem = (id: number) => {
   }
 }
 
-export const useSubmissionList = (userID?: number) => {
+export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
   const url = userID
     ? `/api/submissions/?user_id=${userID}`
     : `/api/submissions/`
-  const { data, error } = useSWR(url, SubmissionListFetcher)
+  const { data, error } = useSWR(!isSkip && url, SubmissionListFetcher)
 
   return {
     submissionListResponse: data,
@@ -151,4 +152,65 @@ export const requestSubmission = async (
   return fetch(`/api/problems/${id}/submissions`, options).then((res) =>
     res.json(),
   )
+}
+
+export const useProblemIsCorrectList = (userID?: number) => {
+  const isSkip = userID === undefined
+  const {
+    problemListResponse,
+    isLoading: isProblemLoading,
+    isError: isProblemError,
+  } = useProblemList()
+  const {
+    submissionListResponse,
+    isLoading: isSubmissionLoading,
+    isError: isSubmissionError,
+  } = useSubmissionList(userID, isSkip)
+
+  console.log(userID)
+
+  if (!userID) {
+    // 非ログイン
+    const data = problemListResponse?.items.map((v) => ({
+      ...v,
+      isCorrect: false,
+    }))
+    return {
+      problemIsCorrectList: data,
+      isLoading: isProblemLoading,
+      isError: isProblemError,
+    }
+  }
+
+  // ログイン済み
+  if (isProblemLoading || isSubmissionLoading) {
+    return {
+      problemIsCorrectList: undefined,
+      isLoading: true,
+      isError: isProblemError || isSubmissionError,
+    }
+  }
+
+  if (!problemListResponse || !submissionListResponse) {
+    return {
+      problemIsCorrectList: undefined,
+      isLoading: false,
+      isError: isProblemError || isSubmissionError,
+    }
+  }
+
+  const problemIDsOfAC = submissionListResponse.items
+    .filter((v) => v.result === 'AC')
+    .map((v) => v.id)
+  const data: ProblesIsCorrect[] = problemListResponse.items.map((v) => ({
+    ...v,
+    isCorrect: problemIDsOfAC.includes(v.id),
+  }))
+  console.log(data)
+
+  return {
+    problemIsCorrectList: data,
+    isLoading: false,
+    isError: undefined,
+  }
 }

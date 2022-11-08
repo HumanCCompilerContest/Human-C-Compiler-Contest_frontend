@@ -3,15 +3,20 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useContext } from 'react'
 
 import Loading from '@/components/atoms/Loading'
 import TextWithIcon from '@/components/atoms/TextWithIcon'
 import ProblemCard from '@/components/molecules/ProblemCard'
-import BasicLayout from '@/components/templates/BasicLayout'
-import { useProblemList } from '@/features/api'
+import BasicLayout, { AuthContext } from '@/components/templates/BasicLayout'
+import { useProblemIsCorrectList } from '@/features/api'
 
 const Problems: NextPage = () => {
-  const { problemListResponse, isLoading, isError } = useProblemList()
+  const { user } = useContext(AuthContext)
+  console.log(user)
+  const { problemIsCorrectList, isLoading, isError } = useProblemIsCorrectList(
+    user?.id,
+  )
 
   if (isLoading) {
     return <Loading />
@@ -40,7 +45,7 @@ const Problems: NextPage = () => {
             mb: '5rem',
           }}
         >
-          {problemListResponse?.items.map((problem, i) => (
+          {problemIsCorrectList?.map((problem, i) => (
             <ProblemCard problem={problem} key={i} sx={{ m: '2rem' }} />
           ))}
         </Box>

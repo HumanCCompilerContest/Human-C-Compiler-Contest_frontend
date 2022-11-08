@@ -5,10 +5,10 @@ import Typography from '@mui/material/Typography'
 import type { SxProps, Theme } from '@mui/material/styles'
 import Link from 'next/link'
 import { FC } from 'react'
-import { Problem } from '@/features/types'
+import { ProblesIsCorrect } from '@/features/types'
 
 type ProblemCardProps = {
-  problem: Problem
+  problem: ProblesIsCorrect
   sx?: SxProps<Theme>
 }
 
@@ -17,7 +17,7 @@ const ProblemCard: FC<ProblemCardProps> = ({ problem, sx }) => {
     <Card
       sx={{
         width: 300,
-        backgroundColor: 'primary.main',
+        backgroundColor: problem.isCorrect ? '#5cb85c' : 'primary.main',
         color: 'white',
         textAlign: 'center',
         '&:hover': {

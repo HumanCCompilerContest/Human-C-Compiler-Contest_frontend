@@ -8,6 +8,10 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import '@fontsource/roboto/900.css'
+
+import Loading from '@/components/atoms/Loading'
+import { AuthContext } from '@/components/templates/BasicLayout'
+import useAuth from '@/features/hooks/useAuth'
 import '../styles/global.css'
 
 const theme = createTheme({
@@ -34,11 +38,19 @@ const theme = createTheme({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { user, isLoading } = useAuth()
+
+  if (isLoading) {
+    return <Loading />
+  }
+
   return (
     <SWRConfig value={{ provider: () => new Map() }}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
+        <AuthContext.Provider value={{ user }}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </AuthContext.Provider>
       </ThemeProvider>
     </SWRConfig>
   )
