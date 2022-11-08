@@ -167,8 +167,6 @@ export const useProblemIsCorrectList = (userID?: number) => {
     isError: isSubmissionError,
   } = useSubmissionList(userID, isSkip)
 
-  console.log(userID)
-
   if (!userID) {
     // 非ログイン
     const data = problemListResponse?.items.map((v) => ({
@@ -206,7 +204,6 @@ export const useProblemIsCorrectList = (userID?: number) => {
     ...v,
     isCorrect: problemIDsOfAC.includes(v.id),
   }))
-  console.log(data)
 
   return {
     problemIsCorrectList: data,

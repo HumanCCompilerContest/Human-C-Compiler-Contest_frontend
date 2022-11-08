@@ -13,7 +13,6 @@ import { useProblemIsCorrectList } from '@/features/api'
 
 const Problems: NextPage = () => {
   const { user } = useAuthContext()
-  console.log(user)
   const { problemIsCorrectList, isLoading, isError } = useProblemIsCorrectList(
     user?.id,
   )

@@ -92,7 +92,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:last-child td, &:last-child th': {
     border: 0,
   },
-  '&:nth-child(even)': {
+  '&:nth-of-type(even)': {
     backgroundColor: '#f5f5f5',
   },
 }))
