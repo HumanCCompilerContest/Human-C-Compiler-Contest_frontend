@@ -1,21 +1,16 @@
 import CreateIcon from '@mui/icons-material/Create'
-import { CardActionArea } from '@mui/material'
 import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import { green } from '@mui/material/colors'
-import { useTheme } from '@mui/material/styles'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
 
 import Loading from '@/components/atoms/Loading'
+import TextWithIcon from '@/components/atoms/TextWithIcon'
+import ProblemCard from '@/components/molecules/ProblemCard'
 import BasicLayout from '@/components/templates/BasicLayout'
 import { useProblemList } from '@/features/api'
 
 const Problems: NextPage = () => {
-  const theme = useTheme()
   const { problemListResponse, isLoading, isError } = useProblemList()
 
   if (isLoading) {
@@ -30,55 +25,24 @@ const Problems: NextPage = () => {
       </Head>
 
       <BasicLayout>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <CreateIcon fontSize='large' sx={{ marginRight: '0.5rem' }} />
+        <TextWithIcon>
+          <CreateIcon fontSize='large' sx={{ mr: '0.5rem' }} />
           <Typography variant='h4' sx={{ fontWeight: '600' }}>
             Problems
           </Typography>
-        </Box>
+        </TextWithIcon>
 
         <Box
           sx={{
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'space-around',
-            m: '0 0 5rem',
+            mb: '5rem',
           }}
         >
-          {problemListResponse?.items.map((v, i) => {
-            return (
-              <Card
-                key={i}
-                sx={{
-                  width: 300,
-                  m: '2rem 2rem 2rem 0',
-                  backgroundColor:
-                    i % 2 == 0 ? theme.palette.primary.main : green[500],
-                  color: 'white',
-                  textAlign: 'center',
-                  '&:hover': {
-                    opacity: 0.8,
-                  },
-                }}
-              >
-                <CardActionArea>
-                  <Link href={`/problems/${v.id}`}>
-                    <CardContent>
-                      <Typography sx={{ m: '0.5rem 0 1rem' }}>
-                        {v.title}
-                      </Typography>
-                      <Typography>{v.score}</Typography>
-                    </CardContent>
-                  </Link>
-                </CardActionArea>
-              </Card>
-            )
-          })}
+          {problemListResponse?.items.map((problem, i) => (
+            <ProblemCard problem={problem} key={i} sx={{ m: '2rem' }} />
+          ))}
         </Box>
       </BasicLayout>
     </>
