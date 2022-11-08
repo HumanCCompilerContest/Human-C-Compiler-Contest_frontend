@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { useMe } from '@/features/api'
+import useIsomorphicEffect from '@/features/hooks/useIsomorphicEffect'
 
 const requireAuthPath: string[] = []
 
@@ -9,8 +10,9 @@ const useAuth = (redirectTo = '/login') => {
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
   const { userResponse } = useMe()
+  const isomorphicEffect = useIsomorphicEffect()
 
-  useLayoutEffect(() => {
+  isomorphicEffect(() => {
     if (!userResponse) return
 
     if (
