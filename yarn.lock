@@ -463,13 +463,6 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-highlight@^0.12.5":
-  version "0.12.5"
-  resolved "https://registry.yarnpkg.com/@types/react-highlight/-/react-highlight-0.12.5.tgz#b2af7ca998247b0bc7859b674552df97b366c3b1"
-  integrity sha512-P8+mTxltxDdQ+99l+pjn40clziSbNrZy5d5zmvG+j3jKzokAhCoCZlIRmmnFgETTYubuqwKjvXSlvesBZcTfvQ==
-  dependencies:
-    "@types/react" "*"
-
 "@types/react-is@^16.7.1 || ^17.0.0":
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/@types/react-is/-/react-is-17.0.3.tgz#2d855ba575f2fc8d17ef9861f084acc4b90a137a"
@@ -1363,16 +1356,6 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-highlight.js@^10.5.0:
-  version "10.7.3"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
-  integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
-
-highlightjs-line-numbers.js@^2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/highlightjs-line-numbers.js/-/highlightjs-line-numbers.js-2.8.0.tgz#479ea8cff0c31fadc1578a66fa03e38b801f9ca6"
-  integrity sha512-TEf1gw0c8mb8nan0QwliqS7obT4cpUd9hzsGzsZLweteNnWea/VIqy5/aQqsa5wnz9lnvmtAkS1ZtDTjB/goYQ==
-
 hoist-non-react-statics@^3.3.1:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
@@ -1893,13 +1876,6 @@ react-dom@18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
-
-react-highlight@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/react-highlight/-/react-highlight-0.14.0.tgz#5aefa5518baa580f96b68d48129d7a5d2dc0c9ef"
-  integrity sha512-kWE+KXOXidS7SABhVopOgMnowbI3RAfeGZbnrduLNlWrYAED8sycL9l/Fvw3w0PFpIIawB7mRDnyhDcM/cIIGA==
-  dependencies:
-    highlight.js "^10.5.0"
 
 react-hook-form@^7.39.1:
   version "7.39.1"
