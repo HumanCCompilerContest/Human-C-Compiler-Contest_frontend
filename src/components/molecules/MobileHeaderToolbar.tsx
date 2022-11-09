@@ -117,7 +117,7 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
             Submission
           </StyledLinkWithIcon>
         </MenuItem>
-        {user ? (
+        {user && (
           <MenuItem>
             <ButtonWithIcon
               buttonLabel='Logout'
@@ -125,22 +125,23 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
               onClick={handleClickLogout}
             />
           </MenuItem>
-        ) : (
-          <>
-            <MenuItem>
-              <StyledLinkWithIcon href='/login' iconReactNode={<LoginIcon />}>
-                Login
-              </StyledLinkWithIcon>
-            </MenuItem>
-            <MenuItem>
-              <StyledLinkWithIcon
-                href='/register'
-                iconReactNode={<HowToRegIcon />}
-              >
-                Register
-              </StyledLinkWithIcon>
-            </MenuItem>
-          </>
+        )}
+        {!user && (
+          <MenuItem>
+            <StyledLinkWithIcon href='/login' iconReactNode={<LoginIcon />}>
+              Login
+            </StyledLinkWithIcon>
+          </MenuItem>
+        )}
+        {!user && (
+          <MenuItem>
+            <StyledLinkWithIcon
+              href='/register'
+              iconReactNode={<HowToRegIcon />}
+            >
+              Register
+            </StyledLinkWithIcon>
+          </MenuItem>
         )}
       </Menu>
     </Toolbar>
