@@ -1,40 +1,28 @@
-import MenuIcon from '@mui/icons-material/Menu'
+import { useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import Image from 'next/image'
-import * as React from 'react'
+import type { Theme, SxProps } from '@mui/material/styles'
+import { FC } from 'react'
 
-const Header = () => {
+import MobileHeaderToolbar from '../molecules/MobileHeaderToolbar'
+import HeaderToolbar from '@/components/molecules/HeaderToolbar'
+
+type HeaderProps = {
+  sx?: SxProps<Theme>
+}
+
+const Header: FC<HeaderProps> = ({ sx }) => {
+  const isUpMd = useMediaQuery<Theme>((theme) => theme.breakpoints.up('md'))
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        position='static'
-        sx={{
-          backgroundColor: 'rgb(10, 25, 41)',
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ margin: '0 0.5rem 0 1rem' }}
-          >
-            <Image src='/HCCC_logo.png' layout='fill' />
-          </IconButton>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            HCCC
-          </Typography>
-          <Button color='inherit'>Login</Button>
-          <Button color='inherit'>Register</Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <AppBar
+      position='static'
+      sx={{
+        backgroundColor: 'primary.main',
+        ...sx,
+      }}
+    >
+      {isUpMd ? <HeaderToolbar /> : <MobileHeaderToolbar />}
+    </AppBar>
   )
 }
 

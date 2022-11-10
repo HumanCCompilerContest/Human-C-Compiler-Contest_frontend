@@ -6,7 +6,10 @@
     "plugin:import/warnings",
     "prettier"
   ],
+  "plugins": ["import", "unused-imports"],
   "rules": {
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "warn",
     "import/order": [
       "error",
       {
