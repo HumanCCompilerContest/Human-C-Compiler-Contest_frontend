@@ -14,39 +14,43 @@ import {
 } from '@/features/types'
 
 const MeFetcher = (path: string): Promise<UserResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
-    res.json(),
-  )
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
+    credentials: 'include',
+  }).then((res) => res.json())
 }
 
 const ProblemListFetcher = (path: string): Promise<ProblemListResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
-    res.json(),
-  )
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
+    credentials: 'include',
+  }).then((res) => res.json())
 }
 
 const ProblemFetcher = (path: string): Promise<ProblemResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
-    res.json(),
-  )
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
+    credentials: 'include',
+  }).then((res) => res.json())
 }
 
 const RankingFetcher = (path: string): Promise<RankingResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
-    res.json(),
-  )
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
+    credentials: 'include',
+  }).then((res) => res.json())
 }
 
 const SubmissionFetcher = (
   url: string,
 ): Promise<SubmissionJoinedUserResponse> => {
-  return fetch(url).then((res) => res.json())
+  return fetch(url, {
+    credentials: 'include',
+  }).then((res) => res.json())
 }
 
 const SubmissionListFetcher = (
   url: string,
 ): Promise<SubmissionJoinedUserListResponse> => {
-  return fetch(url).then((res) => res.json())
+  return fetch(url, {
+    credentials: 'include',
+  }).then((res) => res.json())
 }
 
 export const useMe = () => {
@@ -119,6 +123,7 @@ export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
+    credential: 'include',
   }
   return fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login/`,
@@ -134,6 +139,7 @@ export const requestRegister = async (
     headers: {
       'Content-Type': 'application/json',
     },
+    credential: 'include',
     body: JSON.stringify(data),
   }
   return fetch(
@@ -145,6 +151,7 @@ export const requestRegister = async (
 export const requestLogout = async (): Promise<ResponseBase> => {
   const options = {
     method: 'POST',
+    credential: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -161,6 +168,7 @@ export const requestSubmission = async (
 ): Promise<SubmissionJoinedUserResponse> => {
   const options = {
     method: 'POST',
+    credential: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
