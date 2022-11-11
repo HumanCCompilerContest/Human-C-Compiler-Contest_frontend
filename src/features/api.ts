@@ -120,7 +120,10 @@ export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
     },
     body: JSON.stringify(data),
   }
-  return fetch('/api/login/', options).then((res) => res.json())
+  return fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login/`,
+    options,
+  ).then((res) => res.json())
 }
 
 export const requestRegister = async (
@@ -133,7 +136,10 @@ export const requestRegister = async (
     },
     body: JSON.stringify(data),
   }
-  return fetch('/api/register/', options).then((res) => res.json())
+  return fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/register/`,
+    options,
+  ).then((res) => res.json())
 }
 
 export const requestLogout = async (): Promise<ResponseBase> => {
@@ -143,7 +149,10 @@ export const requestLogout = async (): Promise<ResponseBase> => {
       'Content-Type': 'application/json',
     },
   }
-  return fetch('/api/logout/', options).then((res) => res.json())
+  return fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/logout/`,
+    options,
+  ).then((res) => res.json())
 }
 
 export const requestSubmission = async (
@@ -157,9 +166,10 @@ export const requestSubmission = async (
     },
     body: JSON.stringify(data),
   }
-  return fetch(`/api/problems/${id}/submissions`, options).then((res) =>
-    res.json(),
-  )
+  return fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/problems/${id}/submissions/`,
+    options,
+  ).then((res) => res.json())
 }
 
 export const useProblemIsCorrectList = (userID?: number) => {
