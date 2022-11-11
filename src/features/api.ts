@@ -38,17 +38,17 @@ const RankingFetcher = (path: string): Promise<RankingResponse> => {
 }
 
 const SubmissionFetcher = (
-  url: string,
+  path: string,
 ): Promise<SubmissionJoinedUserResponse> => {
-  return fetch(url, {
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
     credentials: 'include',
   }).then((res) => res.json())
 }
 
 const SubmissionListFetcher = (
-  url: string,
+  path: string,
 ): Promise<SubmissionJoinedUserListResponse> => {
-  return fetch(url, {
+  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
     credentials: 'include',
   }).then((res) => res.json())
 }
@@ -117,13 +117,13 @@ export const useRanking = () => {
 }
 
 export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
-  const options = {
+  const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-    credential: 'include',
+    credentials: 'include',
   }
   return fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login/`,
@@ -134,12 +134,12 @@ export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
 export const requestRegister = async (
   data: UserPost,
 ): Promise<UserResponse> => {
-  const options = {
+  const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    credential: 'include',
+    credentials: 'include',
     body: JSON.stringify(data),
   }
   return fetch(
@@ -149,9 +149,9 @@ export const requestRegister = async (
 }
 
 export const requestLogout = async (): Promise<ResponseBase> => {
-  const options = {
+  const options: RequestInit = {
     method: 'POST',
-    credential: 'include',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -166,9 +166,9 @@ export const requestSubmission = async (
   id: number,
   data: SubmissionPost,
 ): Promise<SubmissionJoinedUserResponse> => {
-  const options = {
+  const options: RequestInit = {
     method: 'POST',
-    credential: 'include',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
