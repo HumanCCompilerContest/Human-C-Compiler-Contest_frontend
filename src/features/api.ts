@@ -56,7 +56,7 @@ export const useMe = () => {
 
 export const useProblemList = () => {
   const { data, error } = useSWR<ProblemListResponse, NetworkError>(
-    `/api/problems/`,
+    `/api/problems`,
     Fetcher,
   )
 
@@ -81,9 +81,7 @@ export const useProblem = (id: number) => {
 }
 
 export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
-  const url = userID
-    ? `/api/submissions/?user_id=${userID}`
-    : `/api/submissions/`
+  const url = userID ? `/api/submissions?user_id=${userID}` : `/api/submissions`
   const { data, error } = useSWR<
     SubmissionJoinedUserListResponse,
     NetworkError
@@ -111,7 +109,7 @@ export const useSubmission = (id: number) => {
 
 export const useRanking = () => {
   const { data, error } = useSWR<RankingResponse, NetworkError>(
-    `/api/ranking/`,
+    `/api/ranking`,
     Fetcher,
   )
 
@@ -132,7 +130,7 @@ export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
     credentials: 'include',
   }
   return fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login/`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login`,
     options,
   ).then((res) => res.json())
 }
@@ -149,7 +147,7 @@ export const requestRegister = async (
     body: JSON.stringify(data),
   }
   return fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/register/`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/register`,
     options,
   ).then((res) => res.json())
 }
@@ -163,7 +161,7 @@ export const requestLogout = async (): Promise<ResponseBase> => {
     },
   }
   return fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/logout/`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/logout`,
     options,
   ).then((res) => res.json())
 }
@@ -181,7 +179,7 @@ export const requestSubmission = async (
     body: JSON.stringify(data),
   }
   return fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/problems/${id}/submissions/`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/problems/${id}/submissions`,
     options,
   ).then((res) => res.json())
 }
