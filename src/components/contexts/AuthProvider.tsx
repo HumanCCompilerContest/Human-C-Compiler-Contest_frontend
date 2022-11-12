@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, FC } from 'react'
+import Error from 'next/error'
 
 import Loading from '@/components/atoms/Loading'
 import useAuth from '@/features/hooks/useAuth'
@@ -15,7 +16,11 @@ type AuthProviderProps = {
 const AuthContext = createContext<AuthContextType>({})
 
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const { user, isLoading } = useAuth()
+  const { user, isLoading, isError } = useAuth()
+
+  if (isError) {
+    return <Error statusCode={500} />
+  }
 
   if (isLoading) {
     return <Loading />
