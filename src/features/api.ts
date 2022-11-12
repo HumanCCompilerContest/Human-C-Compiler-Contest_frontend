@@ -15,10 +15,11 @@ import {
 
 const UnexpectedErrorStatus = 0
 
-const Fetcher = async (path: string): Promise<any> => {
+const Fetcher = async (path: string, options?: RequestInit): Promise<any> => {
   let res
   try {
     res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
+      ...options,
       credentials: 'include',
     })
   } catch (e: unknown) {
@@ -126,12 +127,8 @@ export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-    credentials: 'include',
   }
-  return fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login`,
-    options,
-  ).then((res) => res.json())
+  return await Fetcher(`/api/login`, options)
 }
 
 export const requestRegister = async (
@@ -142,27 +139,19 @@ export const requestRegister = async (
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
     body: JSON.stringify(data),
   }
-  return fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/register`,
-    options,
-  ).then((res) => res.json())
+  return await Fetcher(`/api/register`, options)
 }
 
 export const requestLogout = async (): Promise<ResponseBase> => {
   const options: RequestInit = {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
   }
-  return fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/logout`,
-    options,
-  ).then((res) => res.json())
+  return await Fetcher(`/api/logout`, options)
 }
 
 export const requestSubmission = async (
@@ -171,14 +160,10 @@ export const requestSubmission = async (
 ): Promise<SubmissionJoinedUserResponse> => {
   const options: RequestInit = {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   }
-  return fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/problems/${id}/submissions`,
-    options,
-  ).then((res) => res.json())
+  return await Fetcher(`/api/problems/${id}/submissions`, options)
 }
