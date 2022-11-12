@@ -12,7 +12,7 @@ export default function handler(
     submission: {
       id: 1,
       time: '2022/01/01',
-      asem: 'mov rax, 1\nmov rax, 1\nmov rax, 1\nmov rax, 1\nmov rax, 1',
+      asm: 'mov rax, 1\nmov rax, 1\nmov rax, 1\nmov rax, 1\nmov rax, 1',
       result: 'AC',
       user: {
         id: 1,

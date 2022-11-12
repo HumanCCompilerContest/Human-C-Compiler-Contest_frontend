@@ -16,7 +16,7 @@ import BasicLayout from '@/components/templates/BasicLayout'
 import { useProblem, requestSubmission } from '@/features/api'
 
 type IFormInput = {
-  asem: string
+  asm: string
 }
 
 const Problem = () => {
@@ -36,7 +36,7 @@ const Problem = () => {
   const onSubmit = async (data: IFormInput) => {
     setIsPostLoading(true)
     const res = await requestSubmission(Number(id), {
-      asem: data.asem,
+      asm: data.asm,
     })
     setIsPostLoading(false)
 
@@ -116,9 +116,9 @@ const Problem = () => {
           multiline
           fullWidth
           placeholder='input assembly'
-          error={'asem' in errors}
-          helperText={errors.asem ? 'この項目は必須です' : ''}
-          {...register('asem', { required: true })}
+          error={'asm' in errors}
+          helperText={errors.asm ? 'この項目は必須です' : ''}
+          {...register('asm', { required: true })}
         />
         <Box sx={{ display: 'flex', justifyContent: 'center', m: '4rem' }}>
           <Button

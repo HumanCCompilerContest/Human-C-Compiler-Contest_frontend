@@ -52,7 +52,7 @@ export type RankingResponse = ResponseBase & {
 export type Submission = {
   id: number
   time: string
-  asem: string
+  asm: string
   result: string
 }
 
@@ -70,5 +70,5 @@ export type SubmissionJoinedUserListResponse = ResponseBase & {
 }
 
 export type SubmissionPost = {
-  asem: string
+  asm: string
 }

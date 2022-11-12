@@ -14,7 +14,7 @@ export default function handler(
       submission: {
         id: 1,
         time: '2022/01/01',
-        asem: 'stop',
+        asm: 'stop',
         result: 'AC',
         user: {
           id: 1,

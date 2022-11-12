@@ -45,7 +45,7 @@ const Submission = () => {
         >
           Source Code
         </Typography>
-        <Code language='assembly'>{submissionResponse.submission.asem}</Code>
+        <Code language='assembly'>{submissionResponse.submission.asm}</Code>
       </Box>
 
       <SubmissionResultTable submission={submissionResponse.submission} />
