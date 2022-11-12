@@ -5,13 +5,18 @@ import type { NextPage } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
 
+import { useRouter } from 'next/router'
 import Loading from '@/components/atoms/Loading'
 import SubmissionsTable from '@/components/molecules/SubmissionsTable'
 import BasicLayout from '@/components/templates/BasicLayout'
 import { useSubmissionList } from '@/features/api'
 
 const Submissions: NextPage = () => {
-  const { submissionListResponse, isLoading, isError } = useSubmissionList()
+  const router = useRouter()
+  const { user_id } = router.query
+  const { submissionListResponse, isLoading, isError } = useSubmissionList(
+    Number(user_id),
+  )
 
   if (isError) {
     return <Error statusCode={isError.status} title={isError.message} />

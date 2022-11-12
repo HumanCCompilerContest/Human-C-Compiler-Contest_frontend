@@ -4,6 +4,7 @@ import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import PersonIcon from '@mui/icons-material/Person'
+import PublicIcon from '@mui/icons-material/Public'
 import PublishIcon from '@mui/icons-material/Publish'
 import StarIcon from '@mui/icons-material/Star'
 import type { SxProps, Theme } from '@mui/material'
@@ -112,11 +113,21 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
         <MenuItem>
           <StyledLinkWithIcon
             href='/submissions'
-            iconReactNode={<PublishIcon />}
+            iconReactNode={<PublicIcon />}
           >
-            Submission
+            All Submit
           </StyledLinkWithIcon>
         </MenuItem>
+        {user && (
+          <MenuItem>
+            <StyledLinkWithIcon
+              href={`/submissions?user_id=${user.id}`}
+              iconReactNode={<PublishIcon />}
+            >
+              My Submit
+            </StyledLinkWithIcon>
+          </MenuItem>
+        )}
         {user && (
           <MenuItem>
             <ButtonWithIcon
