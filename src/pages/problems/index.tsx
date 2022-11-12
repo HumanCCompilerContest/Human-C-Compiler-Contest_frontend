@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography'
 import type { NextPage } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 import Loading from '@/components/atoms/Loading'
 import TextWithIcon from '@/components/atoms/TextWithIcon'
@@ -12,13 +14,24 @@ import BasicLayout from '@/components/templates/BasicLayout'
 import { useProblemList } from '@/features/api'
 
 const Problems: NextPage = () => {
+  const router = useRouter()
   const { problemListResponse, isLoading, isError } = useProblemList()
+
+  useEffect(() => {
+    if (problemListResponse?.status === 'login-required') {
+      router.push('/login')
+    }
+  }, [problemListResponse?.status])
 
   if (isError) {
     return <Error statusCode={isError.status} title={isError.message} />
   }
 
-  if (isLoading || !problemListResponse) {
+  if (
+    isLoading ||
+    !problemListResponse ||
+    problemListResponse.status === 'login-required'
+  ) {
     return <Loading />
   }
 
