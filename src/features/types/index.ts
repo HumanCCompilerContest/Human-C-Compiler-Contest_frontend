@@ -36,7 +36,7 @@ export type ProblemListResponse = ResponseBase & {
 }
 
 export type ProblesIsCorrect = Problem & {
-  isCorrect: boolean
+  isCorrect?: boolean
 }
 
 export type Ranking = {

@@ -2,23 +2,28 @@ import CreateIcon from '@mui/icons-material/Create'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import type { NextPage } from 'next'
+import Error from 'next/error'
 import Head from 'next/head'
 
 import Loading from '@/components/atoms/Loading'
 import TextWithIcon from '@/components/atoms/TextWithIcon'
-import { useAuthContext } from '@/components/contexts/AuthProvider'
 import ProblemCard from '@/components/molecules/ProblemCard'
 import BasicLayout from '@/components/templates/BasicLayout'
-import { useProblemIsCorrectList } from '@/features/api'
+import { useProblemList } from '@/features/api'
 
 const Problems: NextPage = () => {
-  const { user } = useAuthContext()
-  const { problemIsCorrectList, isLoading, isError } = useProblemIsCorrectList(
-    user?.id,
-  )
+  const { problemListResponse, isLoading, isError } = useProblemList()
 
-  if (isLoading) {
+  if (isError) {
+    return <Error statusCode={isError.status} title={isError.message} />
+  }
+
+  if (isLoading || !problemListResponse) {
     return <Loading />
+  }
+
+  if (problemListResponse.status === 'ng') {
+    return <Error statusCode={0} title={problemListResponse.errorMessage} />
   }
 
   return (
@@ -44,7 +49,7 @@ const Problems: NextPage = () => {
             mb: '5rem',
           }}
         >
-          {problemIsCorrectList?.map((problem) => (
+          {problemListResponse.items.map((problem) => (
             <ProblemCard
               problem={problem}
               key={problem.id}

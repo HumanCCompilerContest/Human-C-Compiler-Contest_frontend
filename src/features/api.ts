@@ -11,7 +11,6 @@ import {
   SubmissionPost,
   SubmissionJoinedUserResponse,
   SubmissionJoinedUserListResponse,
-  ProblesIsCorrect,
 } from '@/features/types'
 
 const UnexpectedErrorStatus = 0
@@ -182,62 +181,4 @@ export const requestSubmission = async (
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/problems/${id}/submissions`,
     options,
   ).then((res) => res.json())
-}
-
-export const useProblemIsCorrectList = (userID?: number) => {
-  const isSkip = userID === undefined
-  const {
-    problemListResponse,
-    isLoading: isProblemLoading,
-    isError: isProblemError,
-  } = useProblemList()
-  const {
-    submissionListResponse,
-    isLoading: isSubmissionLoading,
-    isError: isSubmissionError,
-  } = useSubmissionList(userID, isSkip)
-
-  if (!userID) {
-    // 非ログイン
-    const data = problemListResponse?.items.map((v) => ({
-      ...v,
-      isCorrect: false,
-    }))
-    return {
-      problemIsCorrectList: data,
-      isLoading: isProblemLoading,
-      isError: isProblemError,
-    }
-  }
-
-  // ログイン済み
-  if (isProblemLoading || isSubmissionLoading) {
-    return {
-      problemIsCorrectList: undefined,
-      isLoading: true,
-      isError: isProblemError || isSubmissionError,
-    }
-  }
-
-  if (!problemListResponse || !submissionListResponse) {
-    return {
-      problemIsCorrectList: undefined,
-      isLoading: false,
-      isError: isProblemError || isSubmissionError,
-    }
-  }
-
-  const problemIDsOfAC = submissionListResponse.items
-    .filter((v) => v.result === 'AC')
-    .map((v) => v.id)
-  const data: ProblesIsCorrect[] = problemListResponse.items.map((v) => ({
-    ...v,
-    isCorrect: problemIDsOfAC.includes(v.id),
-  }))
-
-  return {
-    problemIsCorrectList: data,
-    isLoading: false,
-    isError: undefined,
-  }
 }
