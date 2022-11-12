@@ -3,6 +3,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -47,8 +48,16 @@ const Problem = () => {
     router.push(`/submissions/${res.submission.id}/`)
   }
 
+  if (isError) {
+    return <Error statusCode={isError.status} title={isError.message} />
+  }
+
   if (isLoading || !problemResponse) {
     return <Loading />
+  }
+
+  if (problemResponse.status === 'ng') {
+    return <Error statusCode={0} title={problemResponse.errorMessage} />
   }
 
   const problem = problemResponse.problem

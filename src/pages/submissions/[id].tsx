@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
@@ -13,10 +14,18 @@ const Submission = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const { submissionResponse, isLoading } = useSubmission(Number(id))
+  const { submissionResponse, isLoading, isError } = useSubmission(Number(id))
+
+  if (isError) {
+    return <Error statusCode={isError.status} title={isError.message} />
+  }
 
   if (isLoading || !submissionResponse) {
     return <Loading />
+  }
+
+  if (submissionResponse.status === 'ng') {
+    return <Error statusCode={0} title={submissionResponse.errorMessage} />
   }
 
   return (
