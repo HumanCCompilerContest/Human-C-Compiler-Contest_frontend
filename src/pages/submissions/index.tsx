@@ -10,10 +10,12 @@ import Loading from '@/components/atoms/Loading'
 import SubmissionsTable from '@/components/molecules/SubmissionsTable'
 import BasicLayout from '@/components/templates/BasicLayout'
 import { useSubmissionList } from '@/features/api'
+import { useAuthContext } from '@/components/contexts/AuthProvider'
 
 const Submissions: NextPage = () => {
   const router = useRouter()
   const { user_id } = router.query
+  const { user } = useAuthContext()
   const { submissionListResponse, isLoading, isError } = useSubmissionList(
     Number(user_id),
   )
@@ -46,7 +48,7 @@ const Submissions: NextPage = () => {
         >
           <PublishIcon fontSize='large' sx={{ marginRight: '0.2rem' }} />
           <Typography variant='h4' sx={{ fontWeight: '600' }}>
-            Submissions
+            {Number(user_id) === user?.id ? 'My Submit' : 'Submit'}
           </Typography>
         </Box>
         <SubmissionsTable submissionList={submissionListResponse.items} />
