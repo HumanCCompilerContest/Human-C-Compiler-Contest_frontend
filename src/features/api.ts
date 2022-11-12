@@ -1,5 +1,6 @@
 import useSWR from 'swr'
 
+import { NetworkError } from '@/features/errors'
 import {
   UserPost,
   UserResponse,
@@ -13,14 +14,38 @@ import {
   ProblesIsCorrect,
 } from '@/features/types'
 
-const Fetcher = (path: string): Promise<any> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
-    credentials: 'include',
-  }).then((res) => res.json())
+const UnexpectedErrorStatus = 0
+
+const Fetcher = async (path: string): Promise<any> => {
+  let res
+  try {
+    res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
+      credentials: 'include',
+    })
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      throw new NetworkError(e.message, UnexpectedErrorStatus)
+    }
+
+    throw new NetworkError('unexpected error', UnexpectedErrorStatus)
+  }
+
+  if (!res.ok) {
+    const error = new NetworkError(
+      'An error occurred while fetching the data.',
+      res.status,
+    )
+    throw error
+  }
+
+  return res.json()
 }
 
 export const useMe = () => {
-  const { data, error } = useSWR<UserResponse>(`/api/users/me`, Fetcher)
+  const { data, error } = useSWR<UserResponse, NetworkError>(
+    `/api/users/me`,
+    Fetcher,
+  )
 
   return {
     userResponse: data,
@@ -30,7 +55,10 @@ export const useMe = () => {
 }
 
 export const useProblemList = () => {
-  const { data, error } = useSWR<ProblemListResponse>(`/api/problems/`, Fetcher)
+  const { data, error } = useSWR<ProblemListResponse, NetworkError>(
+    `/api/problems/`,
+    Fetcher,
+  )
 
   return {
     problemListResponse: data,
@@ -40,7 +68,7 @@ export const useProblemList = () => {
 }
 
 export const useProblem = (id: number) => {
-  const { data, error } = useSWR<ProblemResponse>(
+  const { data, error } = useSWR<ProblemResponse, NetworkError>(
     `/api/problems/${id}`,
     Fetcher,
   )
@@ -56,10 +84,10 @@ export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
   const url = userID
     ? `/api/submissions/?user_id=${userID}`
     : `/api/submissions/`
-  const { data, error } = useSWR<SubmissionJoinedUserListResponse>(
-    !isSkip && url,
-    Fetcher,
-  )
+  const { data, error } = useSWR<
+    SubmissionJoinedUserListResponse,
+    NetworkError
+  >(!isSkip && url, Fetcher)
 
   return {
     submissionListResponse: data,
@@ -69,7 +97,7 @@ export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
 }
 
 export const useSubmission = (id: number) => {
-  const { data, error } = useSWR<SubmissionJoinedUserResponse>(
+  const { data, error } = useSWR<SubmissionJoinedUserResponse, NetworkError>(
     `/api/submissions/${id}`,
     Fetcher,
   )
@@ -82,7 +110,10 @@ export const useSubmission = (id: number) => {
 }
 
 export const useRanking = () => {
-  const { data, error } = useSWR<RankingResponse>(`/api/ranking/`, Fetcher)
+  const { data, error } = useSWR<RankingResponse, NetworkError>(
+    `/api/ranking/`,
+    Fetcher,
+  )
 
   return {
     rankingResponse: data,

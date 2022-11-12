@@ -19,7 +19,7 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const { user, isLoading, isError } = useAuth()
 
   if (isError) {
-    return <Error statusCode={500} />
+    return <Error statusCode={isError.status} title={isError.message} />
   }
 
   if (isLoading) {
