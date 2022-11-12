@@ -13,48 +13,14 @@ import {
   ProblesIsCorrect,
 } from '@/features/types'
 
-const MeFetcher = (path: string): Promise<UserResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
-    credentials: 'include',
-  }).then((res) => res.json())
-}
-
-const ProblemListFetcher = (path: string): Promise<ProblemListResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
-    credentials: 'include',
-  }).then((res) => res.json())
-}
-
-const ProblemFetcher = (path: string): Promise<ProblemResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
-    credentials: 'include',
-  }).then((res) => res.json())
-}
-
-const RankingFetcher = (path: string): Promise<RankingResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
-    credentials: 'include',
-  }).then((res) => res.json())
-}
-
-const SubmissionFetcher = (
-  path: string,
-): Promise<SubmissionJoinedUserResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
-    credentials: 'include',
-  }).then((res) => res.json())
-}
-
-const SubmissionListFetcher = (
-  path: string,
-): Promise<SubmissionJoinedUserListResponse> => {
+const Fetcher = (path: string): Promise<any> => {
   return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
     credentials: 'include',
   }).then((res) => res.json())
 }
 
 export const useMe = () => {
-  const { data, error } = useSWR(`/api/users/me`, MeFetcher)
+  const { data, error } = useSWR<UserResponse>(`/api/users/me`, Fetcher)
 
   return {
     userResponse: data,
@@ -64,7 +30,7 @@ export const useMe = () => {
 }
 
 export const useProblemList = () => {
-  const { data, error } = useSWR(`/api/problems/`, ProblemListFetcher)
+  const { data, error } = useSWR<ProblemListResponse>(`/api/problems/`, Fetcher)
 
   return {
     problemListResponse: data,
@@ -74,7 +40,10 @@ export const useProblemList = () => {
 }
 
 export const useProblem = (id: number) => {
-  const { data, error } = useSWR(`/api/problems/${id}`, ProblemFetcher)
+  const { data, error } = useSWR<ProblemResponse>(
+    `/api/problems/${id}`,
+    Fetcher,
+  )
 
   return {
     problemResponse: data,
@@ -87,7 +56,10 @@ export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
   const url = userID
     ? `/api/submissions/?user_id=${userID}`
     : `/api/submissions/`
-  const { data, error } = useSWR(!isSkip && url, SubmissionListFetcher)
+  const { data, error } = useSWR<SubmissionJoinedUserListResponse>(
+    !isSkip && url,
+    Fetcher,
+  )
 
   return {
     submissionListResponse: data,
@@ -97,7 +69,10 @@ export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
 }
 
 export const useSubmission = (id: number) => {
-  const { data, error } = useSWR(`/api/submissions/${id}`, SubmissionFetcher)
+  const { data, error } = useSWR<SubmissionJoinedUserResponse>(
+    `/api/submissions/${id}`,
+    Fetcher,
+  )
 
   return {
     submissionResponse: data,
@@ -107,7 +82,7 @@ export const useSubmission = (id: number) => {
 }
 
 export const useRanking = () => {
-  const { data, error } = useSWR(`/api/ranking/`, RankingFetcher)
+  const { data, error } = useSWR<RankingResponse>(`/api/ranking/`, Fetcher)
 
   return {
     rankingResponse: data,

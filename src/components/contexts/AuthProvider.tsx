@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useContext, FC } from 'react'
 import Error from 'next/error'
+import { createContext, ReactNode, useContext, FC } from 'react'
 
 import Loading from '@/components/atoms/Loading'
 import useAuth from '@/features/hooks/useAuth'
