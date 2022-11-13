@@ -1,6 +1,5 @@
 import PublishIcon from '@mui/icons-material/Publish'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Typography, Box, Alert, AlertTitle } from '@mui/material'
 import type { NextPage } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
@@ -51,18 +50,26 @@ const Submissions: NextPage = () => {
       </Head>
 
       <BasicLayout>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <PublishIcon fontSize='large' sx={{ marginRight: '0.2rem' }} />
-          <Typography variant='h4' sx={{ fontWeight: '600' }}>
-            {Number(user_id) === user?.id ? 'My Submit' : 'Submit'}
-          </Typography>
-        </Box>
-        <SubmissionsTable submissionList={submissionListResponse.items} />
+        {submissionListResponse.status === 'forbidden' ? (
+          <Alert severity='error' sx={{ my: '5rem' }}>
+            <AlertTitle>{submissionListResponse.errorMessage}</AlertTitle>
+          </Alert>
+        ) : (
+          <Box>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <PublishIcon fontSize='large' sx={{ marginRight: '0.2rem' }} />
+              <Typography variant='h4' sx={{ fontWeight: '600' }}>
+                {Number(user_id) === user?.id ? 'My Submit' : 'Submit'}
+              </Typography>
+            </Box>
+            <SubmissionsTable submissionList={submissionListResponse.items} />
+          </Box>
+        )}
       </BasicLayout>
     </>
   )

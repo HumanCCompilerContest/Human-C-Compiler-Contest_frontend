@@ -1,5 +1,5 @@
 export type ResponseBase = {
-  status: 'ok' | 'ng' | 'login-required'
+  status: 'ok' | 'ng' | 'login-required' | 'forbidden'
   errorMessage: string
 }
 

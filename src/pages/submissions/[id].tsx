@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Typography, Box, Alert, AlertTitle } from '@mui/material'
 import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -48,18 +47,24 @@ const Submission = () => {
       <Typography variant='h3' sx={{ fontWeight: '600' }}>
         Submission #{submissionResponse.submission.id}
       </Typography>
-
-      <Box sx={{ m: '4rem 0' }}>
-        <Typography
-          variant='h4'
-          sx={{ fontWeight: '600', marginBottom: '1rem' }}
-        >
-          Source Code
-        </Typography>
-        <Code language='assembly'>{submissionResponse.submission.asm}</Code>
-      </Box>
-
-      <SubmissionResultTable submission={submissionResponse.submission} />
+      {submissionResponse.status === 'forbidden' ? (
+        <Alert severity='error' sx={{ my: '5rem' }}>
+          <AlertTitle>{submissionResponse.errorMessage}</AlertTitle>
+        </Alert>
+      ) : (
+        <Box>
+          <Box sx={{ m: '4rem 0' }}>
+            <Typography
+              variant='h4'
+              sx={{ fontWeight: '600', marginBottom: '1rem' }}
+            >
+              Source Code
+            </Typography>
+            <Code language='assembly'>{submissionResponse.submission.asm}</Code>
+          </Box>
+          <SubmissionResultTable submission={submissionResponse.submission} />
+        </Box>
+      )}
     </BasicLayout>
   )
 }

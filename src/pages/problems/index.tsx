@@ -1,6 +1,5 @@
 import CreateIcon from '@mui/icons-material/Create'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Typography, Box, Alert, AlertTitle } from '@mui/material'
 import type { NextPage } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
@@ -54,22 +53,28 @@ const Problems: NextPage = () => {
           </Typography>
         </TextWithIcon>
 
-        <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-around',
-            mb: '5rem',
-          }}
-        >
-          {problemListResponse.items.map((problem) => (
-            <ProblemCard
-              problem={problem}
-              key={problem.id}
-              sx={{ m: '2rem' }}
-            />
-          ))}
-        </Box>
+        {problemListResponse.status === 'forbidden' ? (
+          <Alert severity='error' sx={{ my: '5rem' }}>
+            <AlertTitle>{problemListResponse.errorMessage}</AlertTitle>
+          </Alert>
+        ) : (
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around',
+              mb: '5rem',
+            }}
+          >
+            {problemListResponse.items.map((problem) => (
+              <ProblemCard
+                problem={problem}
+                key={problem.id}
+                sx={{ m: '2rem' }}
+              />
+            ))}
+          </Box>
+        )}
       </BasicLayout>
     </>
   )
