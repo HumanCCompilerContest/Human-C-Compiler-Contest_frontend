@@ -38,7 +38,7 @@ const SubmissionsTable: FC<SubmissionsTableProps> = ({ submissionList }) => {
           {submissionList.map((row, idx) => (
             <StyledTableRow key={idx}>
               <StyledTableCell component='th' scope='row' align='left'>
-                {row.time}
+                {new Date(row.time).toLocaleString('ja-JP')}
               </StyledTableCell>
               <StyledTableCell align='right'>
                 {row.problem.title}
