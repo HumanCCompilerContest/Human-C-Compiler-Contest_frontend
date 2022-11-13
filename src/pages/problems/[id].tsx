@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Code from '@/components/atoms/Code'
@@ -33,6 +33,12 @@ const Problem = () => {
     formState: { errors },
   } = useForm<IFormInput>()
 
+  useEffect(() => {
+    if (problemResponse?.status === 'login-required') {
+      router.push('/login')
+    }
+  }, [problemResponse?.status])
+
   const onSubmit = async (data: IFormInput) => {
     setIsPostLoading(true)
     const res = await requestSubmission(Number(id), {
@@ -52,7 +58,11 @@ const Problem = () => {
     return <Error statusCode={isError.status} title={isError.message} />
   }
 
-  if (isLoading || !problemResponse) {
+  if (
+    isLoading ||
+    !problemResponse ||
+    problemResponse.status === 'login-required'
+  ) {
     return <Loading />
   }
 

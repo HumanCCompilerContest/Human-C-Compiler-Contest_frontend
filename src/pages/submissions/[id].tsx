@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography'
 import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 import Code from '@/components/atoms/Code'
 import Loading from '@/components/atoms/Loading'
@@ -16,11 +17,21 @@ const Submission = () => {
 
   const { submissionResponse, isLoading, isError } = useSubmission(Number(id))
 
+  useEffect(() => {
+    if (submissionResponse?.status === 'login-required') {
+      router.push('/login')
+    }
+  }, [submissionResponse?.status])
+
   if (isError) {
     return <Error statusCode={isError.status} title={isError.message} />
   }
 
-  if (isLoading || !submissionResponse) {
+  if (
+    isLoading ||
+    !submissionResponse ||
+    submissionResponse.status === 'login-required'
+  ) {
     return <Loading />
   }
 

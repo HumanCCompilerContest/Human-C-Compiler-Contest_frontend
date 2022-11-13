@@ -4,13 +4,14 @@ import Typography from '@mui/material/Typography'
 import type { NextPage } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
-
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+
 import Loading from '@/components/atoms/Loading'
+import { useAuthContext } from '@/components/contexts/AuthProvider'
 import SubmissionsTable from '@/components/molecules/SubmissionsTable'
 import BasicLayout from '@/components/templates/BasicLayout'
 import { useSubmissionList } from '@/features/api'
-import { useAuthContext } from '@/components/contexts/AuthProvider'
 
 const Submissions: NextPage = () => {
   const router = useRouter()
@@ -20,11 +21,21 @@ const Submissions: NextPage = () => {
     Number(user_id),
   )
 
+  useEffect(() => {
+    if (submissionListResponse?.status === 'login-required') {
+      router.push('/login')
+    }
+  }, [submissionListResponse?.status])
+
   if (isError) {
     return <Error statusCode={isError.status} title={isError.message} />
   }
 
-  if (isLoading || !submissionListResponse) {
+  if (
+    isLoading ||
+    !submissionListResponse ||
+    submissionListResponse.status === 'login-required'
+  ) {
     return <Loading />
   }
 
