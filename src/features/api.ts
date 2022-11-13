@@ -45,6 +45,7 @@ export const useMe = () => {
   const { data, error } = useSWR<UserResponse, NetworkError>(
     `/api/users/me`,
     Fetcher,
+    { revalidateOnFocus: false },
   )
 
   return {
