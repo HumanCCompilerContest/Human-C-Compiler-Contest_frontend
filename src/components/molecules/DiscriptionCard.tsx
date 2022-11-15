@@ -13,6 +13,7 @@ const DiscriptionCard: FC<DiscriptionCardProps> = ({ title, children, sx }) => {
     <Box
       sx={{
         display: 'flex',
+        alignItems: 'center',
         flexDirection: { xs: 'column', md: 'row' },
         ...sx,
       }}
@@ -46,9 +47,9 @@ const DiscriptionCard: FC<DiscriptionCardProps> = ({ title, children, sx }) => {
       </Card>
 
       <Typography
-        variant='h6'
         component='div'
         sx={{
+          fontSize: '1.25rem',
           p: { xs: '3rem 2rem', md: '0 5rem' },
           fontWeight: '600',
         }}
