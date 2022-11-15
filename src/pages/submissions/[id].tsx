@@ -2,7 +2,7 @@ import { Typography, Box, Alert, AlertTitle } from '@mui/material'
 import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import Code from '@/components/atoms/Code'
 import Loading from '@/components/atoms/Loading'
@@ -13,14 +13,21 @@ import { useSubmission } from '@/features/api'
 const Submission = () => {
   const router = useRouter()
   const { id } = router.query
+  const [refreshInterval, setRefreshInterval] = useState(1000)
 
-  const { submissionResponse, isLoading, isError } = useSubmission(Number(id))
+  const { submissionResponse, isLoading, isError } = useSubmission(Number(id), {
+    refreshInterval,
+  })
 
   useEffect(() => {
     if (submissionResponse?.status === 'login-required') {
       router.push('/login')
     }
-  }, [submissionResponse?.status])
+
+    setRefreshInterval(
+      submissionResponse?.submission.result === 'Pending' ? 1000 : 0,
+    )
+  }, [submissionResponse?.status, submissionResponse?.submission.result])
 
   if (isError) {
     return <Error statusCode={isError.status} title={isError.message} />

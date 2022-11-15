@@ -95,10 +95,11 @@ export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
   }
 }
 
-export const useSubmission = (id: number) => {
+export const useSubmission = (id: number, options?: any) => {
   const { data, error } = useSWR<SubmissionJoinedUserResponse, NetworkError>(
     `/api/submissions/${id}`,
     Fetcher,
+    options,
   )
 
   return {
