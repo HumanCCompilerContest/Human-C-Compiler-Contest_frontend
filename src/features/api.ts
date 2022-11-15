@@ -81,12 +81,12 @@ export const useProblem = (id: number) => {
   }
 }
 
-export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
+export const useSubmissionList = (userID?: number, options?: any) => {
   const url = userID ? `/api/submissions?user_id=${userID}` : `/api/submissions`
   const { data, error } = useSWR<
     SubmissionJoinedUserListResponse,
     NetworkError
-  >(!isSkip && url, Fetcher)
+  >(url, Fetcher, options)
 
   return {
     submissionListResponse: data,

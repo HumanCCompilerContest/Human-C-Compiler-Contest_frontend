@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import Loading from '@/components/atoms/Loading'
 import { useAuthContext } from '@/components/contexts/AuthProvider'
@@ -16,15 +16,26 @@ const Submissions: NextPage = () => {
   const router = useRouter()
   const { user_id } = router.query
   const { user } = useAuthContext()
+  const [refreshInterval, setRefreshInterval] = useState(5000)
   const { submissionListResponse, isLoading, isError } = useSubmissionList(
     Number(user_id),
+    {
+      refreshInterval,
+    },
+  )
+
+  const hasPending = submissionListResponse?.items.reduce(
+    (p, c) => c.result === 'Pending' || p,
+    false,
   )
 
   useEffect(() => {
     if (submissionListResponse?.status === 'login-required') {
       router.push('/login')
     }
-  }, [submissionListResponse?.status])
+
+    setRefreshInterval(hasPending ? 5000 : 0)
+  }, [submissionListResponse?.status, hasPending])
 
   if (isError) {
     return <Error statusCode={isError.status} title={isError.message} />

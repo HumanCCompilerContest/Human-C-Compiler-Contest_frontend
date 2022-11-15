@@ -13,7 +13,7 @@ import { useSubmission } from '@/features/api'
 const Submission = () => {
   const router = useRouter()
   const { id } = router.query
-  const [refreshInterval, setRefreshInterval] = useState(1000)
+  const [refreshInterval, setRefreshInterval] = useState(5000)
 
   const { submissionResponse, isLoading, isError } = useSubmission(Number(id), {
     refreshInterval,
@@ -25,7 +25,7 @@ const Submission = () => {
     }
 
     setRefreshInterval(
-      submissionResponse?.submission.result === 'Pending' ? 1000 : 0,
+      submissionResponse?.submission.result === 'Pending' ? 5000 : 0,
     )
   }, [submissionResponse?.status, submissionResponse?.submission.result])
 
