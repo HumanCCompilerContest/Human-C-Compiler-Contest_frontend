@@ -24,7 +24,7 @@ const Submissions: NextPage = () => {
     },
   )
 
-  const hasPending = submissionListResponse?.items.reduce(
+  const hasPending = submissionListResponse?.items?.reduce(
     (p, c) => c.result === 'Pending' || p,
     false,
   )
@@ -32,6 +32,7 @@ const Submissions: NextPage = () => {
   useEffect(() => {
     if (submissionListResponse?.status === 'login-required') {
       router.push('/login')
+      return
     }
 
     setRefreshInterval(hasPending ? 5000 : 0)

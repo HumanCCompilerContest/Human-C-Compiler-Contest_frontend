@@ -59,7 +59,7 @@ const Regulation: FC<RegulationProps> = ({ sx }) => {
               </li>
               <li>
                 第1回大会では以下の仕様を基準に競技を行う．
-                <ol>
+                <ol type='i'>
                   <li>C言語の仕様はC99に則る ．</li>
                   <li>
                     ABIの仕様はSystem V Application Binary
@@ -71,7 +71,7 @@ const Regulation: FC<RegulationProps> = ({ sx }) => {
               </li>
               <li>
                 第1回大会では評価基準を以下のように定める．
-                <ol>
+                <ol type='i'>
                   <li>各問題に点数を与えその得点で評価を行う．</li>
                   <li>得点が同じ場合は回答を提出した順番で順位づけを行う．</li>
                   <li>誤答した場合は時間でペナルティを課す．</li>

@@ -22,6 +22,7 @@ const Submission = () => {
   useEffect(() => {
     if (submissionResponse?.status === 'login-required') {
       router.push('/login')
+      return
     }
 
     setRefreshInterval(
