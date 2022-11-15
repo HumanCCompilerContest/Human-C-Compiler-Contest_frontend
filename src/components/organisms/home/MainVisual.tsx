@@ -36,38 +36,29 @@ const MainVisual: FC<MainVisualProps> = ({ sx }) => {
 
         <Box sx={{ p: '1rem' }}>
           <Typography
-            variant='h4'
             component='div'
             align='center'
             sx={{
               width: { xs: undefined, md: '600px' },
+              fontSize: '2.2rem',
               fontWeight: '800',
               paddingBottom: '3rem',
+              color: '#ffe0b2',
             }}
           >
-            あなたも
-            <Typography
-              component='span'
-              sx={{
-                display: { xs: 'block', md: 'inline' },
-                fontSize: '2.5rem',
-                p: '0 0.5rem',
-                fontWeight: '900',
-                color: '#ffe0b2',
-              }}
-            >
-              Cコンパイラ
-            </Typography>
-            になろう
+            HCCC / 人間 Cコンパイラコンテスト
           </Typography>
+
           <Typography
-            variant='h6'
+            variant='h5'
             component='div'
+            align='center'
             sx={{
+              fontWeight: '700',
               maxWidth: '600px',
             }}
           >
-            競技者自身がCコンパイラとなってソースコードを読み込みアセンブリを吐き出す競技
+            Day: 2022 11.19 (Sat.) 13:10 〜
           </Typography>
         </Box>
       </Box>

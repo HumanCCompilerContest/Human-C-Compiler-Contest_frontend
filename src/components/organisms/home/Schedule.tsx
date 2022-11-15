@@ -28,7 +28,7 @@ const Schedule: FC<ScheduleProps> = ({ sx }) => {
           Contests)は SECCON Contest of Contest
           に応募された競技やコンテストの企画案・設計案を，実際に実施するイベントです．
         </Typography>
-        <Typography align='center'>
+        <Typography align='center' variant='h6'>
           <Link
             href='https://www.seccon.jp/2022/seccon_contest/secconcon.html'
             target='_blank'

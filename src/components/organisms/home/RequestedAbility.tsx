@@ -13,14 +13,14 @@ const RequestedAbility: FC<RequestedAbilityProps> = ({ sx }) => {
       <ul style={{ marginTop: 0 }}>
         <li>
           <span style={{ fontWeight: '800', color: '#f44336' }}>
-            C言語の仕様に関する深い知識
+            C言語(C99)の仕様に関する深い知識
           </span>
         </li>
         <li>アセンブリを書く技術</li>
-        <li>ABIの知識</li>
+        <li>ABI(AMD64)の知識</li>
         <li>x86_64アーキテクチャの知識</li>
         <li>コンパイラまわりのあれこれ</li>
-        <li>慣れ（慣れ）</li>
+        <li>気合い(気合い)</li>
       </ul>
     </DiscriptionCard>
   )
