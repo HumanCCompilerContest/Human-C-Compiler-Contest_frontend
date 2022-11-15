@@ -61,7 +61,10 @@ const Regulation: FC<RegulationProps> = ({ sx }) => {
                 第1回大会では以下の仕様を基準に競技を行う．
                 <ol>
                   <li>C言語の仕様はC99に則る ．</li>
-                  <li>ABIの仕様はSystem Vの仕様に従う ．</li>
+                  <li>
+                    ABIの仕様はSystem V Application Binary
+                    Interfaceの仕様に従う．
+                  </li>
                   <li>対象アーキテクチャはx86_64とする．</li>
                   <li>記法はAT&amp;Tとintel記法の双方を許可する．</li>
                 </ol>
