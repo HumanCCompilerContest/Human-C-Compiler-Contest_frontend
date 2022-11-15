@@ -13,7 +13,7 @@ const DiscriptionCard: FC<DiscriptionCardProps> = ({ title, children, sx }) => {
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'center',
+        alignItems: { md: 'center' },
         flexDirection: { xs: 'column', md: 'row' },
         ...sx,
       }}
