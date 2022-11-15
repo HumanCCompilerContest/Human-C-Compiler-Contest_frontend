@@ -50,7 +50,7 @@ const QandA: FC<QandAProps> = ({ sx }) => {
           競技で使用できるCのバージョン, アーキテクチャを教えてください
         </StyledAccordionSummary>
         <StyledAccordionDetails>
-          C99, X86_64を採用しています。ABIの仕様はSystem Vの仕様に従います。
+          C99, X86_64を採用しています。ABIの仕様はAMD64の仕様に従います。
         </StyledAccordionDetails>
       </Accordion>
 
@@ -61,7 +61,6 @@ const QandA: FC<QandAProps> = ({ sx }) => {
         </StyledAccordionSummary>
         <StyledAccordionDetails>
           大歓迎です。裏番組として入門編を流す予定ですので自分のレベル感に合わせて解説を聞いたり競技に戻ったりして頂いて構いません．
-          開催一週間前までにはチュートリアルも用意する予定なので、そちらで予習も可能です。
           低レイヤーに踏み出す第一歩としてご活用ください。
         </StyledAccordionDetails>
       </Accordion>
@@ -91,6 +90,25 @@ const QandA: FC<QandAProps> = ({ sx }) => {
           </a>
           からご確認ください。
         </StyledAccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <HelpIcon color='secondary' sx={{ mr: '1rem' }} />
+          コンパイラを自作して使用しても良いですか？
+        </StyledAccordionSummary>
+        <StyledAccordionDetails>
+          今回は任意のコンパイラの使用を禁止しています。
+          ですが、将来的に自作コンパイラを使った別の方向性のコンテストも考えています。
+        </StyledAccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <HelpIcon color='secondary' sx={{ mr: '1rem' }} />
+          悪意のあるコードを提出しても良いですか？
+        </StyledAccordionSummary>
+        <StyledAccordionDetails>勘弁してください</StyledAccordionDetails>
       </Accordion>
     </Box>
   )

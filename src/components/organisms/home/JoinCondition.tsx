@@ -23,11 +23,7 @@ const JoinCondition: FC<JoinConditionProps> = ({ sx }) => {
             低レイヤに興味がある方からCコンパイラ自作勢までレベルを問わず募集します．
           </p>
           <p>
-            裏番組として入門編を流す予定ですので自分のレベル感に合わせて解説を聞いたり競技に戻ったりして頂いて構いません．
-            皆さんの参加をお待ちしています．
-          </p>
-          <p>
-            参加ご希望の方は
+            当日はSECCONCONイベント内のZoomで進行を行うので、参加される方は
             <a
               href='https://forms.gle/4UiJnoR6gRoCzkpT8'
               target='_blank'
@@ -36,6 +32,10 @@ const JoinCondition: FC<JoinConditionProps> = ({ sx }) => {
               応募フォーム
             </a>
             の入力をお願いします。
+          </p>
+          <p>
+            裏番組として入門編を流す予定ですので自分のレベル感に合わせて解説を聞いたり競技に戻ったりして頂いて構いません．
+            皆さんの参加をお待ちしています．
           </p>
         </Typography>
       </Box>
