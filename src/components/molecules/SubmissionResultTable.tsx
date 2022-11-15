@@ -5,13 +5,13 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-  Chip,
 } from '@mui/material'
 
 import { tableCellClasses } from '@mui/material/TableCell'
 import { styled } from '@mui/material/styles'
 import { FC } from 'react'
 
+import ResultChip from '../atoms/ResultChip'
 import { SubmissionJoined } from '@/features/types'
 
 type SubmissionResultTableProps = {
@@ -38,13 +38,7 @@ const SubmissionResultTable: FC<SubmissionResultTableProps> = ({
               Result
             </StyledTableCell>
             <StyledTableCell align='center'>
-              <Chip
-                label={submission.result}
-                sx={{
-                  bgcolor: submission.result === 'AC' ? '#5cb85c' : '#ffc107',
-                  color: 'white',
-                }}
-              />
+              <ResultChip result={submission.result} />
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow>
