@@ -82,7 +82,10 @@ export const useProblem = (id: number) => {
 }
 
 export const useSubmissionList = (userID?: number, options?: any) => {
-  const url = userID ? `/api/submissions?user_id=${userID}` : `/api/submissions`
+  const url =
+    userID === undefined || isNaN(userID)
+      ? `/api/submissions`
+      : `/api/submissions?user_id=${userID}`
   const { data, error } = useSWR<
     SubmissionJoinedUserListResponse,
     NetworkError
