@@ -16,6 +16,7 @@ export default function handler(
         time: '2022/01/01',
         asm: 'stop',
         result: 'AC',
+        isCE: false,
         user: {
           id: 1,
           name: 'hoge',
