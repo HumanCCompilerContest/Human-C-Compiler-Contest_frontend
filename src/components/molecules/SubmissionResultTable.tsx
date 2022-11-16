@@ -46,7 +46,7 @@ const SubmissionResultTable: FC<SubmissionResultTableProps> = ({
               Score
             </StyledTableCell>
             <StyledTableCell align='center'>
-              {submission.problem.score}
+              {submission.result === 'AC' ? submission.problem.score : 0}
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow>

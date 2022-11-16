@@ -1,4 +1,4 @@
-import { Box, CircularProgress, colors } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import { FC } from 'react'
 
 type ResultChipProps = {
