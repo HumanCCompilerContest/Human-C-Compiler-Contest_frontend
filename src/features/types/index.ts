@@ -71,4 +71,5 @@ export type SubmissionJoinedUserListResponse = ResponseBase & {
 
 export type SubmissionPost = {
   asm: string
+  isCE: boolean
 }

@@ -46,6 +46,23 @@ const Problem = () => {
     setIsPostLoading(true)
     const res = await requestSubmission(Number(id), {
       asm: data.asm,
+      isCE: false,
+    })
+    setIsPostLoading(false)
+
+    if (res.status === 'ng') {
+      setErrorMessage(res.errorMessage)
+      return
+    }
+
+    router.push(`/submissions/${res.submission.id}/`)
+  }
+
+  const handleCEClick = async () => {
+    setIsPostLoading(true)
+    const res = await requestSubmission(Number(id), {
+      asm: '',
+      isCE: true,
     })
     setIsPostLoading(false)
 
@@ -148,6 +165,22 @@ const Problem = () => {
                 onClick={handleSubmit(onSubmit)}
               >
                 Submit
+              </Button>
+              <Button
+                variant='contained'
+                size='large'
+                sx={{
+                  width: '200px',
+                  backgroundColor: '#ff3939',
+                  ml: '1.5rem',
+                  '&:hover': {
+                    backgroundColor: '#ff3939',
+                    opacity: 0.8,
+                  },
+                }}
+                onClick={handleCEClick}
+              >
+                Compile Error
               </Button>
             </Box>
           </Box>
