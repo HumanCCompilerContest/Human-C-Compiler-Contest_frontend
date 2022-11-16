@@ -1,11 +1,24 @@
-import { Box, CircularProgress } from '@mui/material'
+import { Box, CircularProgress, colors } from '@mui/material'
 import { FC } from 'react'
 
 type ResultChipProps = {
   result: string
 }
 
+const colorStyles = {
+  AC: { bgcolor: '#5cb85c', color: 'white' },
+  Pending: { bgcolor: '#eeeeee', color: 'black' },
+  WC: { bgcolor: '#ff3939', color: 'white' },
+}
+
+const getColorStyle = (result: string) => {
+  if (result === 'AC' || result === 'Pending' || result === 'WC')
+    return colorStyles[result]
+  else return { bgcolor: '#ffc107', color: 'white' }
+}
+
 const ResultChip: FC<ResultChipProps> = ({ result }) => {
+  const colorStyle = getColorStyle(result)
   return (
     <Box
       sx={{
@@ -14,13 +27,7 @@ const ResultChip: FC<ResultChipProps> = ({ result }) => {
         alignItems: 'center',
         p: '0.3rem 1rem',
         borderRadius: '5rem',
-        bgcolor:
-          result === 'AC'
-            ? '#5cb85c'
-            : result === 'Pending'
-            ? '#eeeeee'
-            : '#ffc107',
-        color: result === 'Pending' ? 'black' : 'white',
+        ...colorStyle,
       }}
     >
       <span> {result}</span>
