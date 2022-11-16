@@ -68,7 +68,24 @@ const Submission = () => {
             >
               Source Code
             </Typography>
-            <Code language='assembly'>{submissionResponse.submission.asm}</Code>
+            {submissionResponse.submission.isCE ? (
+              <Typography
+                sx={{
+                  display: 'inline-block',
+                  backgroundColor: '#ef9a9a',
+                  color: 'white',
+                  p: '0.5rem 1rem',
+                  borderRadius: '10rem',
+                  fontWeight: '800',
+                }}
+              >
+                Compile Error Submitted
+              </Typography>
+            ) : (
+              <Code language='assembly'>
+                {submissionResponse.submission.asm}
+              </Code>
+            )}
           </Box>
           <SubmissionResultTable submission={submissionResponse.submission} />
         </Box>
