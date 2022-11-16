@@ -106,6 +106,31 @@ const QandA: FC<QandAProps> = ({ sx }) => {
       <Accordion>
         <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
           <HelpIcon color='secondary' sx={{ mr: '1rem' }} />
+          コンテスト中にWebページをを閲覧しても良いですか？
+        </StyledAccordionSummary>
+        <StyledAccordionDetails>
+          <a
+            href='https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf'
+            target='_blank'
+            rel='noreferrer'
+          >
+            C99規格書
+          </a>
+          ,{' '}
+          <a
+            href='https://uclibc.org/docs/psABI-x86_64.pdf'
+            target='_blank'
+            rel='noreferrer'
+          >
+            System V Application Binary
+          </a>
+          を除き禁止しています.
+        </StyledAccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <HelpIcon color='secondary' sx={{ mr: '1rem' }} />
           悪意のあるコードを提出しても良いですか？
         </StyledAccordionSummary>
         <StyledAccordionDetails>勘弁してください</StyledAccordionDetails>
