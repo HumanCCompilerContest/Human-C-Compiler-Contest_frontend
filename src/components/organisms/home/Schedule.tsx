@@ -24,7 +24,7 @@ const Schedule: FC<ScheduleProps> = ({ sx }) => {
           2022年11月19日(土) 13:00 〜
         </Typography>
         <Typography variant='h6' sx={{ m: '2rem 0 1rem' }}>
-          HCCCはSECCONCONの1枠として開催されます。 SECCONCON(SECCON Contests)は
+          HCCCはSECCONCONの1枠として開催されます. SECCONCON(SECCON Contests)は
           SECCON Contest of Contest
           に応募された競技やコンテストの企画案・設計案を，実際に実施するイベントです．
         </Typography>

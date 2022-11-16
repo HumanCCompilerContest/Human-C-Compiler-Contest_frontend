@@ -50,18 +50,18 @@ const QandA: FC<QandAProps> = ({ sx }) => {
           競技で使用できるCのバージョン, アーキテクチャを教えてください
         </StyledAccordionSummary>
         <StyledAccordionDetails>
-          C99, X86_64を採用しています。ABIの仕様はAMD64の仕様に従います。
+          C99, X86_64を採用しています.ABIの仕様はAMD64の仕様に従います.
         </StyledAccordionDetails>
       </Accordion>
 
       <Accordion>
         <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
           <HelpIcon color='secondary' sx={{ mr: '1rem' }} />
-          初心者でコンパイラの知識がありませんが、参加できますか？
+          初心者でコンパイラの知識がありませんが,参加できますか？
         </StyledAccordionSummary>
         <StyledAccordionDetails>
-          大歓迎です。裏番組として入門編を流す予定ですので自分のレベル感に合わせて解説を聞いたり競技に戻ったりして頂いて構いません．
-          低レイヤーに踏み出す第一歩としてご活用ください。
+          大歓迎です.裏番組として入門編を流す予定ですので自分のレベル感に合わせて解説を聞いたり競技に戻ったりして頂いて構いません．
+          低レイヤーに踏み出す第一歩としてご活用ください.
         </StyledAccordionDetails>
       </Accordion>
 
@@ -71,7 +71,7 @@ const QandA: FC<QandAProps> = ({ sx }) => {
           AT&T記法とIntel記法のどちらも使えますか?
         </StyledAccordionSummary>
         <StyledAccordionDetails>
-          使えます。お好きな方で記述してください。
+          使えます.お好きな方で記述してください.
         </StyledAccordionDetails>
       </Accordion>
 
@@ -88,7 +88,7 @@ const QandA: FC<QandAProps> = ({ sx }) => {
           >
             こちらのリンク
           </a>
-          からご確認ください。
+          からご確認ください.
         </StyledAccordionDetails>
       </Accordion>
 
@@ -98,8 +98,8 @@ const QandA: FC<QandAProps> = ({ sx }) => {
           コンパイラを自作して使用しても良いですか？
         </StyledAccordionSummary>
         <StyledAccordionDetails>
-          今回は任意のコンパイラの使用を禁止しています。
-          ですが、将来的に自作コンパイラを使った別の方向性のコンテストも考えています。
+          今回は任意のコンパイラの使用を禁止しています.
+          ですが,将来的に自作コンパイラを使った別の方向性のコンテストも考えています.
         </StyledAccordionDetails>
       </Accordion>
 
