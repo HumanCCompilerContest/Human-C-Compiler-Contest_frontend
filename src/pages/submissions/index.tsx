@@ -16,7 +16,7 @@ const Submissions: NextPage = () => {
   const router = useRouter()
   const { user_id } = router.query
   const { user } = useAuthContext()
-  const [refreshInterval, setRefreshInterval] = useState(5000)
+  const [refreshInterval, setRefreshInterval] = useState(2000)
   const { submissionListResponse, isLoading, isError } = useSubmissionList(
     Number(user_id),
     {
