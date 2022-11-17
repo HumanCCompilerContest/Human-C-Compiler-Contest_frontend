@@ -9,7 +9,7 @@ import {
 import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, KeyboardEventHandler } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Code from '@/components/atoms/Code'
@@ -92,6 +92,32 @@ const Problem = () => {
     }
 
     router.push(`/submissions/${res.submission.id}/`)
+  }
+
+  const handleKeyDown: KeyboardEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (e) => {
+    const target = e.target as HTMLInputElement | HTMLTextAreaElement
+    const value = target.value
+
+    if (e.key === 'Tab') {
+      e.preventDefault()
+
+      const cursorPosition = target.selectionStart
+      const cursorEndPosition = target.selectionEnd
+      const tab = '\t'
+      if (cursorPosition === null || cursorEndPosition === null) {
+        return
+      }
+
+      target.value =
+        value.substring(0, cursorPosition) +
+        tab +
+        value.substring(cursorEndPosition)
+
+      target.selectionStart = cursorPosition + 1
+      target.selectionEnd = cursorPosition + 1
+    }
   }
 
   if (isProblemError) {
@@ -221,6 +247,9 @@ const Problem = () => {
                   error={'asm' in errors}
                   helperText={errors.asm ? 'この項目は必須です' : ''}
                   {...register('asm', { required: true })}
+                  InputProps={{
+                    onKeyDown: handleKeyDown,
+                  }}
                 />
                 <Box
                   sx={{ display: 'flex', justifyContent: 'center', m: '4rem' }}
