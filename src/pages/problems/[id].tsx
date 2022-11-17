@@ -15,8 +15,13 @@ import { useForm } from 'react-hook-form'
 import Code from '@/components/atoms/Code'
 import Loading from '@/components/atoms/Loading'
 import TitleLabel from '@/components/atoms/TitleLabel'
+import { useAuthContext } from '@/components/contexts/AuthProvider'
 import BasicLayout from '@/components/templates/BasicLayout'
-import { useProblem, requestSubmission } from '@/features/api'
+import {
+  useProblem,
+  requestSubmission,
+  useSubmissionList,
+} from '@/features/api'
 
 type IFormInput = {
   asm: string
@@ -25,8 +30,18 @@ type IFormInput = {
 const Problem = () => {
   const router = useRouter()
   const { id } = router.query
+  const { user } = useAuthContext()
 
-  const { problemResponse, isLoading, isError } = useProblem(Number(id))
+  const {
+    problemResponse,
+    isLoading: isProblemLoading,
+    isError: isProblemError,
+  } = useProblem(Number(id))
+  const {
+    submissionListResponse,
+    isLoading: isSubmissionLoading,
+    isError: isSubmissionError,
+  } = useSubmissionList(user?.id)
 
   const [errorMessage, setErrorMessage] = useState('')
   const [isPostLoading, setIsPostLoading] = useState(false)
@@ -36,9 +51,14 @@ const Problem = () => {
     formState: { errors },
   } = useForm<IFormInput>()
 
+  const hasWCSubmission = submissionListResponse?.items
+    ?.filter((v) => v.problem.id === Number(id))
+    .reduce((pv, cv) => pv || cv.result === 'WC', false)
+
   useEffect(() => {
     if (problemResponse?.status === 'login-required') {
       router.push('/login')
+      return
     }
   }, [problemResponse?.status])
 
@@ -74,14 +94,31 @@ const Problem = () => {
     router.push(`/submissions/${res.submission.id}/`)
   }
 
-  if (isError) {
-    return <Error statusCode={isError.status} title={isError.message} />
+  if (isProblemError) {
+    return (
+      <Error
+        statusCode={isProblemError.status}
+        title={isProblemError.message}
+      />
+    )
+  }
+
+  if (isSubmissionError) {
+    return (
+      <Error
+        statusCode={isSubmissionError.status}
+        title={isSubmissionError.message}
+      />
+    )
   }
 
   if (
-    isLoading ||
+    isProblemLoading ||
     !problemResponse ||
-    problemResponse.status === 'login-required'
+    problemResponse.status === 'login-required' ||
+    isSubmissionLoading ||
+    !submissionListResponse ||
+    submissionListResponse.status === 'login-required'
   ) {
     return <Loading />
   }
@@ -141,48 +178,80 @@ const Problem = () => {
           <Box sx={{ m: '10rem 0' }}>
             <TitleLabel label='Submission' sx={{ mb: '2rem' }} />
 
-            <Box sx={{ m: '2rem 0' }}>
-              {errorMessage && <Alert severity='error'>{errorMessage}</Alert>}
-            </Box>
-
-            <TextField
-              color='primary'
-              label='submission'
-              variant='filled'
-              rows={10}
-              multiline
-              fullWidth
-              placeholder='input assembly'
-              error={'asm' in errors}
-              helperText={errors.asm ? 'この項目は必須です' : ''}
-              {...register('asm', { required: true })}
-            />
-            <Box sx={{ display: 'flex', justifyContent: 'center', m: '4rem' }}>
-              <Button
-                variant='contained'
-                size='large'
-                sx={{ width: '200px' }}
-                onClick={handleSubmit(onSubmit)}
-              >
-                Submit
-              </Button>
-              <Button
-                variant='contained'
-                size='large'
+            {hasWCSubmission ? (
+              <Typography
+                variant='h5'
                 sx={{
-                  width: '200px',
-                  backgroundColor: '#ff3939',
-                  ml: '1.5rem',
-                  '&:hover': {
-                    backgroundColor: '#ff3939',
-                    opacity: 0.8,
-                  },
+                  mt: '5rem',
+                  bgcolor: '#ef5350',
+                  color: 'white',
+                  lineHeight: '1.5',
+                  fontWeight: '600',
+                  p: '2rem',
                 }}
-                onClick={handleCEClick}
               >
-                Compile Error
-              </Button>
-            </Box>
+                正しいコードに対し,コンパイルエラーが提出されました. <br />
+                この問題を再び回答することはできません.
+                <br />
+                詳細は
+                <a
+                  href='https://github.com/Alignof/Human_C_Compiler_Contest'
+                  target='_black'
+                >
+                  レギュレーション
+                </a>
+                をご確認ください.
+              </Typography>
+            ) : (
+              <Box>
+                <Box sx={{ m: '2rem 0' }}>
+                  {errorMessage && (
+                    <Alert severity='error'>{errorMessage}</Alert>
+                  )}
+                </Box>
+
+                <TextField
+                  color='primary'
+                  label='submission'
+                  variant='filled'
+                  rows={10}
+                  multiline
+                  fullWidth
+                  placeholder='input assembly'
+                  error={'asm' in errors}
+                  helperText={errors.asm ? 'この項目は必須です' : ''}
+                  {...register('asm', { required: true })}
+                />
+                <Box
+                  sx={{ display: 'flex', justifyContent: 'center', m: '4rem' }}
+                >
+                  <Button
+                    variant='contained'
+                    size='large'
+                    sx={{ width: '200px' }}
+                    onClick={handleSubmit(onSubmit)}
+                  >
+                    Submit
+                  </Button>
+                  <Button
+                    variant='contained'
+                    size='large'
+                    sx={{
+                      width: '200px',
+                      backgroundColor: '#ff3939',
+                      ml: '1.5rem',
+                      '&:hover': {
+                        backgroundColor: '#ff3939',
+                        opacity: 0.8,
+                      },
+                    }}
+                    onClick={handleCEClick}
+                  >
+                    Compile Error
+                  </Button>
+                </Box>
+              </Box>
+            )}
           </Box>
         </Box>
       )}
