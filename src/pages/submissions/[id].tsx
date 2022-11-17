@@ -28,7 +28,7 @@ const Submission = () => {
     setRefreshInterval(
       submissionResponse?.submission.result === 'Pending' ? 5000 : 0,
     )
-  }, [submissionResponse?.status, submissionResponse?.submission.result])
+  }, [submissionResponse?.status, submissionResponse?.submission?.result])
 
   if (isError) {
     return <Error statusCode={isError.status} title={isError.message} />

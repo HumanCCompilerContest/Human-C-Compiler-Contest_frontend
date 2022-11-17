@@ -100,7 +100,7 @@ export const useSubmissionList = (userID?: number, options?: any) => {
 
 export const useSubmission = (id: number, options?: any) => {
   const { data, error } = useSWR<SubmissionJoinedUserResponse, NetworkError>(
-    `/api/submissions/${id}`,
+    !isNaN(id) && `/api/submissions/${id}`,
     Fetcher,
     options,
   )
