@@ -47,7 +47,7 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
     }
 
     // データの再検証をしないとログイン済の状態となる
-    mutate('/api/users/me')
+    await mutate('/api/users/me')
     router.push('/login')
   }
 

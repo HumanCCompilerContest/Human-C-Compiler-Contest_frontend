@@ -36,7 +36,7 @@ const Login: NextPage = () => {
       return
     }
     // データの再検証をしないと表示がログインしていない状態となる
-    mutate('/api/users/me')
+    await mutate('/api/users/me')
     router.push('/')
   }
 
