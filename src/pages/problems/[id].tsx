@@ -257,7 +257,15 @@ const Problem = () => {
                   <Button
                     variant='contained'
                     size='large'
-                    sx={{ width: '200px' }}
+                    sx={{
+                      width: '300px',
+                      py: '1.2rem',
+                      fontSize: '1.1rem',
+                      fontWeight: '700',
+                      '&:hover': {
+                        opacity: 0.8,
+                      },
+                    }}
                     onClick={handleSubmit(onSubmit)}
                   >
                     Submit
@@ -266,9 +274,12 @@ const Problem = () => {
                     variant='contained'
                     size='large'
                     sx={{
-                      width: '200px',
+                      width: '300px',
                       backgroundColor: '#ff3939',
                       ml: '1.5rem',
+                      py: '1.2rem',
+                      fontSize: '1.1rem',
+                      fontWeight: '700',
                       '&:hover': {
                         backgroundColor: '#ff3939',
                         opacity: 0.8,
