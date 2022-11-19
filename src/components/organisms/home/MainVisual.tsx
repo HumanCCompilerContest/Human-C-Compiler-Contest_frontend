@@ -15,7 +15,7 @@ const MainVisual: FC<MainVisualProps> = ({ sx }) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundImage: "url('/bg.jpg')",
+        backgroundImage: "url('/HomeBack.jpg')",
         ...sx,
       }}
     >
