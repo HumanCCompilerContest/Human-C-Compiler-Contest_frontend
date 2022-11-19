@@ -81,7 +81,7 @@ const Problem = () => {
   const handleCEClick = async () => {
     setIsPostLoading(true)
     const res = await requestSubmission(Number(id), {
-      asm: '',
+      asm: 'empty',
       isCE: true,
     })
     setIsPostLoading(false)
