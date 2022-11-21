@@ -5,6 +5,7 @@ import Head from 'next/head'
 
 import RegisterForm from '@/components/organisms/RegisterForm'
 import BasicLayout from '@/components/templates/BasicLayout'
+import TextWithIcon from '@/components/atoms/TextWithIcon'
 
 const Register: NextPage = () => {
   return (
@@ -22,20 +23,14 @@ const Register: NextPage = () => {
             p: '0 2rem',
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <TextWithIcon>
             <HowToRegIcon
               sx={{ width: '40px', height: '40px', marginRight: '1rem' }}
             />
             <Typography variant='h4' component='div' sx={{ fontWeight: 600 }}>
               Register
             </Typography>
-          </Box>
+          </TextWithIcon>
 
           <RegisterForm sx={{ m: '2rem 0' }} />
         </Box>
