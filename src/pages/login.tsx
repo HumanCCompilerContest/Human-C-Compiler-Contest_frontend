@@ -5,6 +5,7 @@ import Head from 'next/head'
 
 import LoginForm from '@/components/organisms/LoginForm'
 import BasicLayout from '@/components/templates/BasicLayout'
+import TextWithIcon from '@/components/atoms/TextWithIcon'
 
 const Login: NextPage = () => {
   return (
@@ -22,18 +23,12 @@ const Login: NextPage = () => {
             p: '0 2rem',
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <TextWithIcon>
             <LoginIcon sx={{ width: '40px', height: '40px', mr: '1rem' }} />
             <Typography variant='h4' sx={{ fontWeight: 600 }}>
               Login
             </Typography>
-          </Box>
+          </TextWithIcon>
 
           <LoginForm sx={{ m: '2rem 0' }} />
         </Box>
