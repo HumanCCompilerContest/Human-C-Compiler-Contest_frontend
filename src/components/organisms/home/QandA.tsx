@@ -25,7 +25,7 @@ const QandA: FC<QandAProps> = ({ sx }) => {
           justifyContent: 'center',
           alignItems: 'center',
           fontWeight: '600',
-          m: '10rem 0 5rem',
+          mb: '5rem',
           '&::before, &::after': {
             content: '""',
             display: 'block',
