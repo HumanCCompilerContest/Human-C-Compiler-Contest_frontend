@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "yarn lint --fix",
-    "format:check":"prettier --check \"./**/*.{js,jsx,ts,tsx,json}\"",
+    "format:check": "prettier --check \"./**/*.{js,jsx,ts,tsx,json}\"",
     "prettier:format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
     "format": "yarn lint:fix && yarn prettier:format",
     "type:check": "tsc --noemit"
