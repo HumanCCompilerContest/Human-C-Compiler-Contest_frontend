@@ -3,9 +3,9 @@ import { Box, Typography } from '@mui/material'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
+import TextWithIcon from '@/components/atoms/TextWithIcon'
 import RegisterForm from '@/components/organisms/RegisterForm'
 import BasicLayout from '@/components/templates/BasicLayout'
-import TextWithIcon from '@/components/atoms/TextWithIcon'
 
 const Register: NextPage = () => {
   return (
