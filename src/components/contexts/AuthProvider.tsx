@@ -1,3 +1,4 @@
+import Error from 'next/error'
 import { createContext, ReactNode, useContext, FC } from 'react'
 
 import Loading from '@/components/atoms/Loading'
@@ -15,7 +16,11 @@ type AuthProviderProps = {
 const AuthContext = createContext<AuthContextType>({})
 
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const { user, isLoading } = useAuth()
+  const { user, isLoading, isError } = useAuth()
+
+  if (isError) {
+    return <Error statusCode={isError.status} title={isError.message} />
+  }
 
   if (isLoading) {
     return <Loading />

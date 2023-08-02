@@ -9,7 +9,7 @@ const requireAuthPath: string[] = []
 const useAuth = (redirectTo = '/login') => {
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
-  const { userResponse } = useMe()
+  const { userResponse, isError } = useMe()
   const isomorphicEffect = useIsomorphicEffect()
 
   isomorphicEffect(() => {
@@ -26,7 +26,7 @@ const useAuth = (redirectTo = '/login') => {
     setIsLoading(false)
   }, [userResponse, userResponse?.user, redirectTo])
 
-  return { user: userResponse?.user, isLoading }
+  return { user: userResponse?.user, isLoading, isError }
 }
 
 export default useAuth

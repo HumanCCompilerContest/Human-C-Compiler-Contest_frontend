@@ -1,5 +1,6 @@
 import useSWR from 'swr'
 
+import { NetworkError } from '@/features/errors'
 import {
   UserPost,
   UserResponse,
@@ -10,47 +11,42 @@ import {
   SubmissionPost,
   SubmissionJoinedUserResponse,
   SubmissionJoinedUserListResponse,
-  ProblesIsCorrect,
 } from '@/features/types'
 
-const MeFetcher = (path: string): Promise<UserResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
-    res.json(),
-  )
-}
+const UnexpectedErrorStatus = 0
 
-const ProblemListFetcher = (path: string): Promise<ProblemListResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
-    res.json(),
-  )
-}
+const Fetcher = async (path: string, options?: RequestInit): Promise<any> => {
+  let res
+  try {
+    res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
+      ...options,
+      credentials: 'include',
+    })
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      throw new NetworkError(e.message, UnexpectedErrorStatus)
+    }
 
-const ProblemFetcher = (path: string): Promise<ProblemResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
-    res.json(),
-  )
-}
+    throw new NetworkError('unexpected error', UnexpectedErrorStatus)
+  }
 
-const RankingFetcher = (path: string): Promise<RankingResponse> => {
-  return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`).then((res) =>
-    res.json(),
-  )
-}
+  if (!res.ok) {
+    const error = new NetworkError(
+      'An error occurred while fetching the data.',
+      res.status,
+    )
+    throw error
+  }
 
-const SubmissionFetcher = (
-  url: string,
-): Promise<SubmissionJoinedUserResponse> => {
-  return fetch(url).then((res) => res.json())
-}
-
-const SubmissionListFetcher = (
-  url: string,
-): Promise<SubmissionJoinedUserListResponse> => {
-  return fetch(url).then((res) => res.json())
+  return res.json()
 }
 
 export const useMe = () => {
-  const { data, error } = useSWR(`/api/users/me`, MeFetcher)
+  const { data, error } = useSWR<UserResponse, NetworkError>(
+    `/api/users/me`,
+    Fetcher,
+    { revalidateOnFocus: false },
+  )
 
   return {
     userResponse: data,
@@ -60,7 +56,10 @@ export const useMe = () => {
 }
 
 export const useProblemList = () => {
-  const { data, error } = useSWR(`/api/problems/`, ProblemListFetcher)
+  const { data, error } = useSWR<ProblemListResponse, NetworkError>(
+    `/api/problems`,
+    Fetcher,
+  )
 
   return {
     problemListResponse: data,
@@ -70,7 +69,10 @@ export const useProblemList = () => {
 }
 
 export const useProblem = (id: number) => {
-  const { data, error } = useSWR(`/api/problems/${id}`, ProblemFetcher)
+  const { data, error } = useSWR<ProblemResponse, NetworkError>(
+    `/api/problems/${id}`,
+    Fetcher,
+  )
 
   return {
     problemResponse: data,
@@ -79,11 +81,15 @@ export const useProblem = (id: number) => {
   }
 }
 
-export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
-  const url = userID
-    ? `/api/submissions/?user_id=${userID}`
-    : `/api/submissions/`
-  const { data, error } = useSWR(!isSkip && url, SubmissionListFetcher)
+export const useSubmissionList = (userID?: number, options?: any) => {
+  const url =
+    userID === undefined || isNaN(userID)
+      ? `/api/submissions`
+      : `/api/submissions?user_id=${userID}`
+  const { data, error } = useSWR<
+    SubmissionJoinedUserListResponse,
+    NetworkError
+  >(url, Fetcher, options)
 
   return {
     submissionListResponse: data,
@@ -92,8 +98,12 @@ export const useSubmissionList = (userID?: number, isSkip: boolean = false) => {
   }
 }
 
-export const useSubmission = (id: number) => {
-  const { data, error } = useSWR(`/api/submissions/${id}`, SubmissionFetcher)
+export const useSubmission = (id: number, options?: any) => {
+  const { data, error } = useSWR<SubmissionJoinedUserResponse, NetworkError>(
+    !isNaN(id) && `/api/submissions/${id}`,
+    Fetcher,
+    options,
+  )
 
   return {
     submissionResponse: data,
@@ -103,7 +113,10 @@ export const useSubmission = (id: number) => {
 }
 
 export const useRanking = () => {
-  const { data, error } = useSWR(`/api/ranking/`, RankingFetcher)
+  const { data, error } = useSWR<RankingResponse, NetworkError>(
+    `/api/ranking`,
+    Fetcher,
+  )
 
   return {
     rankingResponse: data,
@@ -113,109 +126,49 @@ export const useRanking = () => {
 }
 
 export const requestLogin = async (data: UserPost): Promise<UserResponse> => {
-  const options = {
+  const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   }
-  return fetch('/api/login/', options).then((res) => res.json())
+  return await Fetcher(`/api/login`, options)
 }
 
 export const requestRegister = async (
   data: UserPost,
 ): Promise<UserResponse> => {
-  const options = {
+  const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   }
-  return fetch('/api/register/', options).then((res) => res.json())
+  return await Fetcher(`/api/register`, options)
 }
 
 export const requestLogout = async (): Promise<ResponseBase> => {
-  const options = {
+  const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
   }
-  return fetch('/api/logout/', options).then((res) => res.json())
+  return await Fetcher(`/api/logout`, options)
 }
 
 export const requestSubmission = async (
   id: number,
   data: SubmissionPost,
 ): Promise<SubmissionJoinedUserResponse> => {
-  const options = {
+  const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   }
-  return fetch(`/api/problems/${id}/submissions`, options).then((res) =>
-    res.json(),
-  )
-}
-
-export const useProblemIsCorrectList = (userID?: number) => {
-  const isSkip = userID === undefined
-  const {
-    problemListResponse,
-    isLoading: isProblemLoading,
-    isError: isProblemError,
-  } = useProblemList()
-  const {
-    submissionListResponse,
-    isLoading: isSubmissionLoading,
-    isError: isSubmissionError,
-  } = useSubmissionList(userID, isSkip)
-
-  if (!userID) {
-    // 非ログイン
-    const data = problemListResponse?.items.map((v) => ({
-      ...v,
-      isCorrect: false,
-    }))
-    return {
-      problemIsCorrectList: data,
-      isLoading: isProblemLoading,
-      isError: isProblemError,
-    }
-  }
-
-  // ログイン済み
-  if (isProblemLoading || isSubmissionLoading) {
-    return {
-      problemIsCorrectList: undefined,
-      isLoading: true,
-      isError: isProblemError || isSubmissionError,
-    }
-  }
-
-  if (!problemListResponse || !submissionListResponse) {
-    return {
-      problemIsCorrectList: undefined,
-      isLoading: false,
-      isError: isProblemError || isSubmissionError,
-    }
-  }
-
-  const problemIDsOfAC = submissionListResponse.items
-    .filter((v) => v.result === 'AC')
-    .map((v) => v.id)
-  const data: ProblesIsCorrect[] = problemListResponse.items.map((v) => ({
-    ...v,
-    isCorrect: problemIDsOfAC.includes(v.id),
-  }))
-
-  return {
-    problemIsCorrectList: data,
-    isLoading: false,
-    isError: undefined,
-  }
+  return await Fetcher(`/api/problems/${id}/submissions`, options)
 }

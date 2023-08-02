@@ -34,7 +34,7 @@ const Home: NextPage = () => {
           <Schedule sx={{ m: '12rem 0' }} />
           <JoinCondition sx={{ m: '4rem 0 8rem' }} />
           <Regulation />
-          <QandA />
+          <QandA sx={{ m: '10rem 0 3rem' }} />
         </Container>
       </BasicLayout>
     </>

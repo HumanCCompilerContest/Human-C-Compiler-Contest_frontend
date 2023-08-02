@@ -12,8 +12,9 @@ export default function handler(
   const submissionData: SubmissionJoined = {
     id: 1,
     time: '2022/01/01',
-    asem: 'stop',
+    asm: 'stop',
     result: 'AC',
+    isCE: false,
     user: {
       id: 1,
       name: 'hoge',

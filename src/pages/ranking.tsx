@@ -1,6 +1,7 @@
 import StarIcon from '@mui/icons-material/Star'
 import { Typography } from '@mui/material'
 import type { NextPage } from 'next'
+import Error from 'next/error'
 import Head from 'next/head'
 
 import Loading from '@/components/atoms/Loading'
@@ -10,10 +11,18 @@ import BasicLayout from '@/components/templates/BasicLayout'
 import { useRanking } from '@/features/api'
 
 const Ranking: NextPage = () => {
-  const { rankingResponse, isLoading } = useRanking()
+  const { rankingResponse, isLoading, isError } = useRanking()
+
+  if (isError) {
+    return <Error statusCode={isError.status} title={isError.message} />
+  }
 
   if (isLoading || !rankingResponse) {
     return <Loading />
+  }
+
+  if (rankingResponse.status === 'ng') {
+    return <Error statusCode={0} title={rankingResponse.errorMessage} />
   }
 
   const rankingList = rankingResponse.items

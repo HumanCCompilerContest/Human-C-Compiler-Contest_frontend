@@ -6,7 +6,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Chip,
 } from '@mui/material'
 import MuiLink from '@mui/material/Link'
 import { tableCellClasses } from '@mui/material/TableCell'
@@ -14,6 +13,7 @@ import { styled } from '@mui/material/styles'
 import Link from 'next/link'
 import { FC } from 'react'
 
+import ResultChip from '../atoms/ResultChip'
 import { SubmissionJoined } from '@/features/types'
 
 type SubmissionsTableProps = {
@@ -38,7 +38,7 @@ const SubmissionsTable: FC<SubmissionsTableProps> = ({ submissionList }) => {
           {submissionList.map((row, idx) => (
             <StyledTableRow key={idx}>
               <StyledTableCell component='th' scope='row' align='left'>
-                {row.time}
+                {new Date(row.time).toLocaleString('ja-JP')}
               </StyledTableCell>
               <StyledTableCell align='right'>
                 {row.problem.title}
@@ -48,13 +48,7 @@ const SubmissionsTable: FC<SubmissionsTableProps> = ({ submissionList }) => {
                 {row.result === 'AC' ? row.problem.score : 0}
               </StyledTableCell>
               <StyledTableCell align='right'>
-                <Chip
-                  label={row.result}
-                  sx={{
-                    bgcolor: row.result === 'AC' ? '#5cb85c' : '#ffc107',
-                    color: 'white',
-                  }}
-                />
+                <ResultChip result={row.result} />
               </StyledTableCell>
               <StyledTableCell align='center'>
                 <Link href={`/submissions/${row.id}`} passHref>

@@ -1,5 +1,5 @@
 export type ResponseBase = {
-  status: 'ok' | 'ng'
+  status: 'ok' | 'ng' | 'login-required' | 'forbidden'
   errorMessage: string
 }
 
@@ -36,7 +36,7 @@ export type ProblemListResponse = ResponseBase & {
 }
 
 export type ProblesIsCorrect = Problem & {
-  isCorrect: boolean
+  isCorrect?: boolean
 }
 
 export type Ranking = {
@@ -52,8 +52,9 @@ export type RankingResponse = ResponseBase & {
 export type Submission = {
   id: number
   time: string
-  asem: string
+  asm: string
   result: string
+  isCE: boolean
 }
 
 export type SubmissionJoined = Submission & {
@@ -70,5 +71,6 @@ export type SubmissionJoinedUserListResponse = ResponseBase & {
 }
 
 export type SubmissionPost = {
-  asem: string
+  asm: string
+  isCE: boolean
 }

@@ -1,7 +1,8 @@
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Typography, Box, Alert, AlertTitle } from '@mui/material'
+import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 import Code from '@/components/atoms/Code'
 import Loading from '@/components/atoms/Loading'
@@ -12,11 +13,37 @@ import { useSubmission } from '@/features/api'
 const Submission = () => {
   const router = useRouter()
   const { id } = router.query
+  const [refreshInterval, setRefreshInterval] = useState(2000)
 
-  const { submissionResponse, isLoading } = useSubmission(Number(id))
+  const { submissionResponse, isLoading, isError } = useSubmission(Number(id), {
+    refreshInterval,
+  })
 
-  if (isLoading || !submissionResponse) {
+  useEffect(() => {
+    if (submissionResponse?.status === 'login-required') {
+      router.push('/login')
+      return
+    }
+
+    setRefreshInterval(
+      submissionResponse?.submission.result === 'Pending' ? 2000 : 0,
+    )
+  }, [submissionResponse?.status, submissionResponse?.submission?.result])
+
+  if (isError) {
+    return <Error statusCode={isError.status} title={isError.message} />
+  }
+
+  if (
+    isLoading ||
+    !submissionResponse ||
+    submissionResponse.status === 'login-required'
+  ) {
     return <Loading />
+  }
+
+  if (submissionResponse.status === 'ng') {
+    return <Error statusCode={0} title={submissionResponse.errorMessage} />
   }
 
   return (
@@ -28,18 +55,41 @@ const Submission = () => {
       <Typography variant='h3' sx={{ fontWeight: '600' }}>
         Submission #{submissionResponse.submission.id}
       </Typography>
-
-      <Box sx={{ m: '4rem 0' }}>
-        <Typography
-          variant='h4'
-          sx={{ fontWeight: '600', marginBottom: '1rem' }}
-        >
-          Source Code
-        </Typography>
-        <Code language='assembly'>{submissionResponse.submission.asem}</Code>
-      </Box>
-
-      <SubmissionResultTable submission={submissionResponse.submission} />
+      {submissionResponse.status === 'forbidden' ? (
+        <Alert severity='error' sx={{ my: '5rem' }}>
+          <AlertTitle>{submissionResponse.errorMessage}</AlertTitle>
+        </Alert>
+      ) : (
+        <Box>
+          <Box sx={{ m: '4rem 0' }}>
+            <Typography
+              variant='h4'
+              sx={{ fontWeight: '600', marginBottom: '1rem' }}
+            >
+              Source Code
+            </Typography>
+            {submissionResponse.submission.isCE ? (
+              <Typography
+                sx={{
+                  display: 'inline-block',
+                  backgroundColor: '#ef9a9a',
+                  color: 'white',
+                  p: '0.5rem 1rem',
+                  borderRadius: '10rem',
+                  fontWeight: '800',
+                }}
+              >
+                Compile Error Submitted
+              </Typography>
+            ) : (
+              <Code language='assembly'>
+                {submissionResponse.submission.asm}
+              </Code>
+            )}
+          </Box>
+          <SubmissionResultTable submission={submissionResponse.submission} />
+        </Box>
+      )}
     </BasicLayout>
   )
 }

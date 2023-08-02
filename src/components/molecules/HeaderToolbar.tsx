@@ -3,6 +3,7 @@ import HowToRegIcon from '@mui/icons-material/HowToReg'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
+import PublicIcon from '@mui/icons-material/Public'
 import PublishIcon from '@mui/icons-material/Publish'
 import StarIcon from '@mui/icons-material/Star'
 import type { SxProps, Theme } from '@mui/material'
@@ -35,7 +36,7 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
     }
 
     // データの再検証をしないとログイン済の状態となる
-    mutate('/api/users/me')
+    await mutate('/api/users/me')
     router.push('/login')
   }
 
@@ -74,9 +75,21 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       >
         Problem
       </LinkWithIcon>
-      <LinkWithIcon href='/submissions' iconReactNode={<PublishIcon />}>
-        Submission
+      <LinkWithIcon
+        href='/submissions'
+        iconReactNode={<PublicIcon />}
+        sx={{ mr: '1rem' }}
+      >
+        All Submit
       </LinkWithIcon>
+      {user && (
+        <LinkWithIcon
+          href={`/submissions?user_id=${user.id}`}
+          iconReactNode={<PublishIcon />}
+        >
+          My Submit
+        </LinkWithIcon>
+      )}
 
       <Box sx={{ flexGrow: 1 }} />
 

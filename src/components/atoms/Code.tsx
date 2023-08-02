@@ -1,20 +1,20 @@
 import { FC } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 type CodeProps = {
   language: string
-  styleName?: 'materialDark'
+  styleName?: 'atomOneDark'
   children?: string
 }
 
 const styles = {
-  materialDark: materialDark,
+  atomOneDark: atomOneDark,
 }
 
 const Code: FC<CodeProps> = ({
   language,
-  styleName = 'materialDark',
+  styleName = 'atomOneDark',
   children = '',
 }) => {
   return (

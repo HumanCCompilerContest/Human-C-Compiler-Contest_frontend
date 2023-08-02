@@ -9,19 +9,15 @@ type WhatHCCCProps = {
 
 const WhatHCCC: FC<WhatHCCCProps> = ({ sx }) => {
   return (
-    <DiscriptionCard title='What is HCCC' sx={sx}>
+    <DiscriptionCard title='HCCCとは' sx={sx}>
       <p style={{ margin: 0 }}>
-        人間Cコンパイラコンテストとは，文字通り競技者自身がCコンパイラとなってC言語からアセンブリを生成し，その時間と正確さを競う競技です．
+        <span style={{ color: 'red' }}>人間Cコンパイラコンテスト(HCCC)</span>
+        とは文字通り競技者自身がCコンパイラとなり
+        C言語からアセンブリを生成し，その時間と正確さを競う競技です．
       </p>
       <p>
-        競技者はC言語のプログラムを渡され，それを見てコンパイルが通らなければ（C言語の仕様に則っていなければ）該当する最初の行を指摘し，コンパイルが通るようであればアセンブリを書いて提出します．
-      </p>
-      <p>
-        最もスコアが高かったプレイヤが栄誉ある
-        <span style={{ fontWeight: '800', color: '#f44336' }}>
-          人間Cコンパイラの称号
-        </span>
-        を手に入れる．
+        与えられるソースコードの中にはコンパイルエラーを出す必要の
+        ある仕様上間違ったものも含まれています．このような場合にはコンパイルエラーと解答する必要があります.
       </p>
     </DiscriptionCard>
   )
