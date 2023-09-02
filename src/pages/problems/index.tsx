@@ -8,13 +8,17 @@ import { useEffect } from 'react'
 
 import Loading from '@/components/atoms/Loading'
 import TextWithIcon from '@/components/atoms/TextWithIcon'
+import { useAuthContext } from '@/components/contexts/AuthProvider'
 import ProblemCard from '@/components/molecules/ProblemCard'
 import BasicLayout from '@/components/templates/BasicLayout'
-import { useProblemList } from '@/features/api'
+import { useProblemList, useSubmissionList } from '@/features/api'
 
 const Problems: NextPage = () => {
   const router = useRouter()
-  const { problemListResponse, isLoading, isError } = useProblemList()
+  const { user } = useAuthContext()
+  const { problemListResponse, isError: isProblemError } = useProblemList()
+  const { submissionListResponse, isError: isSubmissionError } =
+    useSubmissionList(user?.id)
 
   useEffect(() => {
     if (problemListResponse?.status === 'login-required') {
@@ -22,21 +26,42 @@ const Problems: NextPage = () => {
     }
   }, [problemListResponse?.status])
 
-  if (isError) {
-    return <Error statusCode={isError.status} title={isError.message} />
+  // ネットワーク関連のエラー
+  if (isProblemError) {
+    return (
+      <Error
+        statusCode={isProblemError.status}
+        title={isProblemError.message}
+      />
+    )
+  } else if (isSubmissionError) {
+    return (
+      <Error
+        statusCode={isSubmissionError.status}
+        title={isSubmissionError.message}
+      />
+    )
   }
 
   if (
-    isLoading ||
     !problemListResponse ||
-    problemListResponse.status === 'login-required'
+    problemListResponse.status === 'login-required' ||
+    !submissionListResponse ||
+    submissionListResponse.status === 'login-required'
   ) {
     return <Loading />
   }
 
   if (problemListResponse.status === 'ng') {
     return <Error statusCode={0} title={problemListResponse.errorMessage} />
+  } else if (submissionListResponse.status === 'ng') {
+    return <Error statusCode={0} title={submissionListResponse.errorMessage} />
   }
+
+  // データの前処理
+  const acSubmissionIDs = submissionListResponse.items
+    .filter((v) => v.result == 'AC')
+    .map((v) => v.problem.id)
 
   return (
     <>
@@ -66,13 +91,19 @@ const Problems: NextPage = () => {
               mb: '5rem',
             }}
           >
-            {problemListResponse.items.map((problem) => (
-              <ProblemCard
-                problem={problem}
-                key={problem.id}
-                sx={{ m: '2rem' }}
-              />
-            ))}
+            {problemListResponse.items.map((problem) => {
+              const isCorrect = acSubmissionIDs.includes(problem.id)
+              return (
+                <ProblemCard
+                  problem={{
+                    ...problem,
+                    isCorrect: isCorrect,
+                  }}
+                  key={problem.id}
+                  sx={{ m: '2rem' }}
+                />
+              )
+            })}
           </Box>
         )}
       </BasicLayout>
