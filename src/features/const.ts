@@ -1,0 +1,1 @@
+export const UNEXPECTED_NETWORK_ERROR_STATUS = 0
