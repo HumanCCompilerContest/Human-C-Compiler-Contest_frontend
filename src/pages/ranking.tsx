@@ -17,7 +17,7 @@ const Ranking: NextPage = () => {
     return <Error statusCode={isError.status} title={isError.message} />
   }
 
-  if (isLoading || !rankingResponse) {
+  if (!rankingResponse) {
     return <Loading />
   }
 

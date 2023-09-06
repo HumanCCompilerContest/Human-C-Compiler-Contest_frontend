@@ -1,5 +1,6 @@
 import useSWR from 'swr'
 
+import { UNEXPECTED_NETWORK_ERROR_STATUS } from '@/features/const'
 import { NetworkError } from '@/features/errors'
 import {
   UserPost,
@@ -13,8 +14,6 @@ import {
   SubmissionJoinedUserListResponse,
 } from '@/features/types'
 
-const UnexpectedErrorStatus = 0
-
 const Fetcher = async (path: string, options?: RequestInit): Promise<any> => {
   let res
   try {
@@ -23,14 +22,18 @@ const Fetcher = async (path: string, options?: RequestInit): Promise<any> => {
       credentials: 'include',
     })
   } catch (e: unknown) {
+    // エラーログの出力
+    console.error(e)
+
     if (e instanceof Error) {
-      throw new NetworkError(e.message, UnexpectedErrorStatus)
+      throw new NetworkError(e.message, UNEXPECTED_NETWORK_ERROR_STATUS)
     }
 
-    throw new NetworkError('unexpected error', UnexpectedErrorStatus)
+    throw new NetworkError('unexpected error', UNEXPECTED_NETWORK_ERROR_STATUS)
   }
 
   if (!res.ok) {
+    /* 通信が完了したが、正しいリクエストではなかった場合のエラー（ステータスコードが2xxではない) */
     const error = new NetworkError(
       'An error occurred while fetching the data.',
       res.status,
