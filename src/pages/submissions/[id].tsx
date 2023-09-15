@@ -86,6 +86,33 @@ const Submission = () => {
                 {submissionResponse.submission.asm}
               </Code>
             )}
+            {submissionResponse.submission.error_message && (
+              <Box
+                sx={{
+                  mt: '2rem',
+                }}
+              >
+                <Typography variant='h5' sx={{ fontWeight: '600' }}>
+                  Judging Error
+                </Typography>
+                <Box
+                  sx={{
+                    bgcolor: 'primary.main',
+                    p: '1rem',
+                    mt: '1rem',
+                    borderRadius: '6px',
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: 'white',
+                    }}
+                  >
+                    {submissionResponse.submission.error_message}
+                  </Typography>
+                </Box>
+              </Box>
+            )}
           </Box>
           <SubmissionResultTable submission={submissionResponse.submission} />
         </Box>
