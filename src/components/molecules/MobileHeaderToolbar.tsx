@@ -1,3 +1,4 @@
+import { Done } from '@mui/icons-material'
 import CreateIcon from '@mui/icons-material/Create'
 import HowToRegIcon from '@mui/icons-material/HowToReg'
 import LoginIcon from '@mui/icons-material/Login'
@@ -57,7 +58,7 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
         href='/'
         iconReactNode={
           <IconButton size='large' sx={{ m: '0 0.5rem 0 1rem' }} disabled>
-            <Image src='/HCCC_logo.png' layout='fill' />
+            <Image src='/HCCC_logo.png' layout='fill' alt='HCCC Logo' />
           </IconButton>
         }
         sx={{ mr: '3rem' }}
@@ -100,6 +101,14 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       </IconButton>
 
       <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
+        <MenuItem>
+          <StyledLinkWithIcon
+            href='https://github.com/Alignof/HCCC_Tutorial'
+            iconReactNode={<Done />}
+          >
+            Tutorial
+          </StyledLinkWithIcon>
+        </MenuItem>
         <MenuItem>
           <StyledLinkWithIcon href='/ranking' iconReactNode={<StarIcon />}>
             Ranking
