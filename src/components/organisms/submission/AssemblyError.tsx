@@ -27,7 +27,7 @@ const AssemblyError: FC<AssemblyErrorProps> = ({ errorMessage, sx }) => {
             color: 'white',
           }}
         >
-          {errorMessage}
+          {errorMessage.replaceAll(/\n*$/g, '') /* 文末の改行を消して表示 */}
         </Typography>
       </Box>
     </Box>
