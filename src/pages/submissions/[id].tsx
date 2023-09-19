@@ -101,6 +101,7 @@ const Submission = () => {
                     p: '1rem',
                     mt: '1rem',
                     borderRadius: '6px',
+                    whiteSpace: 'pre-wrap',
                   }}
                 >
                   <Typography
