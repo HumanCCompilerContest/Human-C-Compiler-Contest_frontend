@@ -25,7 +25,7 @@ const JoinCondition: FC<JoinConditionProps> = ({ sx }) => {
           <p>
             当日はSECCONCONイベント内のZoomで進行を行うので,参加される方は
             <a
-              href='https://forms.gle/4UiJnoR6gRoCzkpT8'
+              href='https://docs.google.com/forms/d/e/1FAIpQLSfqQEbgSkdRcDoYdDKHePb2VNFnkoI1hkzZgEFgJ-lgkZz4rg/viewform'
               target='_blank'
               rel='noreferrer'
             >

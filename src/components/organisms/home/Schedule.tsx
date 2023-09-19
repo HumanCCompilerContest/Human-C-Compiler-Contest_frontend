@@ -21,16 +21,16 @@ const Schedule: FC<ScheduleProps> = ({ sx }) => {
 
       <Box sx={{ width: { xs: '90%', md: '600px' }, m: '3rem auto' }}>
         <Typography variant='h4' align='center'>
-          2022年11月19日(土) 13:00 〜
+          2023年9月30日(土) 15:20 〜
         </Typography>
         <Typography variant='h6' sx={{ m: '2rem 0 1rem' }}>
-          HCCCはSECCONCONの1枠として開催されます. SECCONCON(SECCON Contests)は
-          SECCON Contest of Contest
+          第3回 人間CコンパイラコンテストはSECCONCONの1枠として開催されます.
+          SECCONCON(SECCON Contests)は SECCON Contest of Contest
           に応募された競技やコンテストの企画案・設計案を，実際に実施するイベントです．
         </Typography>
         <Typography align='center' variant='h6'>
           <Link
-            href='https://www.seccon.jp/2022/seccon_contest/secconcon.html'
+            href='https://www.seccon.jp/2023/seccon_contest/secconcon_1.html'
             target='_blank'
             sx={{
               fontSize: '1.5rem',
@@ -39,7 +39,7 @@ const Schedule: FC<ScheduleProps> = ({ sx }) => {
               '&:hover': { color: '#1b5e20', textDecoration: 'underline' },
             }}
           >
-            SECCONCON 2022 (外部サイト)
+            SECCONCON 2023 (外部サイト)
           </Link>
         </Typography>
       </Box>
