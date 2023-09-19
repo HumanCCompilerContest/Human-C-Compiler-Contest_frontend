@@ -54,6 +54,7 @@ export type Submission = {
   time: string
   asm: string
   result: string
+  error_message: string
   isCE: boolean
 }
 
