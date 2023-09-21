@@ -102,14 +102,6 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
 
       <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
         <MenuItem>
-          <StyledLinkWithIcon
-            href='https://github.com/Alignof/HCCC_Tutorial'
-            iconReactNode={<Done />}
-          >
-            Tutorial
-          </StyledLinkWithIcon>
-        </MenuItem>
-        <MenuItem>
           <StyledLinkWithIcon href='/ranking' iconReactNode={<StarIcon />}>
             Ranking
           </StyledLinkWithIcon>
@@ -137,6 +129,14 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
             </StyledLinkWithIcon>
           </MenuItem>
         )}
+        <MenuItem>
+          <StyledLinkWithIcon
+            href='https://github.com/Alignof/HCCC_Tutorial'
+            iconReactNode={<Done />}
+          >
+            Tutorial
+          </StyledLinkWithIcon>
+        </MenuItem>
         {user && (
           <MenuItem>
             <ButtonWithIcon

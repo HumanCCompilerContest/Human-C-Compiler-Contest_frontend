@@ -80,14 +80,6 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       </LinkWithIcon>
 
       <LinkWithIcon
-        href='https://github.com/Alignof/HCCC_Tutorial'
-        iconReactNode={<DoneIcon />}
-        sx={{ mr: '1rem' }}
-      >
-        Tutorial
-      </LinkWithIcon>
-
-      <LinkWithIcon
         href='/ranking'
         iconReactNode={<StarIcon />}
         sx={{ mr: '1rem' }}
@@ -138,6 +130,14 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
           )}
         </Menu>
       </Box>
+
+      <LinkWithIcon
+        href='https://github.com/Alignof/HCCC_Tutorial'
+        iconReactNode={<DoneIcon />}
+        sx={{ mr: '1rem' }}
+      >
+        Tutorial
+      </LinkWithIcon>
 
       <Box sx={{ flexGrow: 1 }} />
 
