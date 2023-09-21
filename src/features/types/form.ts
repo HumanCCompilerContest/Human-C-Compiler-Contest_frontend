@@ -1,0 +1,3 @@
+type SubmitFormInput = {
+  asm: string
+}
