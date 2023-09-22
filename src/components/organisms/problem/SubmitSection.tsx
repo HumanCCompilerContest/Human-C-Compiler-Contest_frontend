@@ -114,7 +114,8 @@ const SubmitSection: FC<SubmitSectionProps> = ({
             sx={(theme) => ({
               mb: '1rem',
               '& .MuiFormControlLabel-label': {
-                color: theme.palette.error.main,
+                fontSize: '1.5rem',
+                color: isCEChecked ? theme.palette.error.main : '',
                 fontWeight: 600,
               },
             })}
@@ -141,18 +142,20 @@ const SubmitSection: FC<SubmitSectionProps> = ({
             <Button
               variant='contained'
               size='large'
-              sx={{
+              sx={(theme) => ({
                 width: '300px',
                 py: '1.2rem',
                 fontSize: '1.1rem',
                 fontWeight: '700',
+                backgroundColor: isCEChecked ? theme.palette.error.main : '',
                 '&:hover': {
                   opacity: 0.8,
+                  backgroundColor: isCEChecked ? theme.palette.error.main : '',
                 },
-              }}
+              })}
               onClick={handleSubmit(onSubmit)}
             >
-              Submit
+              {isCEChecked ? 'Compile Error' : 'Submit'}
             </Button>
           </Box>
         </Box>
