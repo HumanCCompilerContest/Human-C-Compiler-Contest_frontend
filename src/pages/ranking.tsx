@@ -11,7 +11,7 @@ import BasicLayout from '@/components/templates/BasicLayout'
 import { useRanking } from '@/features/api'
 
 const Ranking: NextPage = () => {
-  const { rankingResponse, isLoading, isError } = useRanking()
+  const { rankingResponse, isError } = useRanking()
 
   if (isError) {
     return <Error statusCode={isError.status} title={isError.message} />

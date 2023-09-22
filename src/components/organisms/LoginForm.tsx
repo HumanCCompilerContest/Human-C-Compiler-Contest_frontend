@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Alert, Box, Button, TextField } from '@mui/material'
 import type { SxProps, Theme } from '@mui/material/styles'
 import { useRouter } from 'next/router'
@@ -6,11 +7,7 @@ import { useForm } from 'react-hook-form'
 import { useSWRConfig } from 'swr'
 
 import { requestLogin } from '@/features/api'
-
-type IFormInput = {
-  name: string
-  password: string
-}
+import { LoginFormSchema, loginFormSchema } from '@/features/yupSchema'
 
 type LoginFormProps = {
   sx?: SxProps<Theme>
@@ -23,10 +20,12 @@ const LoginForm: FC<LoginFormProps> = ({ sx }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>()
+  } = useForm<LoginFormSchema>({
+    resolver: yupResolver(loginFormSchema),
+  })
   const router = useRouter()
 
-  const onSubmit = async (data: IFormInput) => {
+  const onSubmit = async (data: LoginFormSchema) => {
     const res = await requestLogin({
       name: data.name,
       password: data.password,
@@ -38,7 +37,7 @@ const LoginForm: FC<LoginFormProps> = ({ sx }) => {
     }
     // データの再検証をしないと表示がログインしていない状態となる
     await mutate('/api/users/me')
-    router.push('/')
+    await router.push('/')
   }
 
   return (
@@ -54,8 +53,8 @@ const LoginForm: FC<LoginFormProps> = ({ sx }) => {
           variant='outlined'
           fullWidth
           error={'name' in errors}
-          helperText={errors.name ? 'この項目は必須です' : ''}
-          {...register('name', { required: true })}
+          helperText={errors.name?.message ?? ''}
+          {...register('name')}
         />
       </Box>
 
@@ -66,8 +65,8 @@ const LoginForm: FC<LoginFormProps> = ({ sx }) => {
           variant='outlined'
           fullWidth
           error={'password' in errors}
-          helperText={errors.password ? 'この項目は必須です' : ''}
-          {...register('password', { required: true })}
+          helperText={errors.password?.message ?? ''}
+          {...register('password')}
         />
       </Box>
       <Box

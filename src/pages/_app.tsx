@@ -10,7 +10,7 @@ import '@fontsource/roboto/700.css'
 import '@fontsource/roboto/900.css'
 
 import AuthProvider from '@/components/contexts/AuthProvider'
-import '../styles/global.css'
+import '@/styles/global.css'
 
 const theme = createTheme({
   palette: {

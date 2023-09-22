@@ -10,4 +10,16 @@ export const submitFormSchema = yup
   })
   .required()
 
+export const loginFormSchema = yup.object({
+  name: yup.string().required('この項目は必須です'),
+  password: yup.string().required('この項目は必須です'),
+})
+
+export const registerFormSchema = yup.object({
+  name: yup.string().required('この項目は必須です'),
+  password: yup.string().required('この項目は必須です'),
+})
+
 export type SubmitFormSchema = yup.InferType<typeof submitFormSchema>
+export type LoginFormSchema = yup.InferType<typeof loginFormSchema>
+export type RegisterFormSchema = yup.InferType<typeof registerFormSchema>
