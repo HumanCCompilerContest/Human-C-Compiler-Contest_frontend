@@ -47,6 +47,8 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       return
     }
 
+    // キャッシュクリア
+    await mutate(() => true, undefined, { revalidate: false })
     // データの再検証をしないとログイン済の状態となる
     await mutate('/api/users/me')
     router.push('/login')
@@ -102,14 +104,6 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
 
       <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
         <MenuItem>
-          <StyledLinkWithIcon
-            href='https://github.com/Alignof/HCCC_Tutorial'
-            iconReactNode={<Done />}
-          >
-            Tutorial
-          </StyledLinkWithIcon>
-        </MenuItem>
-        <MenuItem>
           <StyledLinkWithIcon href='/ranking' iconReactNode={<StarIcon />}>
             Ranking
           </StyledLinkWithIcon>
@@ -137,6 +131,14 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
             </StyledLinkWithIcon>
           </MenuItem>
         )}
+        <MenuItem>
+          <StyledLinkWithIcon
+            href='https://github.com/Alignof/HCCC_Tutorial'
+            iconReactNode={<Done />}
+          >
+            Tutorial
+          </StyledLinkWithIcon>
+        </MenuItem>
         {user && (
           <MenuItem>
             <ButtonWithIcon

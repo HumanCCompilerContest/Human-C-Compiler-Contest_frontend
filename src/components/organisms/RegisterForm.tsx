@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Alert, Box, Button, TextField } from '@mui/material'
 import type { SxProps, Theme } from '@mui/material/styles'
 import { useRouter } from 'next/router'
@@ -6,11 +7,7 @@ import { useForm } from 'react-hook-form'
 import { useSWRConfig } from 'swr'
 
 import { requestRegister } from '@/features/api'
-
-type IFormInput = {
-  name: string
-  password: string
-}
+import { RegisterFormSchema, registerFormSchema } from '@/features/yupSchema'
 
 type RegisterFormProps = {
   sx?: SxProps<Theme>
@@ -24,9 +21,11 @@ const RegisterForm: FC<RegisterFormProps> = ({ sx }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>()
+  } = useForm<RegisterFormSchema>({
+    resolver: yupResolver(registerFormSchema),
+  })
 
-  const onSubmit = async (data: IFormInput) => {
+  const onSubmit = async (data: RegisterFormSchema) => {
     const res = await requestRegister({
       name: data.name,
       password: data.password,
@@ -36,9 +35,12 @@ const RegisterForm: FC<RegisterFormProps> = ({ sx }) => {
       setErrorMessage(res.errorMessage)
       return
     }
+
+    // キャッシュクリア
+    await mutate(() => true, undefined, { revalidate: false })
     // データの再検証をしないとログインしていない状態となる
     await mutate('/api/users/me')
-    router.push('/')
+    await router.push('/')
   }
 
   return (
@@ -54,8 +56,8 @@ const RegisterForm: FC<RegisterFormProps> = ({ sx }) => {
           variant='outlined'
           fullWidth
           error={'name' in errors}
-          helperText={errors.name ? 'この項目は必須です' : ''}
-          {...register('name', { required: true })}
+          helperText={errors.name?.message ?? ''}
+          {...register('name')}
         />
       </Box>
 
@@ -66,8 +68,8 @@ const RegisterForm: FC<RegisterFormProps> = ({ sx }) => {
           variant='outlined'
           fullWidth
           error={'password' in errors}
-          helperText={errors.password ? 'この項目は必須です' : ''}
-          {...register('password', { required: true })}
+          helperText={errors.password?.message ?? ''}
+          {...register('password')}
         />
       </Box>
       <Button

@@ -54,6 +54,8 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       return
     }
 
+    // キャッシュクリア
+    await mutate(() => true, undefined, { revalidate: false })
     // データの再検証をしないとログイン済の状態となる
     await mutate('/api/users/me')
     router.push('/login')
@@ -77,14 +79,6 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
         >
           HCCC
         </Typography>
-      </LinkWithIcon>
-
-      <LinkWithIcon
-        href='https://github.com/Alignof/HCCC_Tutorial'
-        iconReactNode={<DoneIcon />}
-        sx={{ mr: '1rem' }}
-      >
-        Tutorial
       </LinkWithIcon>
 
       <LinkWithIcon
@@ -138,6 +132,14 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
           )}
         </Menu>
       </Box>
+
+      <LinkWithIcon
+        href='https://github.com/Alignof/HCCC_Tutorial'
+        iconReactNode={<DoneIcon />}
+        sx={{ mr: '1rem' }}
+      >
+        Tutorial
+      </LinkWithIcon>
 
       <Box sx={{ flexGrow: 1 }} />
 
