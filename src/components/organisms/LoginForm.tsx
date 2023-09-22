@@ -35,6 +35,9 @@ const LoginForm: FC<LoginFormProps> = ({ sx }) => {
       setErrorMessage(res.errorMessage)
       return
     }
+
+    // キャッシュクリア
+    await mutate(() => true, undefined, { revalidate: false })
     // データの再検証をしないと表示がログインしていない状態となる
     await mutate('/api/users/me')
     await router.push('/')

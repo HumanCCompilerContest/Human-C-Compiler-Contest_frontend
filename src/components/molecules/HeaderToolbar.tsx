@@ -54,6 +54,8 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       return
     }
 
+    // キャッシュクリア
+    await mutate(() => true, undefined, { revalidate: false })
     // データの再検証をしないとログイン済の状態となる
     await mutate('/api/users/me')
     router.push('/login')

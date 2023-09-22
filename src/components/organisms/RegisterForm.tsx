@@ -35,6 +35,9 @@ const RegisterForm: FC<RegisterFormProps> = ({ sx }) => {
       setErrorMessage(res.errorMessage)
       return
     }
+
+    // キャッシュクリア
+    await mutate(() => true, undefined, { revalidate: false })
     // データの再検証をしないとログインしていない状態となる
     await mutate('/api/users/me')
     await router.push('/')
