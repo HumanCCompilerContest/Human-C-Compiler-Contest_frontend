@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@mui/material'
 import type { SxProps, Theme } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 import React, { FC, KeyboardEventHandler } from 'react'
 import { useForm } from 'react-hook-form'
 import TitleLabel from '@/components/atoms/TitleLabel'
@@ -101,7 +102,8 @@ const SubmitSection: FC<SubmitSectionProps> = ({
           <FormControlLabel
             label='Compile Error'
             control={
-              <Switch
+              <StyledSwitch
+                color='error'
                 {...register('isCE', {
                   onChange: () => {
                     clearErrors()
@@ -109,6 +111,13 @@ const SubmitSection: FC<SubmitSectionProps> = ({
                 })}
               />
             }
+            sx={(theme) => ({
+              mb: '1rem',
+              '& .MuiFormControlLabel-label': {
+                color: theme.palette.error.main,
+                fontWeight: 600,
+              },
+            })}
           />
 
           <TextField
@@ -151,5 +160,27 @@ const SubmitSection: FC<SubmitSectionProps> = ({
     </Box>
   )
 }
+
+const StyledSwitch = styled(Switch)(() => ({
+  width: 80,
+  height: 45,
+  padding: 7,
+  '& .MuiSwitch-switchBase': {
+    margin: 1,
+    padding: 0,
+    transform: 'translateX(6px)',
+    '&.Mui-checked': {
+      transform: 'translateX(32px)',
+    },
+  },
+
+  '& .MuiSwitch-thumb': {
+    width: 40,
+    height: 40,
+  },
+  '& .MuiSwitch-track': {
+    borderRadius: 25,
+  },
+}))
 
 export default SubmitSection
