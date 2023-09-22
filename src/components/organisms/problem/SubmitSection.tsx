@@ -1,13 +1,23 @@
-import { Alert, Box, Button, TextField, Typography } from '@mui/material'
+import { yupResolver } from '@hookform/resolvers/yup'
+import {
+  Alert,
+  Box,
+  Button,
+  FormControlLabel,
+  Switch,
+  TextField,
+  Typography,
+} from '@mui/material'
 import type { SxProps, Theme } from '@mui/material/styles'
-import { FC, KeyboardEventHandler } from 'react'
+import React, { FC, KeyboardEventHandler } from 'react'
 import { useForm } from 'react-hook-form'
 import TitleLabel from '@/components/atoms/TitleLabel'
+import { SubmitFormSchema, submitFormSchema } from '@/features/yupSchema'
 
 type SubmitSectionProps = {
   hasWCSubmission: boolean
   errorMessage: string
-  onSubmit: (data: SubmitFormInput) => void
+  onSubmit: (data: SubmitFormSchema) => void
   sx?: SxProps<Theme>
 }
 
@@ -20,8 +30,13 @@ const SubmitSection: FC<SubmitSectionProps> = ({
   const {
     register,
     handleSubmit,
+    watch,
+    clearErrors,
     formState: { errors },
-  } = useForm<SubmitFormInput>()
+  } = useForm<SubmitFormSchema>({
+    resolver: yupResolver(submitFormSchema),
+  })
+  const isCEChecked = watch('isCE')
 
   const handleKeyDown: KeyboardEventHandler<
     HTMLInputElement | HTMLTextAreaElement
@@ -83,6 +98,19 @@ const SubmitSection: FC<SubmitSectionProps> = ({
             {errorMessage && <Alert severity='error'>{errorMessage}</Alert>}
           </Box>
 
+          <FormControlLabel
+            label='Compile Error'
+            control={
+              <Switch
+                {...register('isCE', {
+                  onChange: () => {
+                    clearErrors()
+                  },
+                })}
+              />
+            }
+          />
+
           <TextField
             color='primary'
             label='submission'
@@ -92,12 +120,14 @@ const SubmitSection: FC<SubmitSectionProps> = ({
             fullWidth
             placeholder='input assembly'
             error={'asm' in errors}
-            helperText={errors.asm ? 'この項目は必須です' : ''}
-            {...register('asm', { required: true })}
+            helperText={errors.asm?.message ?? ''}
+            {...register('asm')}
             InputProps={{
               onKeyDown: handleKeyDown,
             }}
+            disabled={isCEChecked}
           />
+
           <Box sx={{ display: 'flex', justifyContent: 'center', m: '4rem' }}>
             <Button
               variant='contained'

@@ -15,6 +15,7 @@ import {
   requestSubmission,
   useSubmissionList,
 } from '@/features/api'
+import { SubmitFormSchema } from '@/features/yupSchema'
 
 const Problem = () => {
   const router = useRouter()
@@ -40,20 +41,22 @@ const Problem = () => {
     }
   }, [router, problemResponse?.status])
 
-  const onSubmit = async (data: SubmitFormInput) => {
+  const onSubmit = async (data: SubmitFormSchema) => {
     setIsPostLoading(true)
+    const asm = data.isCE ? 'compile error submitted' : data.asm
     const res = await requestSubmission(Number(id), {
-      asm: data.asm,
-      isCE: false,
+      asm: asm || '',
+      isCE: data.isCE,
     })
-    setIsPostLoading(false)
 
     if (res.status === 'ng') {
       setErrorMessage(res.errorMessage)
+      setIsPostLoading(false)
       return
     }
 
-    router.push(`/submissions/${res.submission.id}/`)
+    await router.push(`/submissions/${res.submission.id}/`)
+    setIsPostLoading(false)
   }
 
   if (isProblemError) {
