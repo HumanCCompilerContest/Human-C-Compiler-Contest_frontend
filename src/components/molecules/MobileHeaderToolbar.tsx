@@ -134,6 +134,8 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
         <MenuItem>
           <StyledLinkWithIcon
             href='https://github.com/Alignof/HCCC_Tutorial'
+            target='_blank'
+            rel='noreferrer'
             iconReactNode={<Done />}
           >
             Tutorial

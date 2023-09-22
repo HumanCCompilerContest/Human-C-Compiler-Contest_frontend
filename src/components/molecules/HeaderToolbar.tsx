@@ -135,6 +135,8 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
 
       <LinkWithIcon
         href='https://github.com/Alignof/HCCC_Tutorial'
+        target='_blank'
+        rel='noreferrer'
         iconReactNode={<DoneIcon />}
         sx={{ mr: '1rem' }}
       >
