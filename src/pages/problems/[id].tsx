@@ -55,8 +55,8 @@ const Problem = () => {
       return
     }
 
-    await router.push(`/submissions/${res.submission.id}/`)
     setIsPostLoading(false)
+    await router.push(`/submissions/${res.submission.id}/`)
   }
 
   if (isProblemError) {
