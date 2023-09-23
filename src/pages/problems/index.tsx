@@ -63,6 +63,10 @@ const Problems: NextPage = () => {
     .filter((v) => v.result == 'AC')
     .map((v) => v.problem.id)
 
+  const wcSubmissionIDs = submissionListResponse.items
+    .filter((v) => v.result == 'WC')
+    .map((v) => v.problem.id)
+
   return (
     <>
       <Head>
@@ -93,12 +97,12 @@ const Problems: NextPage = () => {
           >
             {problemListResponse.items.map((problem) => {
               const isCorrect = acSubmissionIDs.includes(problem.id)
+              const isWC = wcSubmissionIDs.includes(problem.id)
               return (
                 <ProblemCard
-                  problem={{
-                    ...problem,
-                    isCorrect: isCorrect,
-                  }}
+                  problem={problem}
+                  isCorrect={isCorrect}
+                  isWC={isWC}
                   key={problem.id}
                   sx={{ m: '2rem' }}
                 />

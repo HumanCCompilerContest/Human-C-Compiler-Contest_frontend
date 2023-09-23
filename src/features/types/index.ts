@@ -35,10 +35,6 @@ export type ProblemListResponse = ResponseBase & {
   items: Problem[]
 }
 
-export type ProblesIsCorrect = Problem & {
-  isCorrect: boolean
-}
-
 export type Ranking = {
   rank: number
   userName: string
