@@ -10,7 +10,7 @@
 
 @media screen and (max-width: 600px) {
   #timer {
-    bottom: -2px; /* モバイルだと下に少し隙間が発生するj */
+    bottom: -2px; /* モバイルだと下に少し隙間が発生する */
     right: 20px;
   }
 }
