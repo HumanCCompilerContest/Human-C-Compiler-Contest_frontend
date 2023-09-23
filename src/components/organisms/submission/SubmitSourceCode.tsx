@@ -30,7 +30,7 @@ const SubmitSourceCode: FC<SubmitSourceCodeProps> = ({ submission, sx }) => {
         </Typography>
       ) : (
         <Code language='assembly'>
-          {submission.error_line_number !== undefined
+          {submission.error_line_number != undefined
             ? `${submission.asm} : Line ${submission.error_line_number}`
             : `${submission.asm}`}
         </Code>

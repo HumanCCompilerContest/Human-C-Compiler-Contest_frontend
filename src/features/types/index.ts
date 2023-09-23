@@ -56,7 +56,7 @@ export type Submission = {
   result: string
   error_message: string
   isCE: boolean
-  error_line_number?: number
+  error_line_number?: number | null
 }
 
 export type SubmissionJoined = Submission & {
