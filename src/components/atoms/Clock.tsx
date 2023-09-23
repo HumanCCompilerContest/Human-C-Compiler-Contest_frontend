@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { blueGrey } from '@mui/material/colors'
+import { grey } from '@mui/material/colors'
 import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { equalDateTime, formatDate, formatMillSeconds } from '@/features/utils'
@@ -86,7 +86,7 @@ const Clock = () => {
         padding: '10px',
         border: 'solid 10px',
         borderColor: theme.palette.primary.light,
-        backgroundColor: blueGrey[100],
+        backgroundColor: grey[300],
         borderRadius: '15px',
         display: 'flex',
         justifyContent: 'center',
