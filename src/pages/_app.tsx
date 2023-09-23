@@ -11,6 +11,7 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import '@fontsource/roboto/900.css'
 
+import Clock from '@/components/atoms/Clock'
 import Loading from '@/components/atoms/Loading'
 import AuthProvider from '@/components/contexts/AuthProvider'
 import '@/styles/global.css'
@@ -70,6 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AuthProvider>
           <CssBaseline />
           <Component {...pageProps} />
+          <Clock />
           {isPageLoading && <Loading />}
         </AuthProvider>
       </ThemeProvider>
