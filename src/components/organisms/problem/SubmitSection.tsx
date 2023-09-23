@@ -101,6 +101,7 @@ const SubmitSection: FC<SubmitSectionProps> = ({
 
           <FormControlLabel
             label='Compile Error'
+            labelPlacement='start'
             control={
               <StyledSwitch
                 color='error'
@@ -109,6 +110,9 @@ const SubmitSection: FC<SubmitSectionProps> = ({
                     clearErrors()
                   },
                 })}
+                sx={{
+                  ml: '1rem',
+                }}
               />
             }
             sx={(theme) => ({
@@ -120,6 +124,42 @@ const SubmitSection: FC<SubmitSectionProps> = ({
               },
             })}
           />
+
+          <Box
+            sx={{
+              mb: '1rem',
+            }}
+          >
+            <FormControlLabel
+              label='Line Number'
+              labelPlacement='start'
+              control={
+                <TextField
+                  variant='filled'
+                  size='small'
+                  type='number'
+                  hiddenLabel
+                  disabled={!isCEChecked}
+                  placeholder='line number'
+                  error={'error_line_number' in errors}
+                  helperText={errors.error_line_number?.message ?? ''}
+                  {...register('error_line_number')}
+                  sx={{
+                    ml: '4rem',
+                    width: '200px',
+                  }}
+                />
+              }
+              sx={(theme) => ({
+                mb: '1rem',
+                '& .MuiFormControlLabel-label': {
+                  fontSize: '1.2rem',
+                  color: isCEChecked ? theme.palette.error.main : '',
+                  fontWeight: 600,
+                },
+              })}
+            />
+          </Box>
 
           <TextField
             color='primary'

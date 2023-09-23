@@ -56,6 +56,7 @@ export type Submission = {
   result: string
   error_message: string
   isCE: boolean
+  error_line_number?: number
 }
 
 export type SubmissionJoined = Submission & {
@@ -74,4 +75,5 @@ export type SubmissionJoinedUserListResponse = ResponseBase & {
 export type SubmissionPost = {
   asm: string
   isCE: boolean
+  error_line_number?: number
 }

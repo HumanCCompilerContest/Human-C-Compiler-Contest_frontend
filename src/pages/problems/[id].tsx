@@ -15,6 +15,7 @@ import {
   requestSubmission,
   useSubmissionList,
 } from '@/features/api'
+import { SubmissionPost } from '@/features/types'
 import { SubmitFormSchema } from '@/features/yupSchema'
 
 const Problem = () => {
@@ -44,10 +45,15 @@ const Problem = () => {
   const onSubmit = async (data: SubmitFormSchema) => {
     setIsPostLoading(true)
     const asm = data.isCE ? 'compile error submitted' : data.asm
-    const res = await requestSubmission(Number(id), {
+
+    const param: SubmissionPost = {
       asm: asm || '',
       isCE: data.isCE,
-    })
+    }
+    if (data.isCE && data.error_line_number != undefined) {
+      param.error_line_number = data.error_line_number
+    }
+    const res = await requestSubmission(Number(id), param)
 
     if (res.status === 'ng') {
       setErrorMessage(res.errorMessage)
