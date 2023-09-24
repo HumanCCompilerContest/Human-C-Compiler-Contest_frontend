@@ -35,10 +35,6 @@ export type ProblemListResponse = ResponseBase & {
   items: Problem[]
 }
 
-export type ProblesIsCorrect = Problem & {
-  isCorrect: boolean
-}
-
 export type Ranking = {
   rank: number
   userName: string
@@ -56,6 +52,7 @@ export type Submission = {
   result: string
   error_message: string
   isCE: boolean
+  error_line_number?: number | null
 }
 
 export type SubmissionJoined = Submission & {
@@ -74,4 +71,5 @@ export type SubmissionJoinedUserListResponse = ResponseBase & {
 export type SubmissionPost = {
   asm: string
   isCE: boolean
+  error_line_number?: number
 }

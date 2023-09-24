@@ -29,7 +29,11 @@ const SubmitSourceCode: FC<SubmitSourceCodeProps> = ({ submission, sx }) => {
           Compile Error Submitted
         </Typography>
       ) : (
-        <Code language='assembly'>{submission.asm}</Code>
+        <Code language='assembly'>
+          {submission.error_line_number != undefined
+            ? `${submission.asm} : Line ${submission.error_line_number}`
+            : `${submission.asm}`}
+        </Code>
       )}
     </Box>
   )
