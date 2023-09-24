@@ -1,3 +1,16 @@
 #__next {
   height: 100%;
 }
+
+#timer {
+  position: fixed;
+  bottom: 0;
+  right: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  #timer {
+    bottom: -2px; /* モバイルだと下に少し隙間が発生する */
+    right: 20px;
+  }
+}

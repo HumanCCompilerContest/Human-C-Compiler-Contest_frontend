@@ -61,7 +61,9 @@ const SubmissionResultTable: FC<SubmissionResultTableProps> = ({
             <StyledTableCell component='th' align='center' variant='head'>
               DateTime
             </StyledTableCell>
-            <StyledTableCell align='center'>{submission.time}</StyledTableCell>
+            <StyledTableCell align='center'>
+              {new Date(submission.time).toLocaleString('ja-JP')}
+            </StyledTableCell>
           </StyledTableRow>
         </TableBody>
       </Table>

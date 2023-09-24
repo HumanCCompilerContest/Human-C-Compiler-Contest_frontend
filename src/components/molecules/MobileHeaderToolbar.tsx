@@ -1,3 +1,4 @@
+import { Done } from '@mui/icons-material'
 import CreateIcon from '@mui/icons-material/Create'
 import HowToRegIcon from '@mui/icons-material/HowToReg'
 import LoginIcon from '@mui/icons-material/Login'
@@ -46,6 +47,8 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       return
     }
 
+    // キャッシュクリア
+    await mutate(() => true, undefined, { revalidate: false })
     // データの再検証をしないとログイン済の状態となる
     await mutate('/api/users/me')
     router.push('/login')
@@ -57,7 +60,7 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
         href='/'
         iconReactNode={
           <IconButton size='large' sx={{ m: '0 0.5rem 0 1rem' }} disabled>
-            <Image src='/HCCC_logo.png' layout='fill' />
+            <Image src='/HCCC_logo.png' layout='fill' alt='HCCC Logo' />
           </IconButton>
         }
         sx={{ mr: '3rem' }}
@@ -128,6 +131,16 @@ const MobileHeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
             </StyledLinkWithIcon>
           </MenuItem>
         )}
+        <MenuItem>
+          <StyledLinkWithIcon
+            href='https://github.com/Alignof/HCCC_Tutorial'
+            target='_blank'
+            rel='noreferrer'
+            iconReactNode={<Done />}
+          >
+            Tutorial
+          </StyledLinkWithIcon>
+        </MenuItem>
         {user && (
           <MenuItem>
             <ButtonWithIcon

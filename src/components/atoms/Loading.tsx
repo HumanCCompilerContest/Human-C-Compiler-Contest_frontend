@@ -8,7 +8,7 @@ type LoadingProps = {
 
 const Loading: FC<LoadingProps> = ({ sx }) => {
   return (
-    <Backdrop sx={{ color: '#fff' }} open>
+    <Backdrop sx={{ color: '#fff', zIndex: 9999 }} open>
       <CircularProgress color='inherit' sx={sx} />
     </Backdrop>
   )

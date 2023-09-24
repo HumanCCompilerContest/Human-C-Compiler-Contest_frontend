@@ -31,7 +31,12 @@ const MainVisual: FC<MainVisualProps> = ({ sx }) => {
         }}
       >
         <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-          <Image src='/HCCC_logo.png' width='200px' height='200px' />
+          <Image
+            src='/HCCC_logo.png'
+            width='200px'
+            height='200px'
+            alt='HCCC Logo'
+          />
         </Box>
 
         <Box sx={{ p: '1rem' }}>
@@ -58,7 +63,7 @@ const MainVisual: FC<MainVisualProps> = ({ sx }) => {
               maxWidth: '600px',
             }}
           >
-            Day: 2022 11.19 (Sat.) 13:00 〜
+            Day: 2023 9.30 (Sat.) 15:20 〜
           </Typography>
           <Typography
             variant='h6'

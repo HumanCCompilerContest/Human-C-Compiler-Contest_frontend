@@ -1,4 +1,5 @@
 import CreateIcon from '@mui/icons-material/Create'
+import DoneIcon from '@mui/icons-material/Done'
 import HowToRegIcon from '@mui/icons-material/HowToReg'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -7,10 +8,18 @@ import PublicIcon from '@mui/icons-material/Public'
 import PublishIcon from '@mui/icons-material/Publish'
 import StarIcon from '@mui/icons-material/Star'
 import type { SxProps, Theme } from '@mui/material'
-import { Typography, Toolbar, IconButton, Box } from '@mui/material'
+import {
+  Typography,
+  Toolbar,
+  IconButton,
+  Box,
+  Menu,
+  styled,
+} from '@mui/material'
+import MuiMenuItem from '@mui/material/MenuItem'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useSWRConfig } from 'swr'
 
 import TextWithIcon from '@/components/atoms/TextWithIcon'
@@ -27,6 +36,16 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
   const router = useRouter()
   const { mutate } = useSWRConfig()
   const { user } = useAuthContext()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+
+  const handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(e.currentTarget)
+  }
+
+  const handleSubmitClose = () => {
+    setAnchorEl(null)
+  }
 
   const handleClickLogout = async () => {
     const res = await requestLogout()
@@ -35,6 +54,8 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       return
     }
 
+    // キャッシュクリア
+    await mutate(() => true, undefined, { revalidate: false })
     // データの再検証をしないとログイン済の状態となる
     await mutate('/api/users/me')
     router.push('/login')
@@ -46,7 +67,7 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
         href='/'
         iconReactNode={
           <IconButton size='large' sx={{ m: '0 0.5rem 0 1rem' }} disabled>
-            <Image src='/HCCC_logo.png' layout='fill' />
+            <Image src='/HCCC_logo.png' layout='fill' alt='HCCC Logo' />
           </IconButton>
         }
         sx={{ mr: '3rem' }}
@@ -75,21 +96,52 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
       >
         Problem
       </LinkWithIcon>
+
+      <Box>
+        <ButtonWithIcon
+          buttonLabel='Submit'
+          iconReactNode={<PublishIcon />}
+          onClick={handleSubmitClick}
+          wrapSx={{
+            '&:hover': {
+              opacity: 0.6,
+            },
+          }}
+          sx={{
+            fontSize: '1rem',
+          }}
+        />
+        <Menu open={open} anchorEl={anchorEl} onClose={handleSubmitClose}>
+          <MenuItem>
+            <StyledLinkWithIcon
+              href='/submissions'
+              iconReactNode={<PublicIcon />}
+            >
+              All Submit
+            </StyledLinkWithIcon>
+          </MenuItem>
+          {user && (
+            <MenuItem>
+              <StyledLinkWithIcon
+                href={`/submissions?user_id=${user.id}`}
+                iconReactNode={<PublishIcon />}
+              >
+                My Submit
+              </StyledLinkWithIcon>
+            </MenuItem>
+          )}
+        </Menu>
+      </Box>
+
       <LinkWithIcon
-        href='/submissions'
-        iconReactNode={<PublicIcon />}
+        href='https://github.com/Alignof/HCCC_Tutorial'
+        target='_blank'
+        rel='noreferrer'
+        iconReactNode={<DoneIcon />}
         sx={{ mr: '1rem' }}
       >
-        All Submit
+        Tutorial
       </LinkWithIcon>
-      {user && (
-        <LinkWithIcon
-          href={`/submissions?user_id=${user.id}`}
-          iconReactNode={<PublishIcon />}
-        >
-          My Submit
-        </LinkWithIcon>
-      )}
 
       <Box sx={{ flexGrow: 1 }} />
 
@@ -145,5 +197,14 @@ const HeaderToolbar: FC<HeaderToolbarProps> = ({ sx }) => {
     </Toolbar>
   )
 }
+
+const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
+  color: theme.palette.primary.main,
+}))
+
+const StyledLinkWithIcon = styled(LinkWithIcon)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  marginRight: '1rem',
+}))
 
 export default HeaderToolbar
