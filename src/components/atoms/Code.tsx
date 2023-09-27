@@ -6,6 +6,7 @@ type CodeProps = {
   language: string
   styleName?: 'atomOneDark'
   children?: string
+  showLineNumbers?: boolean
 }
 
 const styles = {
@@ -16,12 +17,13 @@ const Code: FC<CodeProps> = ({
   language,
   styleName = 'atomOneDark',
   children = '',
+  showLineNumbers = true,
 }) => {
   return (
     <SyntaxHighlighter
       language={language}
       style={styles[styleName]}
-      showLineNumbers
+      showLineNumbers={showLineNumbers}
     >
       {children}
     </SyntaxHighlighter>

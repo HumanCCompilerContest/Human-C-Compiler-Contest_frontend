@@ -75,7 +75,7 @@ const MainVisual: FC<MainVisualProps> = ({ sx }) => {
               maxWidth: '600px',
             }}
           >
-            Duration: 60 minutes
+            Duration: 70 minutes
           </Typography>
         </Box>
       </Box>
