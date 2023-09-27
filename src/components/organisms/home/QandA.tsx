@@ -50,7 +50,7 @@ const QandA: FC<QandAProps> = ({ sx }) => {
           競技で使用できるCのバージョン, アーキテクチャを教えてください
         </StyledAccordionSummary>
         <StyledAccordionDetails>
-          C99, X86_64を採用しています.ABIの仕様はAMD64の仕様に従います.
+          C99, X86_64, RISC-Vを採用しています.ABIの仕様はAMD64の仕様に従います.
         </StyledAccordionDetails>
       </Accordion>
 
