@@ -104,6 +104,7 @@ const Regulation: FC<RegulationProps> = ({ sx }) => {
                   </li>
                   <li>対象アーキテクチャはx86_64とRISC-Vとする．</li>
                   <li>記法はAT&amp;Tとintel記法の双方を許可する．</li>
+                  <li>アセンブラにはGNU assemblerを使用する</li>
                 </ol>
               </li>
               <li>
