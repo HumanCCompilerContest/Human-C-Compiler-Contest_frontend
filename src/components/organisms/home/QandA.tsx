@@ -106,7 +106,7 @@ const QandA: FC<QandAProps> = ({ sx }) => {
       <Accordion>
         <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
           <HelpIcon color='secondary' sx={{ mr: '1rem' }} />
-          コンテスト中にWebページをを閲覧しても良いですか？
+          コンテスト中にWebページを閲覧しても良いですか？
         </StyledAccordionSummary>
         <StyledAccordionDetails>
           <a
