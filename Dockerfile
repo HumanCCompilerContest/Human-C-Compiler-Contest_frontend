@@ -4,7 +4,7 @@ FROM base AS builder
 WORKDIR /app
 
 COPY . .
-RUN yarn --frozen-lockfile
+RUN yarn --frozen-lockfile --production
 RUN yarn build
 
 # Production image
