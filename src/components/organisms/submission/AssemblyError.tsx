@@ -3,15 +3,32 @@ import type { Theme, SxProps } from '@mui/material/styles'
 import { FC } from 'react'
 
 type AssemblyErrorProps = {
+  result: string
   errorMessage: string
   sx?: SxProps<Theme>
 }
 
-const AssemblyError: FC<AssemblyErrorProps> = ({ errorMessage, sx }) => {
+const AssemblyError: FC<AssemblyErrorProps> = ({
+  result,
+  errorMessage,
+  sx,
+}) => {
   return (
     <Box sx={sx}>
       <Typography variant='h5' sx={{ fontWeight: '600' }}>
-        Assembly error
+        {result === 'AE'
+          ? 'Assembly Error'
+          : result === 'LE'
+          ? 'Linker Error'
+          : result === 'RE'
+          ? 'Runtime Error'
+          : result === 'TLE'
+          ? 'Time Limit Exceeded'
+          : result === 'WC'
+          ? 'Wrong Compile Error'
+          : result === 'WA'
+          ? 'Wrong Answer'
+          : 'Other Error'}
       </Typography>
       <Box
         sx={{
