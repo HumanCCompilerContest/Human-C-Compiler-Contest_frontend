@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 
 import Loading from '@/components/atoms/Loading'
 import TextWithIcon from '@/components/atoms/TextWithIcon'
@@ -20,42 +20,6 @@ const Problems: NextPage = () => {
   const { problemListResponse, isError: isProblemError } = useProblemList()
   const { submissionListResponse, isError: isSubmissionError } =
     useSubmissionList(user?.id)
-
-  // データの前処理
-  const acSubmissionIDs = useMemo(() => {
-    if (submissionListResponse === undefined) {
-      return Array<number>()
-    }
-    return submissionListResponse.items
-      .filter((v) => v.result == 'AC')
-      .map((v) => v.problem.id)
-  }, [submissionListResponse])
-
-  const wcSubmissionIDs = useMemo(() => {
-    if (submissionListResponse === undefined) {
-      return Array<number>()
-    }
-    return submissionListResponse.items
-      .filter((v) => v.result == 'WC')
-      .map((v) => v.problem.id)
-  }, [submissionListResponse])
-
-  const errorSubmissionIDs = useMemo(() => {
-    if (submissionListResponse === undefined) {
-      return Array<number>()
-    }
-    return submissionListResponse.items
-      .filter(
-        (v) =>
-          v.result === 'WA' ||
-          v.result === 'TLE' ||
-          v.result === 'RE' ||
-          v.result === 'LE' ||
-          v.result === 'AE' ||
-          v.result === 'SystemError',
-      )
-      .map((v) => v.problem.id)
-  }, [submissionListResponse])
 
   useEffect(() => {
     if (problemListResponse?.status === 'login-required') {
@@ -94,6 +58,27 @@ const Problems: NextPage = () => {
   } else if (submissionListResponse.status === 'ng') {
     return <Error statusCode={0} title={submissionListResponse.errorMessage} />
   }
+
+  // データの前処理
+  const acSubmissionIDs = submissionListResponse.items
+    .filter((v) => v.result === 'AC')
+    .map((v) => v.problem.id)
+
+  const wcSubmissionIDs = submissionListResponse.items
+    .filter((v) => v.result === 'WC')
+    .map((v) => v.problem.id)
+
+  const errorSubmissionIDs = submissionListResponse.items
+    .filter(
+      (v) =>
+        v.result === 'WA' ||
+        v.result === 'TLE' ||
+        v.result === 'RE' ||
+        v.result === 'LE' ||
+        v.result === 'AE' ||
+        v.result === 'SystemError',
+    )
+    .map((v) => v.problem.id)
 
   return (
     <>
