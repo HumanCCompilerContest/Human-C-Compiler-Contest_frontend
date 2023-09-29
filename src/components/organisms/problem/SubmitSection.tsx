@@ -165,7 +165,7 @@ const SubmitSection: FC<SubmitSectionProps> = ({
             color='primary'
             label='submission'
             variant='filled'
-            rows={10}
+            rows={20}
             multiline
             fullWidth
             placeholder='input assembly'

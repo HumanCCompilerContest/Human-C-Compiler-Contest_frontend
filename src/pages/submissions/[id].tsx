@@ -73,6 +73,7 @@ const Submission = () => {
           />
           {submissionResponse.submission.error_message && (
             <AssemblyError
+              result={submissionResponse.submission.result}
               errorMessage={submissionResponse.submission.error_message}
               sx={{
                 mt: '2rem',

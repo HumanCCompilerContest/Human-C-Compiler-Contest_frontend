@@ -73,3 +73,5 @@ export type SubmissionPost = {
   isCE: boolean
   error_line_number?: number
 }
+
+export type ProblemCardStatus = 'ac' | 'wc' | 'error' | 'notSolved'

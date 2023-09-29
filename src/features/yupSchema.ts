@@ -12,6 +12,7 @@ export const submitFormSchema = yup
       .typeError('数字を入力してください')
       .integer('整数を入力してください')
       .min(1, '1以上の数字を入れてください')
+      .max(100000, '値が大きすぎます')
       .nullable()
       .transform((value, originalValue) =>
         String(originalValue).trim() === '' ? null : value,
