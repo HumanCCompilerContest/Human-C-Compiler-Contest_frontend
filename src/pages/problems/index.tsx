@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import Loading from '@/components/atoms/Loading'
 import TextWithIcon from '@/components/atoms/TextWithIcon'
@@ -12,6 +12,7 @@ import { useAuthContext } from '@/components/contexts/AuthProvider'
 import ProblemCard from '@/components/molecules/ProblemCard'
 import BasicLayout from '@/components/templates/BasicLayout'
 import { useProblemList, useSubmissionList } from '@/features/api'
+import { ProblemCardStatus } from '@/features/types'
 
 const Problems: NextPage = () => {
   const router = useRouter()
@@ -20,11 +21,47 @@ const Problems: NextPage = () => {
   const { submissionListResponse, isError: isSubmissionError } =
     useSubmissionList(user?.id)
 
+  // データの前処理
+  const acSubmissionIDs = useMemo(() => {
+    if (submissionListResponse === undefined) {
+      return Array<number>()
+    }
+    return submissionListResponse.items
+      .filter((v) => v.result == 'AC')
+      .map((v) => v.problem.id)
+  }, [submissionListResponse])
+
+  const wcSubmissionIDs = useMemo(() => {
+    if (submissionListResponse === undefined) {
+      return Array<number>()
+    }
+    return submissionListResponse.items
+      .filter((v) => v.result == 'WC')
+      .map((v) => v.problem.id)
+  }, [submissionListResponse])
+
+  const errorSubmissionIDs = useMemo(() => {
+    if (submissionListResponse === undefined) {
+      return Array<number>()
+    }
+    return submissionListResponse.items
+      .filter(
+        (v) =>
+          v.result === 'WA' ||
+          v.result === 'TLE' ||
+          v.result === 'RE' ||
+          v.result === 'LE' ||
+          v.result === 'AE' ||
+          v.result === 'SystemError',
+      )
+      .map((v) => v.problem.id)
+  }, [submissionListResponse])
+
   useEffect(() => {
     if (problemListResponse?.status === 'login-required') {
       router.push('/login')
     }
-  }, [problemListResponse?.status])
+  }, [router, problemListResponse?.status])
 
   // ネットワーク関連のエラー
   if (isProblemError) {
@@ -58,15 +95,6 @@ const Problems: NextPage = () => {
     return <Error statusCode={0} title={submissionListResponse.errorMessage} />
   }
 
-  // データの前処理
-  const acSubmissionIDs = submissionListResponse.items
-    .filter((v) => v.result == 'AC')
-    .map((v) => v.problem.id)
-
-  const wcSubmissionIDs = submissionListResponse.items
-    .filter((v) => v.result == 'WC')
-    .map((v) => v.problem.id)
-
   return (
     <>
       <Head>
@@ -96,13 +124,20 @@ const Problems: NextPage = () => {
             }}
           >
             {problemListResponse.items.map((problem) => {
-              const isCorrect = acSubmissionIDs.includes(problem.id)
+              const isAC = acSubmissionIDs.includes(problem.id)
               const isWC = wcSubmissionIDs.includes(problem.id)
+              const isError = errorSubmissionIDs.includes(problem.id)
+              const status: ProblemCardStatus = isAC
+                ? 'ac' // ACが一つでもある問題
+                : isWC
+                ? 'wc' // ACが無く、WCがある問題
+                : isError
+                ? 'error' // AC, WCが無く、その他エラーが起きた問題
+                : 'notSolved'
               return (
                 <ProblemCard
                   problem={problem}
-                  isCorrect={isCorrect}
-                  isWC={isWC}
+                  status={status}
                   key={problem.id}
                   sx={{ m: '2rem' }}
                 />

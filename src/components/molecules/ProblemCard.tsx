@@ -5,30 +5,27 @@ import Typography from '@mui/material/Typography'
 import type { SxProps, Theme } from '@mui/material/styles'
 import Link from 'next/link'
 import { FC } from 'react'
-import { Problem } from '@/features/types'
+import { Problem, ProblemCardStatus } from '@/features/types'
 
 type ProblemCardProps = {
   problem: Problem
-  isCorrect: boolean
-  isWC: boolean
+  status: ProblemCardStatus
   sx?: SxProps<Theme>
 }
 
-const ProblemCard: FC<ProblemCardProps> = ({
-  problem,
-  isCorrect,
-  isWC,
-  sx,
-}) => {
+const ProblemCard: FC<ProblemCardProps> = ({ problem, status, sx }) => {
   return (
     <Card
       sx={{
         width: 300,
-        backgroundColor: isCorrect
-          ? '#5cb85c'
-          : isWC
-          ? 'error.main'
-          : 'primary.main',
+        backgroundColor:
+          status === 'ac'
+            ? '#5cb85c'
+            : status === 'wc'
+            ? 'error.main'
+            : status === 'error'
+            ? '#ff8f00'
+            : 'primary.main',
         color: 'white',
         textAlign: 'center',
         '&:hover': {
